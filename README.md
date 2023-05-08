@@ -3,7 +3,7 @@
 - [NextJS](https://nextjs.org/)
 - [ReactJS](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Styled Components](https://styled-components.com/)
+- [Linaria](https://linaria.dev/)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 - [Vitest](https://vitest.dev/)
 - [Storybook](https://storybook.js.org/)
