@@ -8,6 +8,7 @@ export const Container = styled.main`
   justify-content: center;
   padding: 4rem;
   text-align: center;
+  background: #f9f9f9;
 `
 
 export const Title = styled.h1`

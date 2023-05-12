@@ -25,6 +25,7 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   height: 100vh;
   width: 100vw;
+  font-family: 'Maven Pro';
 `
 
 const Body = styled.div`
