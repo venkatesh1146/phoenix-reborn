@@ -1,25 +1,53 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Header from '../Header'
 import Image from '../Image'
+import Info from '../Info/Info'
+import LogoHeader from '../LogoHeader'
+import UserNameHeader from '../UserNameHeader'
+
+import Email from './Email'
 
 import { WealthyImages } from '~/assets'
 
 export default function VerifyEmailsContainer() {
   return (
     <Wrapper>
-      <Header />
-      <Body>
-        <div>
-          <Image height={'10rem'} src={WealthyImages.emailIcon} />
-        </div>
-        <h3>Email Ids Verification</h3>
-        <p>{`We found the following Email ID's mapped to these funds`}</p>
-      </Body>
+      <HeaderSection>
+        <UserNameHeader userName="Thor" />
+        <Body>
+          <Text>{`We have found the following email IDs mapped to the funds`}</Text>
+          <Info
+            text={
+              'As per SEBI guidelines, you are required to verify email via OTP to proceed with fund switch'
+            }
+          />
+        </Body>
+      </HeaderSection>
+      <EmailsSection>
+        <Heading>{3} Emails associated with investments</Heading>
+        <Emails>
+          <Email email="venkat.ashish@gmail.com" isVerified={true} />
+        </Emails>
+      </EmailsSection>
     </Wrapper>
   )
 }
+
+const Emails = styled.div``
+const Heading = styled.div`
+  font-family: 'Maven Pro';
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+`
+const HeaderSection = styled.div`
+  padding: 1.25rem;
+`
+const EmailsSection = styled.div`
+  background: #f9f9f9;
+  padding: 2rem 1.8rem;
+`
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -30,5 +58,9 @@ const Wrapper = styled.div`
 
 const Body = styled.div`
   flex-grow: 1;
-  padding: 8rem;
+`
+const Text = styled.p`
+  font-family: 'Maven Pro';
+  font-size: 1rem;
+  margin-bottom: 32px;
 `

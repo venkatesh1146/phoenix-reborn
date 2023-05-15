@@ -13,6 +13,7 @@ interface FundMetaData {
 }
 
 interface FundSwitchCardProps {
+  WrapperClassName?: string
   data: {
     from: FundMetaData
     to: FundMetaData
@@ -21,9 +22,10 @@ interface FundSwitchCardProps {
 
 export default function FundSwitchCard({
   data: { from, to },
+  WrapperClassName = '',
 }: FundSwitchCardProps) {
   return (
-    <Wrapper>
+    <Wrapper className={WrapperClassName}>
       <FundDetails>
         <Image className="circular-image" src={from.logoUrl} height={'4rem'} />
         <Name>{from.fundName}</Name>
@@ -47,7 +49,7 @@ const Wrapper = styled.div`
   border-radius: 4px;
   padding: 1rem;
   font-family: 'Maven Pro';
-
+  justify-content: space-around;
   .circular-image {
     border-radius: 50%;
   }

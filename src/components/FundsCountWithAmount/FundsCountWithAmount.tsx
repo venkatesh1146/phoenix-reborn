@@ -1,13 +1,20 @@
 import { styled } from '@linaria/react'
+import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
-export default function FundsCountWithAmount() {
+interface FundsCountWithAmountProps {
+  className?: string
+}
+
+export default function FundsCountWithAmount({
+  className = '',
+}: FundsCountWithAmountProps) {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Text>Switch to wealthy investment for 4 Funds</Text>
       <SubSection>
         <TotalTxt>Total Amount</TotalTxt>
-        <Amount>Rs 7,00,000</Amount>
+        <Amount>{WealthyAmount.init(700000).currencyFormat(2)}</Amount>
       </SubSection>
     </Wrapper>
   )
@@ -20,7 +27,7 @@ const Wrapper = styled.div`
 `
 const Text = styled.p`
   padding: 1.5rem 2.8rem;
-  border-bottom: 0.2px solid #000000;
+  border-bottom: 0.2px solid #00000074;
   text-align: center;
 `
 const Amount = styled.p`

@@ -5,7 +5,7 @@ import Image from '../Image'
 
 import { WealthyImages } from '~/assets'
 
-export default function Header() {
+export default function LogoHeader() {
   return (
     <HeaderWrapper>
       <Image height={'3rem'} alt="logo" src={WealthyImages.wealthyLogoWhite} />

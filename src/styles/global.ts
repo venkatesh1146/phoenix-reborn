@@ -11,6 +11,7 @@ export const globals = css`
     body,
     #__next {
       height: 100%;
+      margin:0;
     }
 
     input,
@@ -32,5 +33,16 @@ export const globals = css`
       src: url('https://i.wlycdn.com/wealthy-fonts/Maven-pro.ttf')
         format('truetype');
     }
+    @font-face {
+      font-family: 'Marcellus';
+      src: url('https://i.wlycdn.com/articles/Marcellus-regular-font-.ttf')
+        format('truetype');
+    }
+  }
+`
+
+export const desktop_container = css`
+  @media screen and (min-width: 1024px) {
+    max-width: 1000px;
   }
 `
