@@ -1,12 +1,20 @@
 import { styled } from '@linaria/react'
-import React from 'react'
+import React, { useState } from 'react'
 
+import OtpInput from '../../components/OTPInput'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
 
 export default function ProposalPage() {
+  const [otp, updateOtp] = useState<string | undefined>()
   return (
     <Wrapper>
       <FundsCountWithAmount />
+      <OtpInput
+        OTPLength={6}
+        otpType={'number'}
+        onChange={updateOtp}
+        value={otp}
+      />
     </Wrapper>
   )
 }
