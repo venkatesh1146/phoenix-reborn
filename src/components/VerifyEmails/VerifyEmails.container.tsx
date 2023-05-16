@@ -24,9 +24,11 @@ export default function VerifyEmailsContainer() {
       <EmailsSection>
         <Heading>{3} Emails associated with investments</Heading>
         <Emails>
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
         </Emails>
       </EmailsSection>
@@ -42,6 +44,8 @@ export default function VerifyEmailsContainer() {
 }
 
 const Emails = styled.div`
+  margin-bottom: 6rem;
+
   @media (min-width: 1024px) {
     display: flex;
     flex-wrap: wrap;
