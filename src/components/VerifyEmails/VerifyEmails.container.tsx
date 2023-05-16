@@ -1,14 +1,11 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Image from '../Image'
+import { FooterButton } from '../Buttons'
 import Info from '../Info/Info'
-import LogoHeader from '../LogoHeader'
 import UserNameHeader from '../UserNameHeader'
 
 import EmailContainer from './Email'
-
-import { WealthyImages } from '~/assets'
 
 export default function VerifyEmailsContainer() {
   return (
@@ -29,13 +26,31 @@ export default function VerifyEmailsContainer() {
         <Emails>
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
         </Emails>
       </EmailsSection>
+      <FooterButton
+        onClick={console.log}
+        className="footer-btn desktop_footer_btn"
+        primary
+      >
+        Verify and Proceed
+      </FooterButton>
     </Wrapper>
   )
 }
 
 const Emails = styled.div`
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-wrap: wrap;
+
+    .email-wrapper {
+      margin: 0.5rem !important;
+      min-width: 28.125rem;
+    }
+  }
   .email-wrapper {
     margin: 0.5rem 0;
   }
@@ -59,6 +74,17 @@ const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
   font-family: 'Maven Pro';
+  @media (min-width: 1024px) {
+    max-width: 1100px;
+    margin: auto;
+  }
+  .footer-btn {
+    @media screen and (max-width: 780px) {
+      max-width: 300px;
+      transform: translate(-50%);
+      left: 50%;
+    }
+  }
 `
 
 const Body = styled.div`

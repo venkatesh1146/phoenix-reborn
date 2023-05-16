@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
-import React, { useState } from 'react'
+import React from 'react'
 
-import { DefaultButton, FooterButton } from '../Buttons'
+import { FooterButton } from '../Buttons'
 import FundSwitchCard from '../FundSwitchCard'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
 import UserNameHeader from '../UserNameHeader'
@@ -62,7 +62,7 @@ export default function ProposalPage() {
       </PortfolioAllocation>
       <FooterButton
         onClick={console.log}
-        className="footer-btn desktop_footer_btn"
+        className="mobile-floating-footer-btn desktop_footer_btn"
         primary
       >
         Verify and Proceed
@@ -108,13 +108,6 @@ const Wrapper = styled.div`
   padding-bottom: 7rem;
   .funds-amount-wrapper {
     margin-top: 2rem;
-  }
-  .footer-btn {
-    @media screen and (max-width: 780px) {
-      max-width: 300px;
-      transform: translate(-50%);
-      left: 50%;
-    }
   }
 `
 const PartnerName = styled.p`
