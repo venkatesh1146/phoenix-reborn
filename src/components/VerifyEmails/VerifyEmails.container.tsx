@@ -6,7 +6,7 @@ import Info from '../Info/Info'
 import LogoHeader from '../LogoHeader'
 import UserNameHeader from '../UserNameHeader'
 
-import Email from './Email'
+import EmailContainer from './Email'
 
 import { WealthyImages } from '~/assets'
 
@@ -27,14 +27,19 @@ export default function VerifyEmailsContainer() {
       <EmailsSection>
         <Heading>{3} Emails associated with investments</Heading>
         <Emails>
-          <Email email="venkat.ashish@gmail.com" isVerified={true} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
         </Emails>
       </EmailsSection>
     </Wrapper>
   )
 }
 
-const Emails = styled.div``
+const Emails = styled.div`
+  .email-wrapper {
+    margin: 0.5rem 0;
+  }
+`
 const Heading = styled.div`
   font-family: 'Maven Pro';
   font-weight: 500;

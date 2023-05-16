@@ -15,7 +15,8 @@ export const DefaultButton = styled.button<{
   full_width?: boolean
   primary?: boolean
 }>`
-  background-color: ${(props) => (props.primary ? primaryColor : '#FBF9FF')};
+  background-color: ${(props) =>
+    props.primary ? `${primaryColor}` : '#FBF9FF'};
   font-size: 0.8rem;
   line-height: 1.25rem;
   border: 0;
@@ -35,7 +36,7 @@ export const DefaultButton = styled.button<{
 `
 
 export const PrimaryButton = styled(DefaultButton)`
-  background-color: primaryColor;
+  background-color: ${primaryColor};
   color: #fff;
 `
 
@@ -48,8 +49,9 @@ export const DefaultBlockButton = styled(DefaultButton)`
 
 export const FooterButton = styled(PrimaryButton)`
   background-color: ${(props) =>
-    props.primary ? primaryColor : secondaryColor};
-  color: ${(props) => (props.primary ? secondaryColor : primaryColor)};
+    props.primary ? `${primaryColor}` : `${secondaryColor}`};
+  color: ${(props) =>
+    props.primary ? `${secondaryColor}` : `${primaryColor}`};
   border-radius: 50px;
   font-size: 1rem;
   height: 60px;
@@ -59,18 +61,19 @@ export const FooterButton = styled(PrimaryButton)`
   font-family: 'Maven Pro';
   font-weight: 500;
   ::after {
-    color: ${(props) => (props.primary ? secondaryColor : primaryColor)};
+    color: ${(props) =>
+      props.primary ? `${secondaryColor}` : `${primaryColor}`};
   }
   &[disabled] {
-    color: secondaryTextColor;
+    color: ${secondaryTextColor};
     &::after {
-      color: secondaryTextColor;
+      color: ${secondaryTextColor};
     }
   }
   z-index: 1;
 `
 
-export const RoundButton = styled.button`
+export const RoundButton = styled(PrimaryButton)`
   color: #6725f4;
   border: 1px solid #6725f4;
   font-size: 0.85rem;
@@ -81,11 +84,18 @@ export const RoundButton = styled.button`
   border-radius: 24px;
   height: 32px;
   line-height: 1;
+  &[disabled] {
+    border: 1px solid grey;
+    color: lightgrey !important;
+  }
 `
 export const OutlinedButton = styled(PrimaryButton)`
   background-color: transparent;
-  border: 1px solid primaryColor;
-  color: primaryColor;
+  border: 1px solid ${primaryColor};
+  color: ${primaryColor};
+`
+export const TextButton = styled(OutlinedButton)`
+  border: none;
 `
 
 export const DefaultActionButton = styled.button<{ src: string }>`
@@ -105,10 +115,10 @@ export const DefaultSecondaryActionButton = styled(DefaultActionButton)`
 `
 
 export const DefaultPrimaryActionButton = styled(DefaultActionButton)`
-  background-color: primaryColor;
+  background-color: ${primaryColor};
   flex-shrink: 0;
   &:active {
-    background-color: primaryDenseColor;
+    background-color: ${primaryDenseColor};
   }
 `
 

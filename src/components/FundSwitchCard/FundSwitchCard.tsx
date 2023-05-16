@@ -1,4 +1,5 @@
 import { styled } from '@linaria/react'
+import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
 import Image from '../Image'
@@ -30,14 +31,14 @@ export default function FundSwitchCard({
         <Image className="circular-image" src={from.logoUrl} height={'4rem'} />
         <Name>{from.fundName}</Name>
         <Units>{`${from.units} units`}</Units>
-        <Amount>{'Rs ' + from.amount}</Amount>
+        <Amount>{WealthyAmount.init(from.amount).currencyFormat(2)}</Amount>
       </FundDetails>
       <Image className="arrow-icon" src={WealthyImages.blackArrowRight} />
       <FundDetails>
         <Image className="circular-image" src={from.logoUrl} height={'4rem'} />
         <Name>{from.fundName}</Name>
         <Units>{`${from.units} units`}</Units>
-        <Amount>{'Rs ' + from.amount}</Amount>
+        <Amount>{WealthyAmount.init(to.amount).currencyFormat(2)}</Amount>
       </FundDetails>
     </Wrapper>
   )

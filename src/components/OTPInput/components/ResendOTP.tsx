@@ -2,8 +2,11 @@
 // Derived from the lib https://github.com/shubhanus/otp-input-react
 // Added By: Venkatesh Pullaganti😁 (https://github.com/venkatesh1146)
 
+import { styled } from '@linaria/react'
 import PropTypes from 'prop-types'
 import React, { CSSProperties } from 'react'
+
+import { TextButton } from '~/components/Buttons'
 
 import useResendOTP from '~/hooks/useResendOTP'
 
@@ -13,7 +16,7 @@ interface ResendOTPPropTypes {
   renderTime?: Function
   renderButton?: Function
   maxTime: number
-  timeInterval: number
+  timeInterval?: number
   style: CSSProperties
   className?: string
 }
@@ -44,8 +47,12 @@ function ResendOTP({
     >
       {renderTime ? (
         renderTime(remainingTime)
+      ) : remainingTime > 0 ? (
+        <ResendTxt>
+          You can Request resend OTP after: {remainingTime} sec
+        </ResendTxt>
       ) : (
-        <span>{remainingTime} sec</span>
+        <></>
       )}
       {renderButton ? (
         renderButton({
@@ -53,14 +60,18 @@ function ResendOTP({
           onClick: handelResendClick,
           remainingTime,
         })
+      ) : remainingTime === 0 ? (
+        <ResendTxt>
+          Not received OTP yet ?{' '}
+          <TextButton
+            style={{ color: '#000', padding: '0', fontWeight: '500' }}
+            onClick={handelResendClick}
+          >
+            Resend OTP
+          </TextButton>
+        </ResendTxt>
       ) : (
-        <button
-          disabled={remainingTime !== 0}
-          onClick={handelResendClick}
-          type="button"
-        >
-          Resend OTP
-        </button>
+        <></>
       )}
     </div>
   )
@@ -78,3 +89,7 @@ ResendOTP.propTypes = {
 }
 
 export default ResendOTP
+
+const ResendTxt = styled.p`
+  font-size: 0.75rem;
+`

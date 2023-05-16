@@ -1,2 +1,2 @@
-import Email from './Email.container'
-export default Email
+import EmailContainer from './Email.container'
+export default EmailContainer
