@@ -4,7 +4,10 @@ import React from 'react'
 import { FooterButton } from '../Buttons'
 import FundSwitchCard from '../FundSwitchCard'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
+import Image from '../Image'
 import UserNameHeader from '../UserNameHeader'
+
+import { WealthyImages } from '~/assets'
 
 export default function ProposalPage() {
   const partnerName = 'Venkatesh Pullaganti'
@@ -14,13 +17,26 @@ export default function ProposalPage() {
       <HeadSection>
         <UserNameHeader userName="Ashish" />
         <PartnerName>
-          Your wealth partner <span className="name">{partnerName}</span> has
-          shared a proposal
+          Here’s an Investment proposal shared by &nbsp;
+          <span className="name">
+            <Image
+              height={'1.5rem'}
+              width={'1.5rem'}
+              src={WealthyImages.profilePicPlaceholder}
+              className="profile-pic"
+            />
+            &nbsp;
+            {partnerName}.
+          </span>
+          &nbsp; Please have a look!
         </PartnerName>
         <FundsCountWithAmount className={'funds-amount-wrapper'} />
       </HeadSection>
       <PortfolioAllocation>
-        <Heading>Portfolio Allocation</Heading>
+        <Heading>
+          Portfolio Allocation
+          <FundsCount>4 Funds</FundsCount>
+        </Heading>
         <FundSwitches>
           <FundSwitchCard
             WrapperClassName={'fund-switch-wrapper'}
@@ -71,6 +87,11 @@ export default function ProposalPage() {
   )
 }
 
+const FundsCount = styled.p`
+  color: #7e7e7e;
+  font-size: 0.8rem;
+  font-family: 'Maven Pro';
+`
 const FundSwitches = styled.div`
   margin: 1.5rem 0;
   display: flex;
@@ -85,19 +106,23 @@ const FundSwitches = styled.div`
 
 const HeadSection = styled.div`
   padding: 1.5rem;
+  background: #1e1730;
 `
 
 const PortfolioAllocation = styled.div`
-  background: #f9f9f9;
-  padding: 1.5rem;
+  background: #f6f2ff;
+  padding: 1.2rem 1.2rem 3.8rem 1.2rem;
   @media (min-width: 1100px) {
     border-radius: 16px;
   }
 `
-const Heading = styled.p`
+const Heading = styled.div`
   font-family: 'Marcellus';
   font-size: 1.25rem;
   text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 const Wrapper = styled.div`
   height: 100vh;
@@ -107,13 +132,29 @@ const Wrapper = styled.div`
   background: #ffffff;
   padding-bottom: 7rem;
   .funds-amount-wrapper {
-    margin-top: 2rem;
+    margin-top: 0.8rem;
   }
 `
 const PartnerName = styled.p`
+  color: #ffffff;
   font-size: 1rem;
   font-family: 'Maven Pro';
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 27px;
+
   .name {
     font-weight: 500;
+    color: #fde5b4;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .profile-pic {
+    display: inline;
+    align-self: center;
   }
 `

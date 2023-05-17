@@ -16,4 +16,5 @@ export default function UserNameHeader({ userName = '' }: UserNameHeaderProps) {
 const Wrapper = styled.div`
   font-family: 'Marcellus' !important;
   font-size: 1.625rem;
+  color: #ffffff;
 `

@@ -33,7 +33,14 @@ export default function FundSwitchCard({
         <Units>{`${from.units} units`}</Units>
         <Amount>{WealthyAmount.init(from.amount).currencyFormat(2)}</Amount>
       </FundDetails>
-      <Image className="arrow-icon" src={WealthyImages.blackArrowRight} />
+      <ImageContainer>
+        <Image
+          className="arrow-icon"
+          src={WealthyImages.arrowWithRoundBgIcon}
+          height={'2rem'}
+          width={'2rem'}
+        />
+      </ImageContainer>
       <FundDetails>
         <Image className="circular-image" src={from.logoUrl} height={'4rem'} />
         <Name>{from.fundName}</Name>
@@ -43,6 +50,15 @@ export default function FundSwitchCard({
     </Wrapper>
   )
 }
+
+const ImageContainer = styled.div`
+  width: 0.2rem;
+  margin: 0 2rem 0 1.5rem;
+  background: #f6f2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const Wrapper = styled.div`
   display: flex;
@@ -55,8 +71,8 @@ const Wrapper = styled.div`
     border-radius: 50%;
   }
   .arrow-icon {
-    margin-top: 1.5rem;
-    margin: 1.5rem 1rem;
+    margin: 0 1.25rem;
+    align-self: center;
   }
 `
 
