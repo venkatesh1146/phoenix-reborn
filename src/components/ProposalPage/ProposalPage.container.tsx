@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import { FooterButton } from '../Buttons'
+import Footer from '../Footer'
 import FundSwitchCard from '../FundSwitchCard'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
 import Image from '../Image'
@@ -76,13 +76,7 @@ export default function ProposalPage() {
           />
         </FundSwitches>
       </PortfolioAllocation>
-      <FooterButton
-        onClick={console.log}
-        className="mobile-floating-footer-btn desktop_footer_btn"
-        primary
-      >
-        Verify and Proceed
-      </FooterButton>
+      <Footer agentPhoneNumber={7093980011} />
     </Wrapper>
   )
 }
@@ -127,6 +121,7 @@ const Heading = styled.div`
 const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
+  position: relative;
   display: flex;
   flex-direction: column;
   background: #ffffff;

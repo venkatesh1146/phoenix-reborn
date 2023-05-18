@@ -2,18 +2,24 @@ import { styled } from '@linaria/react'
 import React from 'react'
 
 import { FooterButton } from '../Buttons'
+import Footer from '../Footer'
 import Info from '../Info/Info'
 import UserNameHeader from '../UserNameHeader'
 
 import EmailContainer from './Email'
 
 export default function VerifyEmailsContainer() {
+  const emailsIdsCount = 3
   return (
     <Wrapper>
       <HeaderSection>
-        <UserNameHeader userName="Thor" />
+        <PageHeading>Verify Email</PageHeading>
         <Body>
-          <Text>{`We have found the following email IDs mapped to the funds`}</Text>
+          <Text>
+            We have found the
+            <span className="bold"> {emailsIdsCount} email IDs</span> mapped to
+            the funds
+          </Text>
           <Info
             text={
               'As per SEBI guidelines, you are required to verify email via OTP to proceed with fund switch'
@@ -22,27 +28,29 @@ export default function VerifyEmailsContainer() {
         </Body>
       </HeaderSection>
       <EmailsSection>
-        <Heading>{3} Emails associated with investments</Heading>
+        <Heading>Verify the below Emails</Heading>
         <Emails>
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
+          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
           <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
         </Emails>
       </EmailsSection>
-      <FooterButton
-        onClick={console.log}
-        className="footer-btn desktop_footer_btn"
-        primary
-      >
-        Verify and Proceed
-      </FooterButton>
+      <Footer agentPhoneNumber={7093980011} />
     </Wrapper>
   )
 }
 
+const PageHeading = styled.p`
+  font-family: 'Maven Pro';
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 21px;
+
+  color: #ffffff;
+`
 const Emails = styled.div`
   margin-bottom: 6rem;
 
@@ -56,20 +64,22 @@ const Emails = styled.div`
     }
   }
   .email-wrapper {
-    margin: 0.5rem 0;
+    margin: 1rem 0;
   }
 `
 const Heading = styled.div`
   font-family: 'Maven Pro';
   font-weight: 500;
   font-size: 1.25rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.25rem;
 `
 const HeaderSection = styled.div`
   padding: 1.25rem;
+  background: #1e1730;
+  color: #fff;
 `
 const EmailsSection = styled.div`
-  background: #f9f9f9;
+  background: #f6f2ff;
   padding: 2rem 1.8rem;
 `
 
@@ -77,6 +87,7 @@ const Wrapper = styled.div`
   background-color: #ffffff;
   height: 100vh;
   width: 100vw;
+  box-sizing: border-box;
   font-family: 'Maven Pro';
   @media (min-width: 1024px) {
     max-width: 1100px;
@@ -98,4 +109,7 @@ const Text = styled.p`
   font-family: 'Maven Pro';
   font-size: 1rem;
   margin-bottom: 32px;
+  .bold {
+    font-weight: 500;
+  }
 `

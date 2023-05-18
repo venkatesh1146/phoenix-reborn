@@ -7,20 +7,22 @@ import { WealthyImages } from '~/assets'
 
 interface InfoPropsTypes {
   text: string
+  wrapperClassName?: string
 }
-export default function Info({ text }: InfoPropsTypes) {
+export default function Info({ text, wrapperClassName = '' }: InfoPropsTypes) {
   return (
-    <Wrapper>
+    <Wrapper className={wrapperClassName}>
       <Image style={{ marginTop: '2px' }} src={WealthyImages.infoIcon} />
       <Text>{text}</Text>
     </Wrapper>
   )
 }
 const Wrapper = styled.div`
-  background: #f9f9f9;
+  background: #1e1730;
   border-radius: 8px;
   padding: 1.25rem;
   display: flex;
+  border: 1px solid #a69ebc;
 `
 const Text = styled.p`
   font-size: 0.8rem;
@@ -28,4 +30,5 @@ const Text = styled.p`
   margin: 0;
   line-height: 20px;
   margin-left: 0.5rem;
+  color: #a69ebc;
 `

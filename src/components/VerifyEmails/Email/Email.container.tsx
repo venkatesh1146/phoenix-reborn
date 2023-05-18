@@ -7,6 +7,7 @@ import {
   RoundButton,
   TextButton,
 } from '~/components/Buttons'
+import Footer from '~/components/Footer'
 import Image from '~/components/Image'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
@@ -46,22 +47,33 @@ export default function EmailContainer({
     if (isVerified)
       return (
         <>
-          <Image width={'0.9rem'} src={WealthyImages.greenTickIcon} />
-          <VerifiedTxt>Verified</VerifiedTxt>
+          <Image width={'1.375rem'} src={WealthyImages.tickWithBgDesign} />
         </>
       )
     else if (isExpanded)
       return (
-        <TextButton style={{ color: '#000000' }} onClick={toggleIsExpanded}>
+        <TextButton
+          style={{ color: '#000000', padding: 0 }}
+          onClick={toggleIsExpanded}
+        >
           Cancel
         </TextButton>
       )
-    else return <TextButton onClick={onClickVerify}>Verify</TextButton>
+    else
+      return (
+        <TextButton style={{ padding: 0 }} onClick={onClickVerify}>
+          Verify
+        </TextButton>
+      )
   }
 
   return (
     <Wrapper className={`email-wrapper ${className}`} isExpanded={isExpanded}>
       <EmailAndButton>
+        <Image
+          style={{ marginRight: '0.8rem' }}
+          src={WealthyImages.emailIconSecondaryColor}
+        />
         <EmailTxt>{email}</EmailTxt>
         {renderButtonBasedOnStatus()}
       </EmailAndButton>
@@ -109,7 +121,7 @@ const Wrapper = styled.div<{ isExpanded: boolean }>`
   flex-direction: column;
   align-items: center;
   padding: 0.75rem 1.25rem;
-
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   height: ${(props) => (props.isExpanded ? '11.25rem' : '2.75rem')};
   transition: height 0.1s cubic-bezier(0.89, -0.11, 1, 1);
   .otp-input-component {

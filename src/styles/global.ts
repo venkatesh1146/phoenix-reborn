@@ -10,8 +10,10 @@ export const globals = css`
      html,
     body,
     #__next {
-      height: 100%;
       margin:0;
+      padding: 0;
+      height:100vh;
+      width:100vw;
     }
 
     input,
