@@ -10,16 +10,18 @@ interface FooterProps {
   agentPhoneNumber?: number
   btnTxt?: string
   onClick?: () => void
+  isDisabled?: boolean
 }
 export default function Footer({
   agentPhoneNumber,
   btnTxt = 'Verify and Proceed',
   onClick,
+  isDisabled = false,
 }: FooterProps) {
   return (
     <Wrapper className="footer-wrapper">
       {agentPhoneNumber ? (
-        <CallIconContainer onClick={console.log}>
+        <CallIconContainer href={`tel:${agentPhoneNumber}`}>
           <Image
             src={WealthyImages.callIcon}
             height={'1.25rem'}
@@ -29,7 +31,11 @@ export default function Footer({
       ) : (
         <></>
       )}
-      <PrimaryButton className="cta-button" onClick={onClick}>
+      <PrimaryButton
+        disabled={isDisabled}
+        className="cta-button"
+        onClick={onClick}
+      >
         {btnTxt}
       </PrimaryButton>
     </Wrapper>
@@ -58,7 +64,7 @@ const Wrapper = styled.div`
     font-weight: 500;
   }
 `
-const CallIconContainer = styled.div`
+const CallIconContainer = styled.a`
   width: 2.9rem;
   border: 1px solid #6725f4;
   border-radius: 50%;

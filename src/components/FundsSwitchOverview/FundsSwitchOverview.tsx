@@ -8,14 +8,16 @@ interface FundsSwitchOverviewProps {
   totalAmount?: number
   numberOfFunds: string | number
   fundsIcons: string[]
+  wrapperClassName?: string
 }
 export default function FundsSwitchOverview({
   totalAmount,
   numberOfFunds,
   fundsIcons,
+  wrapperClassName = '',
 }: FundsSwitchOverviewProps) {
   return (
-    <Wrapper>
+    <Wrapper className={wrapperClassName}>
       <Header>
         <Heading>Switch Funds from Tracker</Heading>
         <FundsCount>{numberOfFunds}&nbsp;Funds</FundsCount>

@@ -5,19 +5,13 @@ import React from 'react'
 import Image from '../Image'
 
 import { WealthyImages } from '~/assets'
-
-interface FundMetaData {
-  fundName: string
-  logoUrl: string
-  amount: number
-  units: number
-}
+import { FundMetaDataType } from '~/constants/interfaces'
 
 interface FundSwitchCardProps {
   WrapperClassName?: string
   data: {
-    from: FundMetaData
-    to: FundMetaData
+    from: FundMetaDataType
+    to: FundMetaDataType
   }
 }
 

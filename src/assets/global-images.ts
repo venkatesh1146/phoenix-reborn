@@ -15,6 +15,7 @@ const WealthyImages = {
     'https://i.wlycdn.com/articles/email-icon-secondary-purple-icon.svg',
   tickWithBgDesign: 'https://i.wlycdn.com/articles/tick-with-bg-design.svg',
   diamondTick: 'https://i.wlycdn.com/articles/realistic-diamond-tick-icon.svg',
+  profileCardIcon: 'https://i.wlycdn.com/articles/profile-card-icon.svg',
 }
 
 export default WealthyImages

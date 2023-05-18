@@ -1,37 +1,37 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Footer from '../Footer'
-import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
+import FundsSwitchOverview from '../FundsSwitchOverview'
 import Image from '../Image'
 import PortfolioAllocation from '../PortfolioAllocation'
 import UserNameHeader from '../UserNameHeader'
 
 import { WealthyImages } from '~/assets'
 
-export default function ProposalPage() {
-  const partnerName = 'Venkatesh Pullaganti'
-
+export default function ProposalProcessed() {
   return (
-    <Wrapper className="desktop_container">
-      <HeadSection>
+    <Wrapper>
+      <HeaderSection>
         <UserNameHeader userName="Ashish" />
-        <PartnerName>
-          Here’s an Investment proposal shared by &nbsp;
-          <span className="name">
-            <Image
-              height={'1.5rem'}
-              width={'1.5rem'}
-              src={WealthyImages.profilePicPlaceholder}
-              className="profile-pic"
-            />
-            &nbsp;
-            {partnerName}.
-          </span>
-          &nbsp; Please have a look!
-        </PartnerName>
-        <FundsCountWithAmount className={'funds-amount-wrapper'} />
-      </HeadSection>
+        <Image
+          className="tick-icon"
+          src={WealthyImages.diamondTick}
+          width={'9.25rem'}
+          height={'8.688rem'}
+        />
+        <Text>The investment proposal has been successfully processed!</Text>
+        <FundsSwitchOverview
+          wrapperClassName="funds-switch-wrapper"
+          totalAmount={7000000}
+          numberOfFunds={4}
+          fundsIcons={[
+            'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
+            'https://i.wlycdn.com/bank-logos/yes-bank.png',
+            'https://i.wlycdn.com/bank-logos/idfc-first-bank.png',
+            'https://i.wlycdn.com/bank-logos/indian-bank.png',
+          ]}
+        />
+      </HeaderSection>
       <PortfolioAllocation
         switchFunds={[
           {
@@ -66,47 +66,30 @@ export default function ProposalPage() {
           },
         ]}
       />
-      <Footer agentPhoneNumber={7093980011} />
     </Wrapper>
   )
 }
 
-const HeadSection = styled.div`
-  padding: 1.5rem;
+const HeaderSection = styled.div`
   background: #1e1730;
-`
-const Wrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
-  position: relative;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  padding-bottom: 7rem;
-  .funds-amount-wrapper {
-    margin-top: 0.8rem;
-  }
-`
-const PartnerName = styled.p`
-  color: #ffffff;
-  font-size: 1rem;
-  font-family: 'Maven Pro';
-  text-align: center;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 27px;
-
-  .name {
-    font-weight: 500;
-    color: #fde5b4;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: baseline;
-  }
-  .profile-pic {
-    display: inline;
+  padding: 1.25rem;
+  .tick-icon {
     align-self: center;
   }
+  .funds-switch-wrapper {
+    margin-bottom: 1.5rem;
+  }
 `
+const Text = styled.p`
+  font-family: 'Maven Pro';
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  color: #ffffff;
+  margin: 0;
+  margin-bottom: 2rem;
+`
+
+const Wrapper = styled.div``

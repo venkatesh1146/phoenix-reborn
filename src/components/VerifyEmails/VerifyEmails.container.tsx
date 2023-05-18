@@ -89,6 +89,7 @@ const Wrapper = styled.div`
   width: 100vw;
   box-sizing: border-box;
   font-family: 'Maven Pro';
+
   @media (min-width: 1024px) {
     max-width: 1100px;
     margin: auto;

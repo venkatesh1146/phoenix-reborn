@@ -3,13 +3,7 @@ import { styled } from '@linaria/react'
 const primaryColor = '#6725f4'
 const primaryDenseColor = '#571fd1'
 const secondaryColor = '#fbf9ff'
-const primaryTextColor = '#1c1c1c'
 const secondaryTextColor = '#7e7e7e'
-const primaryBgColor = 'rgb(243, 244, 252)'
-const lightPrimaryColor = '#f8f4ff'
-const cardsPrimaryBgColor = '#f6f6fb'
-const errorColor = '#d32f2f'
-const highlightColor = '#fff4de'
 
 export const DefaultButton = styled.button<{
   full_width?: boolean
@@ -28,8 +22,8 @@ export const DefaultButton = styled.button<{
     background-color: #e1dfe6;
   }
   &[disabled] {
-    background-color: #fbf9ff !important;
-    color: #000 !important;
+    background-color: #c8c6cc !important;
+    color: #ffffff !important;
     opacity: 0.7;
     cursor: not-allowed;
   }
