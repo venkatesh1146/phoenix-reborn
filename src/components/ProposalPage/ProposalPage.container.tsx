@@ -1,21 +1,38 @@
 import { styled } from '@linaria/react'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
+
+import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import Footer from '../Footer'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
 import Image from '../Image'
 import PortfolioAllocation from '../PortfolioAllocation'
+import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 import UserNameHeader from '../UserNameHeader'
+import VerifyEmailsContainer from '../VerifyEmails'
 
 import { WealthyImages } from '~/assets'
+import { MF_SWITCH_ROUTES } from '~/constants/routes'
+import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalPage() {
-  const partnerName = 'Venkatesh Pullaganti'
+  const { isLoading, proposalData } = useMFSwitchProposal()
+  const router = useRouter()
+  const [isEmailVerification, setIsEmailVerification] = useState(false)
 
-  return (
+  const navigateToVerifyPage = () => {
+    setIsEmailVerification(true)
+  }
+
+  return isLoading ? (
+    <FullScreenSpinner />
+  ) : isEmailVerification ? (
+    <VerifyEmailsContainer proposalData={proposalData} isLoading={isLoading} />
+  ) : (
     <Wrapper className="desktop_container">
       <HeadSection>
-        <UserNameHeader userName="Ashish" />
+        <UserNameHeader userName={proposalData?.clientName} />
         <PartnerName>
           Here’s an Investment proposal shared by &nbsp;
           <span className="name">
@@ -26,47 +43,25 @@ export default function ProposalPage() {
               className="profile-pic"
             />
             &nbsp;
-            {partnerName}.
+            {proposalData?.partnerName}.
           </span>
           &nbsp; Please have a look!
         </PartnerName>
-        <FundsCountWithAmount className={'funds-amount-wrapper'} />
+        <FundsCountWithAmount
+          amount={
+            proposalData?.schemes.reduce(
+              (prev, current) => prev + current.switchin.amount,
+              0
+            ) ?? 0
+          }
+          className={'funds-amount-wrapper'}
+        />
       </HeadSection>
-      <PortfolioAllocation
-        switchFunds={[
-          {
-            from: {
-              fundName: 'Nippon Growth Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl:
-                'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
-            },
-            to: {
-              fundName: 'Axis Blue Chip Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl: 'https://i.wlycdn.com/credit_card/axis-bank-png.png',
-            },
-          },
-          {
-            from: {
-              fundName: 'Nippon Growth Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl:
-                'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
-            },
-            to: {
-              fundName: 'Axis Blue Chip Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl: 'https://i.wlycdn.com/credit_card/axis-bank-png.png',
-            },
-          },
-        ]}
+      <PortfolioAllocation switchFunds={proposalData?.schemes || []} />
+      <Footer
+        onClick={navigateToVerifyPage}
+        agentPhoneNumber={proposalData?.partnerPhone}
       />
-      <Footer agentPhoneNumber={7093980011} />
     </Wrapper>
   )
 }

@@ -6,12 +6,13 @@ import FundSwitchCard from '../FundSwitchCard'
 import { FundMetaDataType } from '~/constants/interfaces'
 
 interface SwitchFundType {
-  from: FundMetaDataType
-  to: FundMetaDataType
+  switchout: FundMetaDataType
+  switchin: FundMetaDataType
+  amcIconUrl?: string
 }
 
 interface PortfolioAllocationPropsType {
-  switchFunds: Array<SwitchFundType>
+  switchFunds: SwitchFundType[]
 }
 
 export default function PortfolioAllocation({

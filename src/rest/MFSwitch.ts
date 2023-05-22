@@ -5,29 +5,30 @@ import {
   VerifyOTPRequestType,
 } from './interfaces'
 
-const sendOTP = (req: SendOTPRequestType) => {
-  const url = '/approval/api/v0/sendOTP'
+const BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/quinjet`
+
+export const sendOTP = (req: SendOTPRequestType) => {
+  const url = `${BASE_URL}/otp-flow/api/v0/send-otp`
   return transformedAxios.post(url, req)
 }
 
-const verifyOTP = (req: VerifyOTPRequestType) => {
-  const url = '/approval/api/v0/verifyOTP'
+export const verifyOTP = (req: VerifyOTPRequestType) => {
+  const url = `${BASE_URL}/otp-flow/api/v0/verify-otp`
   return transformedAxios.post(url, req)
 }
 
-const resendOTP = (req: ResendOTPRequestType) => {
-  const url = '/approval/api/v0/resendOTP'
+export const resendOTP = (req: ResendOTPRequestType) => {
+  const url = `${BASE_URL}/otp-flow/api/v0/resend-otp`
   return transformedAxios.post(url, req)
 }
 
-const getProposalStatus = (proposalId: string) => {
-  const url = `proposals/api/v0/mf/status?proposal_id=${proposalId}`
-  return transformedAxios.get(url)
-}
-
-export default {
-  sendOTP,
-  verifyOTP,
-  resendOTP,
-  getProposalStatus,
+export const getProposalStatus = (proposalId: string) => {
+  const url = `${BASE_URL}/api/v0/mf/status/?proposal_id=${proposalId}`
+  const config = {
+    headers: {
+      Authorization:
+        '3da15256-a435-455d-bad9-8af927159321:LYgwEBLlwZpTAzHOM-N7jYOrHq8',
+    },
+  }
+  return transformedAxios.get(url, config)
 }

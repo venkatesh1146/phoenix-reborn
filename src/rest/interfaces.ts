@@ -9,7 +9,7 @@ export interface SendOTPRequestType {
 export interface VerifyOTPRequestType {
   email: string
   referenceid: string
-  otp: number
+  otp: number | string
 }
 
 export interface ResendOTPRequestType {

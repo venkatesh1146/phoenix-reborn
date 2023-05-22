@@ -1,15 +1,57 @@
 import { styled } from '@linaria/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { TextButton } from '../Buttons'
 import Footer from '../Footer'
 import Image from '../Image'
 import Info from '../Info/Info'
+import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
+import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
+
+interface KycDataType {
+  pending: {
+    pan: string
+    email: string
+    kycUrl: string
+  }[]
+  completed: {
+    pan: string
+    email: string
+  }[]
+}
 
 export default function KycVerification() {
-  return (
+  const { proposalData, isLoading } = useMFSwitchProposal()
+  const [kycData, setKycData] = useState<KycDataType | null>(null)
+
+  useEffect(() => {
+    const kycData: { pending: any[]; completed: any[] } = {
+      pending: [],
+      completed: [],
+    }
+
+    proposalData?.schemes.forEach((scheme) => {
+      if (scheme.kycCompleted) {
+        kycData.completed.push({
+          pan: scheme?.pan,
+          email: scheme.email,
+        })
+      } else {
+        kycData.pending.push({
+          pan: scheme?.pan,
+          email: scheme.email,
+          kycUrl: scheme.kycLink,
+        })
+      }
+    })
+    setKycData(kycData)
+  }, [])
+
+  return isLoading ? (
+    <FullScreenSpinner />
+  ) : (
     <Wrapper>
       <HeaderSection>
         <PageHeading>KYC Completion</PageHeading>
@@ -25,6 +67,33 @@ export default function KycVerification() {
       </HeaderSection>
       <KycStatus>
         <HeadText>KYC Pending</HeadText>
+        {kycData?.pending.map((data, index) => (
+          <KycCard key={index}>
+            <Image
+              src={WealthyImages.profileCardIcon}
+              height={'1rem'}
+              width={'1.5rem'}
+              className="profile-icon"
+            />
+            <Details>
+              <PanNo>{data.pan}</PanNo>
+              <SubTxt>{data.email}</SubTxt>
+              {/* <SubTxt>{data?.phoneNumber}</SubTxt> */}
+            </Details>
+            <a
+              style={{
+                marginTop: '-4px',
+                height: '1rem',
+                textDecoration: 'none',
+              }}
+              href={data.kycUrl}
+              target={'_blank'}
+              rel="noreferrer"
+            >
+              {'Complete KYC'}
+            </a>
+          </KycCard>
+        ))}
         <KycCard>
           <Image
             src={WealthyImages.profileCardIcon}
@@ -65,8 +134,8 @@ export default function KycVerification() {
         </KycCard>
       </KycStatus>
       <Footer
-        isDisabled={true}
-        agentPhoneNumber={7093980011}
+        isDisabled={kycData?.pending?.length > 0}
+        agentPhoneNumber={proposalData?.partnerPhone}
         btnTxt="Proceed"
       />
     </Wrapper>

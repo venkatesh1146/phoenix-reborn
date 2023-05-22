@@ -33,6 +33,9 @@ export const PrimaryButton = styled(DefaultButton)`
   background-color: ${primaryColor};
   color: #fff;
   font-family: 'Maven Pro';
+  &[disabled] {
+    border: none !important;
+  }
 `
 
 export const DefaultBlockButton = styled(DefaultButton)`

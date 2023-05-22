@@ -1,23 +1,78 @@
 import { styled } from '@linaria/react'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
-import { FooterButton } from '../Buttons'
+import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
+
 import Footer from '../Footer'
 import Info from '../Info/Info'
-import UserNameHeader from '../UserNameHeader'
+import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 
 import EmailContainer from './Email'
 
-export default function VerifyEmailsContainer() {
-  const emailsIdsCount = 3
-  return (
+import { MFSwitchStatusResponseType } from '~/constants/interfaces'
+import { MF_SWITCH_ROUTES } from '~/constants/routes'
+
+interface VerifyEmailsContainerPropsType {
+  proposalData: MFSwitchStatusResponseType | null
+  isLoading: boolean
+}
+
+export default function VerifyEmailsContainer({
+  proposalData,
+  isLoading,
+}: VerifyEmailsContainerPropsType) {
+  const [emails, setEmail] = useState<{ email: string; isVerified: boolean }[]>(
+    []
+  )
+  const router = useRouter()
+  const isAllEmailsVerified =
+    emails.findIndex((e) => e.isVerified === false) < 0
+
+  useEffect(() => {
+    const emails = proposalData?.schemes.reduce<
+      { email: string; isVerified: boolean }[]
+    >((list, current) => {
+      const email = current.email
+      if (list.findIndex((item) => item.email === email) < 0)
+        list.push({
+          email: email || '',
+          isVerified: Boolean(current.customerApproved),
+        })
+      return list
+    }, [])
+    setEmail(emails ?? [])
+  }, [])
+
+  const onVerifyEmail = (emailId: string) => {
+    const index = emails.findIndex((email) => email.email === emailId)
+    if (index < 0) return
+
+    const updatedEmails = [...emails]
+    updatedEmails[index].isVerified = true
+    setEmail(updatedEmails)
+  }
+
+  const handleProceed = () => {
+    proposalData?.ticketNumber &&
+      router.push(
+        getMFSwitchUrlWithProposalId(
+          MF_SWITCH_ROUTES.kycVerification,
+          proposalData?.ticketNumber
+        )
+      )
+  }
+
+  return isLoading ? (
+    <FullScreenSpinner />
+  ) : (
     <Wrapper>
       <HeaderSection>
         <PageHeading>Verify Email</PageHeading>
         <Body>
           <Text>
             We have found the
-            <span className="bold"> {emailsIdsCount} email IDs</span> mapped to
+            <span className="bold"> {emails?.length} email IDs</span> mapped to
             the funds
           </Text>
           <Info
@@ -30,15 +85,23 @@ export default function VerifyEmailsContainer() {
       <EmailsSection>
         <Heading>Verify the below Emails</Heading>
         <Emails>
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={true} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
-          <EmailContainer email="venkat.ashish@gmail.com" isVerified={false} />
+          {emails?.map((eachMail) => (
+            <EmailContainer
+              key={eachMail.isVerified + eachMail.email}
+              email={eachMail.email}
+              isVerified={eachMail.isVerified}
+              proposalId={proposalData?.ticketNumber || ''}
+              userId={proposalData?.userid || ''}
+              onVerify={onVerifyEmail}
+            />
+          ))}
         </Emails>
       </EmailsSection>
-      <Footer agentPhoneNumber={7093980011} />
+      <Footer
+        isDisabled={!isAllEmailsVerified}
+        agentPhoneNumber={proposalData?.partnerPhone}
+        onClick={handleProceed}
+      />
     </Wrapper>
   )
 }
@@ -81,6 +144,7 @@ const HeaderSection = styled.div`
 const EmailsSection = styled.div`
   background: #f6f2ff;
   padding: 2rem 1.8rem;
+  flex-grow: 1;
 `
 
 const Wrapper = styled.div`
@@ -89,7 +153,8 @@ const Wrapper = styled.div`
   width: 100vw;
   box-sizing: border-box;
   font-family: 'Maven Pro';
-
+  display: flex;
+  flex-direction: column;
   @media (min-width: 1024px) {
     max-width: 1100px;
     margin: auto;

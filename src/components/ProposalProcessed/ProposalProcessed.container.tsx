@@ -35,14 +35,14 @@ export default function ProposalProcessed() {
       <PortfolioAllocation
         switchFunds={[
           {
-            from: {
+            switchout: {
               fundName: 'Nippon Growth Fund',
               units: 52.3,
               amount: 50000,
               logoUrl:
                 'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
             },
-            to: {
+            switchin: {
               fundName: 'Axis Blue Chip Fund',
               units: 52.3,
               amount: 50000,
@@ -50,14 +50,14 @@ export default function ProposalProcessed() {
             },
           },
           {
-            from: {
+            switchout: {
               fundName: 'Nippon Growth Fund',
               units: 52.3,
               amount: 50000,
               logoUrl:
                 'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
             },
-            to: {
+            switchin: {
               fundName: 'Axis Blue Chip Fund',
               units: 52.3,
               amount: 50000,

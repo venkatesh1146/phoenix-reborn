@@ -7,7 +7,7 @@ import Image from '../Image'
 import { WealthyImages } from '~/assets'
 
 interface FooterProps {
-  agentPhoneNumber?: number
+  agentPhoneNumber?: number | string
   btnTxt?: string
   onClick?: () => void
   isDisabled?: boolean

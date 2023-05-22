@@ -1,5 +1,6 @@
 import { styled } from '@linaria/react'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 
 import {
   OutlinedButton,
@@ -11,14 +12,20 @@ import Footer from '~/components/Footer'
 import Image from '~/components/Image'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
+import Spinner from '~/components/Spinner'
+import { getErrorMessage } from '~/utils/ErrorUtils'
 
 import { WealthyImages } from '~/assets'
+import useAsync from '~/hooks/useAsync'
+import { resendOTP, sendOTP, verifyOTP } from '~/rest/MFSwitch'
 
 interface EmailPropTypes {
   email: string
   isVerified: boolean
   onVerify?: (email: string) => void
   className?: string
+  proposalId: string
+  userId: string
 }
 
 export default function EmailContainer({
@@ -26,21 +33,58 @@ export default function EmailContainer({
   isVerified,
   onVerify,
   className = '',
+  proposalId,
+  userId,
 }: EmailPropTypes) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [otp, setOtp] = useState('')
+
+  const { isLoading: isSendOtpLoading, makeApiCall: handleSentOTP } =
+    useAsync(sendOTP)
+
+  const { isLoading: isResendOTPLoading, makeApiCall: handleResendOTP } =
+    useAsync(resendOTP)
+
+  const { isLoading: isVerifyOTPLoading, makeApiCall: handleVerifyOTP } =
+    useAsync(verifyOTP)
 
   const toggleIsExpanded = () => {
     setIsExpanded(!isExpanded)
   }
 
   const onClickVerify = () => {
-    // request otp
-    toggleIsExpanded()
+    handleSentOTP(
+      {
+        emails: [email],
+        phoneNumbers: [],
+        referenceid: proposalId,
+        templateName: 'TEMPLATE_1',
+        userid: userId,
+      },
+      () => {
+        setIsExpanded(true)
+      }
+    )
   }
 
   const resendOtp = () => {
-    //pass
+    handleResendOTP({
+      email,
+      referenceid: proposalId,
+    })
+  }
+
+  const handleVerify = () => {
+    handleVerifyOTP(
+      {
+        email,
+        referenceid: proposalId,
+        otp: parseInt(otp),
+      },
+      () => {
+        onVerify && onVerify(email)
+      }
+    )
   }
 
   const renderButtonBasedOnStatus = () => {
@@ -62,7 +106,7 @@ export default function EmailContainer({
     else
       return (
         <TextButton style={{ padding: 0 }} onClick={onClickVerify}>
-          Verify
+          {isSendOtpLoading ? <Spinner /> : 'Verify'}
         </TextButton>
       )
   }
@@ -90,11 +134,15 @@ export default function EmailContainer({
           />
           <ResendOTP style={{}} maxTime={30} onResendClick={resendOtp} />
           <RoundButton
-            disabled={otp.length !== 6}
-            onClick={resendOtp}
+            disabled={otp.length !== 6 || isResendOTPLoading}
+            onClick={handleVerify}
             style={{ fontWeight: '600' }}
           >
-            Confirm OTP
+            {isResendOTPLoading || isVerifyOTPLoading ? (
+              <Spinner />
+            ) : (
+              'Confirm OTP'
+            )}
           </RoundButton>
         </>
       ) : (

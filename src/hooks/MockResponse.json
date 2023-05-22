@@ -1,0 +1,65 @@
+{
+  "user_id": "8d4489ca244f4910acc884422947a1b0",
+  "ticket_number": "proposals_mfs_ouNNtCNLR5a6YUO",
+  "status": "user_kyc_awaited",
+  "client_name": "Arpit",
+  "partner_name": "Venkat Ashish",
+  "total_amount": 100000.0,
+  "partner_phone": "+91-888888888",
+  "schemes": [
+    {
+      "switchout": {
+        "wschemecode": "MSBIL103GGR",
+        "wpc": "WPC12345",
+        "amount": 2000.11,
+        "units": 100,
+        "full": false,
+        "folio_number": "16503818",
+        "fund_name": "Nippon Growth Fund"
+      },
+      "switchin": {
+        "wschemecode": "MSBIL099GGR",
+        "wpc": "WPC12345",
+        "amount": 2000.11,
+        "units": 80,
+        "full": false,
+        "folio_number": "16503818",
+        "fund_name": "Nippon Bluechip Fund"
+      },
+      "amc_icon_url": "https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png",
+      "valid": true,
+      "email": "ashish12345@xyz.com",
+      "pan": "ASHISH1234",
+      "customer_approved": true,
+      "kyc_completed": false,
+      "kyc_link": "https://xyz.com/kyc/some_random_id"
+    },
+    {
+      "switchout": {
+        "wschemecode": "MAXS128MCDGGGD",
+        "wpc": "WPC12345",
+        "amount": 2000.11,
+        "units": 10,
+        "full": false,
+        "folio_number": "91095713652/0",
+        "fund_name": "Axis Growth Fund"
+      },
+      "switchin": {
+        "wschemecode": "MAXS128EFDGGGD",
+        "fund_name": "Axis Bluechip Fund",
+        "wpc": "WPC12345",
+        "amount": 2000.11,
+        "units": 10,
+        "full": false,
+        "folio_number": "91095713652/0"
+      },
+      "amc_icon_url": "https://i.wlycdn.com/credit_card/axis-bank-png.png",
+      "valid": true,
+      "email": "arpitgetWealthy@wealth.com",
+      "pan": "ARPIT1234",
+      "customer_approved": true,
+      "kyc_completed": false,
+      "kyc_link": "https://xyz.com/kyc/some_random_id"
+    }
+  ]
+}

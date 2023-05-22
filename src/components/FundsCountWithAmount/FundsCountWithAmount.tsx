@@ -8,10 +8,12 @@ import { WealthyImages } from '~/assets'
 
 interface FundsCountWithAmountProps {
   className?: string
+  amount: number
 }
 
 export default function FundsCountWithAmount({
   className = '',
+  amount,
 }: FundsCountWithAmountProps) {
   return (
     <Wrapper className={className}>
@@ -28,7 +30,9 @@ export default function FundsCountWithAmount({
       </NameSection>
       <SubSection>
         <TotalTxt>Total Amount</TotalTxt>
-        <Amount>{WealthyAmount.init(700000).currencyFormat(2)}</Amount>
+        <Amount>
+          {amount ? WealthyAmount.init(amount).currencyFormat(2) : '--'}
+        </Amount>
       </SubSection>
     </Wrapper>
   )

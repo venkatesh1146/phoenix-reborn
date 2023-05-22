@@ -10,22 +10,25 @@ import { FundMetaDataType } from '~/constants/interfaces'
 interface FundSwitchCardProps {
   WrapperClassName?: string
   data: {
-    from: FundMetaDataType
-    to: FundMetaDataType
+    switchout: FundMetaDataType
+    switchin: FundMetaDataType
+    amcIconUrl?: string
   }
 }
 
 export default function FundSwitchCard({
-  data: { from, to },
+  data: { switchout, switchin, amcIconUrl },
   WrapperClassName = '',
 }: FundSwitchCardProps) {
   return (
     <Wrapper className={WrapperClassName}>
       <FundDetails>
-        <Image className="circular-image" src={from.logoUrl} height={'4rem'} />
-        <Name>{from.fundName}</Name>
-        <Units>{`${from.units} units`}</Units>
-        <Amount>{WealthyAmount.init(from.amount).currencyFormat(2)}</Amount>
+        <Image className="circular-image" src={amcIconUrl} height={'4rem'} />
+        <Name>{switchout.fundName}</Name>
+        <Units>{`${switchout.units} units`}</Units>
+        <Amount>
+          {WealthyAmount.init(switchout.amount).currencyFormat(2)}
+        </Amount>
       </FundDetails>
       <ImageContainer>
         <Image
@@ -36,10 +39,10 @@ export default function FundSwitchCard({
         />
       </ImageContainer>
       <FundDetails>
-        <Image className="circular-image" src={from.logoUrl} height={'4rem'} />
-        <Name>{from.fundName}</Name>
-        <Units>{`${from.units} units`}</Units>
-        <Amount>{WealthyAmount.init(to.amount).currencyFormat(2)}</Amount>
+        <Image className="circular-image" src={amcIconUrl} height={'4rem'} />
+        <Name>{switchout.fundName}</Name>
+        <Units>{`${switchout.units} units`}</Units>
+        <Amount>{WealthyAmount.init(switchin.amount).currencyFormat(2)}</Amount>
       </FundDetails>
     </Wrapper>
   )

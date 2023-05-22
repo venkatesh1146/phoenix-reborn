@@ -12,13 +12,13 @@ export function Main({ title, description }: Props) {
     <Container>
       <FundSwitchCard
         data={{
-          from: {
+          switchout: {
             fundName: 'Nippon Growth Fund',
             units: 52.3,
             amount: 50000,
             logoUrl: 'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
           },
-          to: {
+          switchin: {
             fundName: 'Axis Blue Chip Fund',
             units: 52.3,
             amount: 50000,
