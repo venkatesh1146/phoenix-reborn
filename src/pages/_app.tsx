@@ -2,7 +2,7 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
 
-import { ToastConfig, ToastDesktopConfig } from '~/constants/config'
+import { ToastConfig, ToastDesktopConfig } from '~/constants/toast.config'
 import { isDesktop, useIsDesktop } from '~/hooks/useIsDesktop'
 
 import '../styles/global'

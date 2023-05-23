@@ -23,6 +23,7 @@ export const ToastConfig = {
     maxWidth: 'unset',
     padding: '8px 10px 12px 10px',
     width: '100%',
+    fontFamily: 'Maven Pro',
   },
 }
 
@@ -30,6 +31,7 @@ const desktopToastStyles: React.CSSProperties = {
   minWidth: '320px',
   maxWidth: '600px',
   minHeight: '52px',
+  fontFamily: 'Maven Pro',
   borderRadius: '8px',
 }
 
