@@ -4,15 +4,21 @@ import React from 'react'
 import FundsSwitchOverview from '../FundsSwitchOverview'
 import Image from '../Image'
 import PortfolioAllocation from '../PortfolioAllocation'
+import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 import UserNameHeader from '../UserNameHeader'
 
 import { WealthyImages } from '~/assets'
+import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalProcessed() {
-  return (
+  const { proposalData, isLoading, getAMCLogos } = useMFSwitchProposal()
+
+  return isLoading ? (
+    <FullScreenSpinner />
+  ) : (
     <Wrapper>
       <HeaderSection>
-        <UserNameHeader userName="Ashish" />
+        <UserNameHeader userName={proposalData?.clientName} />
         <Image
           className="tick-icon"
           src={WealthyImages.diamondTick}
@@ -22,50 +28,12 @@ export default function ProposalProcessed() {
         <Text>The investment proposal has been successfully processed!</Text>
         <FundsSwitchOverview
           wrapperClassName="funds-switch-wrapper"
-          totalAmount={7000000}
-          numberOfFunds={4}
-          fundsIcons={[
-            'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
-            'https://i.wlycdn.com/bank-logos/yes-bank.png',
-            'https://i.wlycdn.com/bank-logos/idfc-first-bank.png',
-            'https://i.wlycdn.com/bank-logos/indian-bank.png',
-          ]}
+          totalAmount={proposalData?.totalAmount}
+          numberOfFunds={proposalData?.schemes.length ?? ''}
+          fundsIcons={getAMCLogos() ?? []}
         />
       </HeaderSection>
-      <PortfolioAllocation
-        switchFunds={[
-          {
-            switchout: {
-              fundName: 'Nippon Growth Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl:
-                'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
-            },
-            switchin: {
-              fundName: 'Axis Blue Chip Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl: 'https://i.wlycdn.com/credit_card/axis-bank-png.png',
-            },
-          },
-          {
-            switchout: {
-              fundName: 'Nippon Growth Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl:
-                'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
-            },
-            switchin: {
-              fundName: 'Axis Blue Chip Fund',
-              units: 52.3,
-              amount: 50000,
-              logoUrl: 'https://i.wlycdn.com/credit_card/axis-bank-png.png',
-            },
-          },
-        ]}
-      />
+      <PortfolioAllocation switchFunds={proposalData?.schemes ?? []} />
     </Wrapper>
   )
 }

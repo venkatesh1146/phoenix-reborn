@@ -1,7 +1,6 @@
 import { styled } from '@linaria/react'
 import React, { useEffect, useState } from 'react'
 
-import { TextButton } from '../Buttons'
 import Footer from '../Footer'
 import Image from '../Image'
 import Info from '../Info/Info'
@@ -23,7 +22,7 @@ interface KycDataType {
 }
 
 export default function KycVerification() {
-  const { proposalData, isLoading } = useMFSwitchProposal()
+  const { proposalData, isLoading, getProposal } = useMFSwitchProposal()
   const [kycData, setKycData] = useState<KycDataType | null>(null)
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export default function KycVerification() {
       }
     })
     setKycData(kycData)
-  }, [])
+  }, [proposalData])
 
   return isLoading ? (
     <FullScreenSpinner />
@@ -66,7 +65,7 @@ export default function KycVerification() {
         />
       </HeaderSection>
       <KycStatus>
-        <HeadText>KYC Pending</HeadText>
+        {kycData?.pending.length ? <HeadText>KYC Pending</HeadText> : null}
         {kycData?.pending.map((data, index) => (
           <KycCard key={index}>
             <Image
@@ -80,67 +79,57 @@ export default function KycVerification() {
               <SubTxt>{data.email}</SubTxt>
               {/* <SubTxt>{data?.phoneNumber}</SubTxt> */}
             </Details>
-            <a
-              style={{
-                marginTop: '-4px',
-                height: '1rem',
-                textDecoration: 'none',
-              }}
-              href={data.kycUrl}
-              target={'_blank'}
-              rel="noreferrer"
-            >
+            <KycLink href={data.kycUrl} target={'_blank'} rel="noreferrer">
               {'Complete KYC'}
-            </a>
+            </KycLink>
           </KycCard>
         ))}
-        <KycCard>
-          <Image
-            src={WealthyImages.profileCardIcon}
-            height={'1rem'}
-            width={'1.5rem'}
-            className="profile-icon"
-          />
-          <Details>
-            <PanNo>{'DAKA5638HD'}</PanNo>
-            <SubTxt>{'naman.bajaj@gmail.com'}</SubTxt>
-            <SubTxt>{'+91-9912345633'}</SubTxt>
-          </Details>
-          <TextButton
-            style={{ marginTop: '-4px', height: '1rem' }}
-            onClick={console.log}
-          >
-            {'Complete KYC'}
-          </TextButton>
-        </KycCard>
 
-        <HeadText className="kyc-completion">KYC Completion</HeadText>
-        <KycCard>
-          <Image
-            src={WealthyImages.profileCardIcon}
-            height={'1rem'}
-            width={'1.5rem'}
-            className="profile-icon"
-          />
-          <Details>
-            <PanNo>{'DAKA5638HD'}</PanNo>
-            <SubTxt>{'naman.bajaj@gmail.com'}</SubTxt>
-            <SubTxt>{'+91-9912345633'}</SubTxt>
-          </Details>
-          <DoneStatus>
-            <Image className="done-icon" src={WealthyImages.tickWithBgDesign} />
-            KYC Done
-          </DoneStatus>
-        </KycCard>
+        {kycData?.completed?.length ? (
+          <HeadText className="kyc-completion">KYC Completion</HeadText>
+        ) : null}
+        {kycData?.completed.map((data, index) => (
+          <KycCard key={index}>
+            <Image
+              src={WealthyImages.profileCardIcon}
+              height={'1rem'}
+              width={'1.5rem'}
+              className="profile-icon"
+            />
+            <Details>
+              <PanNo>{data.pan}</PanNo>
+              <SubTxt>{data.email}</SubTxt>
+              {/* <SubTxt>{data.phoneNumber}</SubTxt> */}
+            </Details>
+            <DoneStatus>
+              <Image
+                className="done-icon"
+                src={WealthyImages.tickWithBgDesign}
+              />
+              KYC Done
+            </DoneStatus>
+          </KycCard>
+        ))}
       </KycStatus>
       <Footer
         isDisabled={kycData?.pending?.length > 0}
         agentPhoneNumber={proposalData?.partnerPhone}
         btnTxt="Proceed"
+        onClick={getProposal}
+        isLoading={isLoading}
       />
     </Wrapper>
   )
 }
+
+const KycLink = styled.a`
+  font-family: 'Maven Pro';
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #6725f4;
+  margin-top: -4px;
+  text-decoration: none;
+`
 
 const DoneStatus = styled.div`
   color: #14b195;

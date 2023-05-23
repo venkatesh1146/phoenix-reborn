@@ -1,8 +1,5 @@
 import { styled } from '@linaria/react'
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-
-import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import Footer from '../Footer'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
@@ -13,12 +10,10 @@ import UserNameHeader from '../UserNameHeader'
 import VerifyEmailsContainer from '../VerifyEmails'
 
 import { WealthyImages } from '~/assets'
-import { MF_SWITCH_ROUTES } from '~/constants/routes'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalPage() {
   const { isLoading, proposalData } = useMFSwitchProposal()
-  const router = useRouter()
   const [isEmailVerification, setIsEmailVerification] = useState(false)
 
   const navigateToVerifyPage = () => {

@@ -18,7 +18,7 @@ export interface MFSwitchStatusResponseType {
 export interface EachFundSwitchType {
   switchout: Switch
   switchin: Switch
-  amcIconurl?: string
+  amcIconUrl: string
   error?: string
   valid?: boolean
   email?: string

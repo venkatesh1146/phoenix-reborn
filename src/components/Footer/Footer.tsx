@@ -3,6 +3,7 @@ import React from 'react'
 
 import { PrimaryButton } from '../Buttons'
 import Image from '../Image'
+import Spinner from '../Spinner'
 
 import { WealthyImages } from '~/assets'
 
@@ -11,12 +12,14 @@ interface FooterProps {
   btnTxt?: string
   onClick?: () => void
   isDisabled?: boolean
+  isLoading?: boolean
 }
 export default function Footer({
   agentPhoneNumber,
   btnTxt = 'Verify and Proceed',
   onClick,
   isDisabled = false,
+  isLoading = false,
 }: FooterProps) {
   return (
     <Wrapper className="footer-wrapper">
@@ -35,8 +38,9 @@ export default function Footer({
         disabled={isDisabled}
         className="cta-button"
         onClick={onClick}
+        style={{ background: isLoading ? '#fff' : '' }}
       >
-        {btnTxt}
+        {isLoading ? <Spinner /> : btnTxt}
       </PrimaryButton>
     </Wrapper>
   )

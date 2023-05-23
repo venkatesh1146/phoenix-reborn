@@ -5,11 +5,16 @@ import Footer from '../Footer'
 import FundsSwitchOverview from '../FundsSwitchOverview'
 import Image from '../Image'
 import Info from '../Info/Info'
+import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
+import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalAccepted() {
-  return (
+  const { proposalData, isLoading, getAMCLogos } = useMFSwitchProposal()
+  return isLoading ? (
+    <FullScreenSpinner />
+  ) : (
     <Wrapper>
       <Image src={WealthyImages.diamondTick} height={'9.28rem'} />
       <Text>Congratulations!</Text>
@@ -22,14 +27,9 @@ export default function ProposalAccepted() {
       />
       <Divider />
       <FundsSwitchOverview
-        totalAmount={7000000}
-        numberOfFunds={4}
-        fundsIcons={[
-          'https://i.wlycdn.com/bank-logos/kotak-mahindra-bank.png',
-          'https://i.wlycdn.com/bank-logos/yes-bank.png',
-          'https://i.wlycdn.com/bank-logos/idfc-first-bank.png',
-          'https://i.wlycdn.com/bank-logos/indian-bank.png',
-        ]}
+        totalAmount={proposalData?.totalAmount}
+        numberOfFunds={proposalData?.schemes?.length || ''}
+        fundsIcons={getAMCLogos() ?? []}
       />
       <Footer btnTxt="Done" />
     </Wrapper>

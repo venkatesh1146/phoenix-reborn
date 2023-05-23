@@ -58,7 +58,7 @@
       "email": "arpitgetWealthy@wealth.com",
       "pan": "ARPIT1234",
       "customer_approved": true,
-      "kyc_completed": false,
+      "kyc_completed": true,
       "kyc_link": "https://xyz.com/kyc/some_random_id"
     }
   ]
