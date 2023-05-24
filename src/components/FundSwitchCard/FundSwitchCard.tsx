@@ -2,7 +2,7 @@ import { styled } from '@linaria/react'
 import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
-import Image from '../Base/Buttons/Image'
+import Image from '../Base/Image'
 
 import { WealthyImages } from '~/assets'
 import { FundMetaDataType } from '~/constants/interfaces'
@@ -12,7 +12,7 @@ interface FundSwitchCardProps {
   data: {
     switchout: FundMetaDataType
     switchin: FundMetaDataType
-    amcIconUrl?: string
+    amcIconUrl: string
   }
 }
 
@@ -23,7 +23,12 @@ export default function FundSwitchCard({
   return (
     <Wrapper className={WrapperClassName}>
       <FundDetails>
-        <Image className="circular-image" src={amcIconUrl} height={'4rem'} />
+        <Image
+          alt={switchout.fundName}
+          className="circular-image"
+          src={amcIconUrl}
+          height={64}
+        />
         <Name>{switchout.fundName}</Name>
         <Units>{`${switchout.units} units`}</Units>
         <Amount>
@@ -32,16 +37,22 @@ export default function FundSwitchCard({
       </FundDetails>
       <ImageContainer>
         <Image
+          alt="arrow"
           className="arrow-icon"
           src={WealthyImages.arrowWithRoundBgIcon}
-          height={'2rem'}
-          width={'2rem'}
+          height={32}
+          width={32}
         />
       </ImageContainer>
       <FundDetails>
-        <Image className="circular-image" src={amcIconUrl} height={'4rem'} />
-        <Name>{switchout.fundName}</Name>
-        <Units>{`${switchout.units} units`}</Units>
+        <Image
+          alt={switchin.fundName}
+          className="circular-image"
+          src={amcIconUrl}
+          height={64}
+        />
+        <Name>{switchin.fundName}</Name>
+        <Units>{`${switchin.units} units`}</Units>
         <Amount>{WealthyAmount.init(switchin.amount).currencyFormat(2)}</Amount>
       </FundDetails>
     </Wrapper>

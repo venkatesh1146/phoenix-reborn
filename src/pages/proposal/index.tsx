@@ -1,13 +1,13 @@
 import { styled } from '@linaria/react'
 import React, { useState } from 'react'
 
-import Image from '../Base/Buttons/Image'
-import Footer from '../Footer'
-import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
-import PortfolioAllocation from '../PortfolioAllocation'
-import FullScreenSpinner from '../Spinner/FullScreenSpinner'
-import UserNameHeader from '../UserNameHeader'
-import VerifyEmailsContainer from '../VerifyEmails'
+import Image from '../../components/Base/Image'
+import Footer from '../../components/Footer'
+import FundsCountWithAmount from '../../components/FundsCountWithAmount/FundsCountWithAmount'
+import PortfolioAllocation from '../../components/PortfolioAllocation'
+import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
+import UserNameHeader from '../../components/UserNameHeader'
+import VerifyEmailsContainer from '../../components/VerifyEmails'
 
 import { WealthyImages } from '~/assets'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
@@ -32,8 +32,9 @@ export default function ProposalPage() {
           Here’s an Investment proposal shared by &nbsp;
           <span className="name">
             <Image
-              height={'1.5rem'}
-              width={'1.5rem'}
+              alt="profile"
+              height={24}
+              width={24}
               src={WealthyImages.profilePicPlaceholder}
               className="profile-pic"
             />

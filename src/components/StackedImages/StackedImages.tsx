@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Image from '../Base/Buttons/Image'
+import Image from '../Base/Image'
 
 interface StackedImageProps {
   urls: string[]
@@ -11,11 +11,12 @@ export default function StackedImages({ urls }: StackedImageProps) {
     <StackContainer>
       {urls.map((url, index) => (
         <Image
+          alt="amc-logo"
           className="image"
           src={url}
           key={index}
-          height={'2.3rem'}
-          width={'2.3rem'}
+          height={38}
+          width={38}
         />
       ))}
     </StackContainer>

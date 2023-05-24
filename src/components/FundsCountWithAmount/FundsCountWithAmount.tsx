@@ -2,7 +2,7 @@ import { styled } from '@linaria/react'
 import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
-import Image from '../Base/Buttons/Image'
+import Image from '../Base/Image'
 
 import { WealthyImages } from '~/assets'
 
@@ -19,9 +19,10 @@ export default function FundsCountWithAmount({
     <Wrapper className={className}>
       <NameSection>
         <Image
+          alt="rupee"
           src={WealthyImages.rupeeSymbolCrystal}
-          height={'2rem'}
-          width={'2rem'}
+          height={32}
+          width={32}
         />
         <Heading>
           <Text>Switch Funds from Tracker</Text>

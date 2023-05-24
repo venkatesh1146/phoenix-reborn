@@ -2,7 +2,7 @@ import { styled } from '@linaria/react'
 import React from 'react'
 
 import { PrimaryButton } from '../Base/Buttons'
-import Image from '../Base/Buttons/Image'
+import Image from '../Base/Image'
 import Spinner from '../Spinner'
 
 import { WealthyImages } from '~/assets'
@@ -26,9 +26,10 @@ export default function Footer({
       {agentPhoneNumber ? (
         <CallIconContainer href={`tel:${agentPhoneNumber}`}>
           <Image
+            alt={'call-icon'}
             src={WealthyImages.callIcon}
-            height={'1.25rem'}
-            width={'1.25rem'}
+            height={20}
+            width={20}
           />
         </CallIconContainer>
       ) : (

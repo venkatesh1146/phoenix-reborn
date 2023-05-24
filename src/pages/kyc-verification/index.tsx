@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Image from '../../components/Base/Buttons/Image'
+import Image from '../../components/Base/Image'
 import Footer from '../../components/Footer'
 import Info from '../../components/Info/Info'
 import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
@@ -83,9 +83,10 @@ export default function KycVerification() {
         {kycData?.pending.map((data, index) => (
           <KycCard key={index}>
             <Image
+              alt="profile-icon"
               src={WealthyImages.profileCardIcon}
-              height={'1rem'}
-              width={'1.5rem'}
+              height={16}
+              width={24}
               className="profile-icon"
             />
             <Details>
@@ -109,9 +110,10 @@ export default function KycVerification() {
         {kycData?.completed.map((data, index) => (
           <KycCard key={index}>
             <Image
+              alt="profile-card"
               src={WealthyImages.profileCardIcon}
-              height={'1rem'}
-              width={'1.5rem'}
+              height={16}
+              width={24}
               className="profile-icon"
             />
             <Details>
@@ -121,6 +123,7 @@ export default function KycVerification() {
             </Details>
             <DoneStatus>
               <Image
+                alt="done"
                 className="done-icon"
                 src={WealthyImages.tickWithBgDesign}
               />

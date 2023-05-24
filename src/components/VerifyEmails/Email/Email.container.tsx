@@ -8,7 +8,7 @@ import {
   RoundButton,
   TextButton,
 } from '~/components/Base/Buttons'
-import Image from '~/components/Base/Buttons/Image'
+import Image from '~/components/Base/Image'
 import Footer from '~/components/Footer'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
@@ -91,7 +91,11 @@ export default function EmailContainer({
     if (isVerified)
       return (
         <>
-          <Image width={'1.375rem'} src={WealthyImages.tickWithBgDesign} />
+          <Image
+            alt="verified"
+            width={22}
+            src={WealthyImages.tickWithBgDesign}
+          />
         </>
       )
     else if (isExpanded)

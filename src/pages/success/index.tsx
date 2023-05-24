@@ -1,11 +1,12 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Image from '../Base/Image'
-import FundsSwitchOverview from '../FundsSwitchOverview'
-import PortfolioAllocation from '../PortfolioAllocation'
-import FullScreenSpinner from '../Spinner/FullScreenSpinner'
-import UserNameHeader from '../UserNameHeader'
+import FundsSwitchOverview from '~/components/FundsSwitchOverview'
+import PortfolioAllocation from '~/components/PortfolioAllocation'
+import FullScreenSpinner from '~/components/Spinner/FullScreenSpinner'
+import UserNameHeader from '~/components/UserNameHeader'
+
+import Image from '../../components/Base/Image'
 
 import { WealthyImages } from '~/assets'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
@@ -20,11 +21,11 @@ export default function ProposalProcessed() {
       <HeaderSection>
         <UserNameHeader userName={proposalData?.clientName} />
         <Image
-          alt="tick-icon"
+          alt="tick"
           className="tick-icon"
           src={WealthyImages.diamondTick}
           width={148}
-          height={140}
+          height={138}
         />
         <Text>The investment proposal has been successfully processed!</Text>
         <FundsSwitchOverview

@@ -1,14 +1,14 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Image from '../Base/Buttons/Image'
+import Image from '../Base/Image'
 
 import { WealthyImages } from '~/assets'
 
 export default function LogoHeader() {
   return (
     <HeaderWrapper>
-      <Image height={'3rem'} alt="logo" src={WealthyImages.wealthyLogoWhite} />
+      <Image height={48} alt="logo" src={WealthyImages.wealthyLogoWhite} />
     </HeaderWrapper>
   )
 }
