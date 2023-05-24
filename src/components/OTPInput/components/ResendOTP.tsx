@@ -6,7 +6,7 @@ import { styled } from '@linaria/react'
 import PropTypes from 'prop-types'
 import React, { CSSProperties } from 'react'
 
-import { TextButton } from '~/components/Buttons'
+import { TextButton } from '~/components/Base/Buttons'
 
 import useResendOTP from '~/hooks/useResendOTP'
 

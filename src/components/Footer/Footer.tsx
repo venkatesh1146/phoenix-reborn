@@ -1,8 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import { PrimaryButton } from '../Buttons'
-import Image from '../Image'
+import { PrimaryButton } from '../Base/Buttons'
+import Image from '../Base/Buttons/Image'
 import Spinner from '../Spinner'
 
 import { WealthyImages } from '~/assets'

@@ -1,3 +1,4 @@
+import humps from 'humps'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -27,37 +28,21 @@ export default function useMFSwitchProposal() {
 
   const router = useRouter()
   const proposalId = router.query.proposalId || router.query.proposal_id
-
   const getAMCLogos = () => {
     return state.proposalData?.schemes.map((s) => s?.amcIconUrl)
   }
 
-  const navigateBasedOnStatus = (proposalId: string, status: string) => {
+  const getPathBasedOnStatus = (status: string) => {
     switch (status) {
       case MF_SWITCH_PROPOSAL_STAGES.clientInitiated:
       case MF_SWITCH_PROPOSAL_STAGES.clientApprovalAwaited:
-        router.push(
-          getMFSwitchUrlWithProposalId(MF_SWITCH_ROUTES.proposal, proposalId)
-        )
-        break
+        return MF_SWITCH_ROUTES.proposal
       case MF_SWITCH_PROPOSAL_STAGES.userKycAwaited:
-        router.push(
-          getMFSwitchUrlWithProposalId(
-            MF_SWITCH_ROUTES.kycVerification,
-            proposalId
-          )
-        )
-        break
+        return MF_SWITCH_ROUTES.kycVerification
       case MF_SWITCH_PROPOSAL_STAGES.orderPlaced:
-        router.push(
-          getMFSwitchUrlWithProposalId(MF_SWITCH_ROUTES.orderPlaced, proposalId)
-        )
-        break
+        return MF_SWITCH_ROUTES.orderPlaced
       case MF_SWITCH_PROPOSAL_STAGES.completed:
-        router.push(
-          getMFSwitchUrlWithProposalId(MF_SWITCH_ROUTES.success, proposalId)
-        )
-        break
+        return MF_SWITCH_ROUTES.success
       default:
         break
     }
@@ -65,19 +50,49 @@ export default function useMFSwitchProposal() {
 
   const getProposal = () => {
     if (proposalId) {
-      getProposalStatus(proposalId as string)
-        .then((res) => {
-          const data = {
-            ...ProposalData,
-          }
-          navigateBasedOnStatus(proposalId as string, data.status)
+      new Promise((res, _) => {
+        setTimeout(() => {
+          res(ProposalData)
+        }, 2000)
+      }).then((res: any) => {
+        console.log('TCL: getProposal -> res', res)
+        const pathAsPerStatus = getPathBasedOnStatus(res.status)
+        if (router.pathname !== pathAsPerStatus) {
+          router.push(
+            getMFSwitchUrlWithProposalId(
+              pathAsPerStatus ?? '',
+              proposalId as string
+            )
+          )
+        } else
           setProposalData({
             isLoading: false,
-            proposalData: res.data,
+            proposalData: humps.camelizeKeys(res) as any,
             error: null,
           })
-        })
-        .catch((e) => toast.error(getErrorMessage(e)))
+      })
+
+      // getProposalStatus(proposalId as string)
+      //   .then((res) => {
+      //     const data = {
+      //       ...ProposalData,
+      //     }
+      //     const pathAsPerStatus = getPathBasedOnStatus(data.status) ?? ''
+      //     if (router.pathname !== pathAsPerStatus) {
+      //       router.push(
+      //         getMFSwitchUrlWithProposalId(
+      //           pathAsPerStatus,
+      //           proposalId as string
+      //         )
+      //       )
+      //     } else
+      //       setProposalData({
+      //         isLoading: false,
+      //         proposalData: res.data,
+      //         error: null,
+      //       })
+      //   })
+      //   .catch((e) => toast.error(getErrorMessage(e)))
     }
   }
 

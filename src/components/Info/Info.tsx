@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import Image from '../Image'
+import Image from '../Base/Buttons/Image'
 
 import { WealthyImages } from '~/assets'
 

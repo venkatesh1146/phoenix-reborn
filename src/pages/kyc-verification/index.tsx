@@ -1,10 +1,24 @@
-import { styled } from '@linaria/react'
 import React, { useEffect, useState } from 'react'
 
-import Footer from '../Footer'
-import Image from '../Image'
-import Info from '../Info/Info'
-import FullScreenSpinner from '../Spinner/FullScreenSpinner'
+import Image from '../../components/Base/Buttons/Image'
+import Footer from '../../components/Footer'
+import Info from '../../components/Info/Info'
+import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
+
+import {
+  Details,
+  DoneStatus,
+  HeadText,
+  HeaderSection,
+  KycCard,
+  KycLink,
+  KycStatus,
+  PageHeading,
+  PanNo,
+  SubTxt,
+  Text,
+  Wrapper,
+} from './styledComponents'
 
 import { WealthyImages } from '~/assets'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
@@ -79,7 +93,11 @@ export default function KycVerification() {
               <SubTxt>{data.email}</SubTxt>
               {/* <SubTxt>{data?.phoneNumber}</SubTxt> */}
             </Details>
-            <KycLink href={data.kycUrl} target={'_blank'} rel="noreferrer">
+            <KycLink
+              href={'https://www.wealthy.in/'}
+              target={'_blank'}
+              rel="noreferrer"
+            >
               {'Complete KYC'}
             </KycLink>
           </KycCard>
@@ -121,104 +139,3 @@ export default function KycVerification() {
     </Wrapper>
   )
 }
-
-const KycLink = styled.a`
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 0.75rem;
-  color: #6725f4;
-  margin-top: -4px;
-  text-decoration: none;
-`
-
-const DoneStatus = styled.div`
-  color: #14b195;
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 0.75rem;
-  line-height: 14px;
-  text-align: center;
-  height: max-content;
-  display: flex;
-  align-items: center;
-  .done-icon {
-    margin-right: 0.5rem;
-  }
-`
-
-const SubTxt = styled.p`
-  font-family: 'Maven Pro';
-  font-size: 0.75rem;
-  color: #7e7e7e;
-  margin: 8px 0;
-`
-const Details = styled.div`
-  flex-grow: 1;
-`
-const PanNo = styled.p`
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 0.75rem;
-  color: #000000;
-  margin: 0;
-`
-const KycCard = styled.div`
-  background: #ffffff;
-  border-radius: 4px;
-  display: flex;
-  padding: 1.25rem;
-  margin: 1rem 0;
-  .profile-icon {
-    margin-right: 0.75rem;
-  }
-`
-
-const HeadText = styled.p`
-  font-family: 'Maven Pro';
-  font-size: 0.75rem;
-  line-height: 14px;
-  color: #7e7e7e;
-  margin: 0;
-  margin-bottom: 1rem;
-`
-const KycStatus = styled.div`
-  background: #f6f2ff;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding: 1.5rem 1.25rem;
-  .kyc-completion {
-    margin-top: 2rem;
-  }
-`
-const Wrapper = styled.div`
-  height: 100vh;
-  font-family: 'Maven Pro';
-  display: flex;
-  flex-direction: column;
-`
-
-const HeaderSection = styled.div`
-  padding: 1.25rem;
-  background: #1e1730;
-  color: #fff;
-`
-const Body = styled.div`
-  flex-grow: 1;
-`
-const PageHeading = styled.p`
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 21px;
-
-  color: #ffffff;
-`
-const Text = styled.p`
-  font-family: 'Maven Pro';
-  font-size: 1rem;
-  margin-bottom: 32px;
-  .bold {
-    font-weight: 500;
-  }
-`

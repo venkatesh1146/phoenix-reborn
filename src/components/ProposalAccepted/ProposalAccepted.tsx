@@ -1,9 +1,9 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import Image from '../Base/Buttons/Image'
 import Footer from '../Footer'
 import FundsSwitchOverview from '../FundsSwitchOverview'
-import Image from '../Image'
 import Info from '../Info/Info'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 

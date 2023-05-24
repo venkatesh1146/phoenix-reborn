@@ -1,8 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import Image from '../Base/Buttons/Image'
 import FundsSwitchOverview from '../FundsSwitchOverview'
-import Image from '../Image'
 import PortfolioAllocation from '../PortfolioAllocation'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 import UserNameHeader from '../UserNameHeader'

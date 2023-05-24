@@ -1,9 +1,9 @@
 import { styled } from '@linaria/react'
 import React, { useState } from 'react'
 
+import Image from '../Base/Buttons/Image'
 import Footer from '../Footer'
 import FundsCountWithAmount from '../FundsCountWithAmount/FundsCountWithAmount'
-import Image from '../Image'
 import PortfolioAllocation from '../PortfolioAllocation'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 import UserNameHeader from '../UserNameHeader'

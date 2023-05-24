@@ -7,9 +7,9 @@ import {
   PrimaryButton,
   RoundButton,
   TextButton,
-} from '~/components/Buttons'
+} from '~/components/Base/Buttons'
+import Image from '~/components/Base/Buttons/Image'
 import Footer from '~/components/Footer'
-import Image from '~/components/Image'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
 import Spinner from '~/components/Spinner'

@@ -7,5 +7,6 @@ const webpackConfig = withLinaria({
   // settings from next.config.js
   reactStrictMode: true,
   swcMinify: true,
+  //base path
 })
 module.exports = webpackConfig

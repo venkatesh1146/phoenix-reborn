@@ -1,7 +1,7 @@
 {
   "user_id": "8d4489ca244f4910acc884422947a1b0",
   "ticket_number": "proposals_mfs_ouNNtCNLR5a6YUO",
-  "status": "user_kyc_awaited",
+  "status": "client_approval_awaited",
   "client_name": "Arpit",
   "partner_name": "Venkat Ashish",
   "total_amount": 100000.0,
@@ -31,7 +31,7 @@
       "email": "ashish12345@xyz.com",
       "pan": "ASHISH1234",
       "customer_approved": true,
-      "kyc_completed": false,
+      "kyc_completed": true,
       "kyc_link": "https://xyz.com/kyc/some_random_id"
     },
     {
