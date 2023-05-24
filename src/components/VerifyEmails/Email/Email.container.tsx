@@ -1,19 +1,11 @@
 import { styled } from '@linaria/react'
 import React, { useState } from 'react'
-import toast from 'react-hot-toast'
 
-import {
-  OutlinedButton,
-  PrimaryButton,
-  RoundButton,
-  TextButton,
-} from '~/components/Base/Buttons'
+import { RoundButton, TextButton } from '~/components/Base/Buttons'
 import Image from '~/components/Base/Image'
-import Footer from '~/components/Footer'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
 import Spinner from '~/components/Spinner'
-import { getErrorMessage } from '~/utils/ErrorUtils'
 
 import { WealthyImages } from '~/assets'
 import useAsync from '~/hooks/useAsync'

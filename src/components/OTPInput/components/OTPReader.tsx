@@ -103,7 +103,7 @@ const OtpInput = ({
     return isTypeValid && value.trim().length === 1
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: any) => {
     const { value } = event.target
 
     if (isInputValueValid(value)) {

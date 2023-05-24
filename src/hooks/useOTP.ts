@@ -138,14 +138,14 @@ const useOTP = ({
     }
   }
 
-  const handelOnInput = (e) => {
+  const handelOnInput = (e: any) => {
     if (e.target.value.length > 1) {
       e.preventDefault()
       focusInputByDirection('next')
     }
   }
 
-  const onInputFocus = (index, event) => {
+  const onInputFocus = (index: any, event: any) => {
     setActiveInput(index)
     event.target.select()
   }

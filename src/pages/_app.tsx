@@ -1,12 +1,12 @@
+import '../styles/global'
+import '../styles/globalCss.scss'
+
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
 
 import { ToastConfig, ToastDesktopConfig } from '~/constants/toast.config'
-import { isDesktop, useIsDesktop } from '~/hooks/useIsDesktop'
-
-import '../styles/global'
-import '../styles/globalCss.scss'
+import { useIsDesktop } from '~/hooks/useIsDesktop'
 
 export default function App({ Component, pageProps }: AppProps) {
   const isDesktop = useIsDesktop()

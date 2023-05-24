@@ -135,7 +135,7 @@ export default function KycVerification() {
         ))}
       </KycStatus>
       <Footer
-        isDisabled={kycData?.pending?.length > 0}
+        isDisabled={kycData ? kycData?.pending?.length > 0 : true}
         agentPhoneNumber={proposalData?.partnerPhone}
         btnTxt="Proceed"
         onClick={getProposal}

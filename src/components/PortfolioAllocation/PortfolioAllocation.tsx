@@ -8,7 +8,7 @@ import { FundMetaDataType } from '~/constants/interfaces'
 interface SwitchFundType {
   switchout: FundMetaDataType
   switchin: FundMetaDataType
-  amcIconUrl?: string
+  amcIconUrl: string
 }
 
 interface PortfolioAllocationPropsType {

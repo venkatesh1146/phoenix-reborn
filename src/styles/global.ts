@@ -1,6 +1,5 @@
 import { css } from '@linaria/core'
 
-import { theme } from '.'
 export const globals = css`
   :global() {
     html {

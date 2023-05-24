@@ -3,8 +3,6 @@
  Git - https://bitbucket.org/salujaharkirat/
  **/
 
-import { AxiosError } from 'axios'
-
 const SERVER_ERROR_KEYWORDS = [
   'HTTPSConnectionPool',
   "'str' object has no attribute 'get'",

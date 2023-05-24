@@ -16,7 +16,8 @@ const Loader = styled.div<{ size: any }>`
   width: ${(props) => props.size};
   height: ${(props) => props.size};
   vertical-align: text-bottom;
-  border: calc(${(props) => props.size} / 10) solid ${(props) => props.color};
+  border: calc(${(props) => props.size} / 10) solid
+    ${(props: any) => props.color};
   border-right-color: transparent;
   border-radius: 50%;
   animation: loader 0.75s linear infinite;
