@@ -28,6 +28,7 @@ export default function FundSwitchCard({
           className="circular-image"
           src={amcIconUrl}
           height={64}
+          width={64}
         />
         <Name>{switchout.fundName}</Name>
         <Units>{`${switchout.units} units`}</Units>
@@ -50,6 +51,7 @@ export default function FundSwitchCard({
           className="circular-image"
           src={amcIconUrl}
           height={64}
+          width={64}
         />
         <Name>{switchin.fundName}</Name>
         <Units>{`${switchin.units} units`}</Units>

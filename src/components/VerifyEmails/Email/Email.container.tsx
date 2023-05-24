@@ -94,6 +94,7 @@ export default function EmailContainer({
           <Image
             alt="verified"
             width={22}
+            height={22}
             src={WealthyImages.tickWithBgDesign}
           />
         </>
@@ -119,6 +120,9 @@ export default function EmailContainer({
     <Wrapper className={`email-wrapper ${className}`} isExpanded={isExpanded}>
       <EmailAndButton>
         <Image
+          alt="email"
+          width={22}
+          height={22}
           style={{ marginRight: '0.8rem' }}
           src={WealthyImages.emailIconSecondaryColor}
         />

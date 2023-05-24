@@ -12,7 +12,13 @@ interface InfoPropsTypes {
 export default function Info({ text, wrapperClassName = '' }: InfoPropsTypes) {
   return (
     <Wrapper className={wrapperClassName}>
-      <Image style={{ marginTop: '2px' }} src={WealthyImages.infoIcon} />
+      <Image
+        alt="info"
+        width={14}
+        height={14}
+        style={{ marginTop: '2px' }}
+        src={WealthyImages.infoIcon}
+      />
       <Text>{text}</Text>
     </Wrapper>
   )

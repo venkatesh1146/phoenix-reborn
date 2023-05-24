@@ -123,6 +123,8 @@ export default function KycVerification() {
             </Details>
             <DoneStatus>
               <Image
+                width={22}
+                height={22}
                 alt="done"
                 className="done-icon"
                 src={WealthyImages.tickWithBgDesign}

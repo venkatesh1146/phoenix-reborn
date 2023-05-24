@@ -18,7 +18,13 @@ export default function ProposalAccepted() {
     <FullScreenSpinner />
   ) : (
     <Wrapper>
-      <Image alt="diamond" src={WealthyImages.diamondTick} height={148} />
+      <Image
+        alt="diamond"
+        className="diamond-tick"
+        src={WealthyImages.diamondTick}
+        height={148}
+        width={148}
+      />
       <Text>Congratulations!</Text>
       <SubText>You have successfully accepted the Proposal</SubText>
       <Info

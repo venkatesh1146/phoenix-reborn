@@ -33,4 +33,7 @@ export const Wrapper = styled.div`
   .footer-wrapper {
     background: none;
   }
+  .diamond-tick {
+    align-self: center;
+  }
 `

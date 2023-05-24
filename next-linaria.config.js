@@ -7,6 +7,16 @@ const webpackConfig = withLinaria({
   // settings from next.config.js
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.wlycdn.com',
+        port: '',
+        pathname: '**/**/**/**',
+      },
+    ],
+  },
   //base path
 })
 module.exports = webpackConfig
