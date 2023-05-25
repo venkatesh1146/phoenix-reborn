@@ -2,6 +2,7 @@ import { styled } from '@linaria/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
+import { tm } from '~/styles/theme'
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import Footer from '../Footer'
@@ -112,7 +113,7 @@ const PageHeading = styled.p`
   font-size: 1.25rem;
   line-height: 21px;
 
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
 `
 const Emails = styled.div`
   margin-bottom: 6rem;
@@ -138,17 +139,17 @@ const Heading = styled.div`
 `
 const HeaderSection = styled.div`
   padding: 1.25rem;
-  background: #1e1730;
+  background: ${tm((t) => t.colors.primaryBgColor)};
   color: #fff;
 `
 const EmailsSection = styled.div`
-  background: #f6f2ff;
+  background: ${tm((t) => t.colors.lightBgColor)};
   padding: 2rem 1.8rem;
   flex-grow: 1;
 `
 
 const Wrapper = styled.div`
-  background-color: #ffffff;
+  background-color: ${tm((t) => t.colors.white)};
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;

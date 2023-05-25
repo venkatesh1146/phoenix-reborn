@@ -6,6 +6,7 @@ import Image from '~/components/Base/Image'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
 import Spinner from '~/components/Spinner'
+import { tm, useTheme } from '~/styles/theme'
 
 import { WealthyImages } from '~/assets'
 import useAsync from '~/hooks/useAsync'
@@ -28,6 +29,7 @@ export default function EmailContainer({
   proposalId,
   userId,
 }: EmailPropTypes) {
+  const theme = useTheme()
   const [isExpanded, setIsExpanded] = useState(false)
   const [otp, setOtp] = useState('')
 
@@ -123,7 +125,7 @@ export default function EmailContainer({
       </EmailAndButton>
       {isExpanded ? (
         <>
-          <Text style={{ color: '#7E7E7E' }}>
+          <Text style={{ color: theme.colors.secondaryTextColor }}>
             We have sent an OTP to above email
           </Text>
           <OtpInput
@@ -163,7 +165,7 @@ const Text = styled.p`
 `
 
 const Wrapper = styled.div<{ isExpanded: boolean }>`
-  background: #ffffff;
+  background: ${tm((t) => t.colors.white)};
   border-radius: 4px;
   display: flex;
   flex-direction: column;

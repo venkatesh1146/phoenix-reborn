@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 import Image from '../Base/Image'
 
 import { WealthyImages } from '~/assets'
@@ -25,5 +27,5 @@ const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 1.5rem;
-  background-color: #1e1730;
+  background-color: ${tm((t) => t.colors.primaryBgColor)};
 `

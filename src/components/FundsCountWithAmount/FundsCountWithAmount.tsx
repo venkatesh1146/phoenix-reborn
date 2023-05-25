@@ -2,6 +2,8 @@ import { styled } from '@linaria/react'
 import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 import Image from '../Base/Image'
 
 import { WealthyImages } from '~/assets'
@@ -56,7 +58,7 @@ const NameSection = styled.div`
   padding: 1.5rem;
 `
 const Wrapper = styled.div`
-  background: #3b2c62;
+  background: ${tm((t) => t.colors.secondaryBgColor)};
   color: #fff;
   border-radius: 0.5rem;
   font-family: 'Maven Pro';
@@ -75,7 +77,7 @@ const Amount = styled.p`
   font-size: 1.5rem;
   font-weight: 500;
   margin: 0;
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
   mix-blend-mode: normal;
 `
 const SubSection = styled.div`

@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 interface UserNameHeaderProps {
   userName?: string
 }
@@ -16,5 +18,5 @@ export default function UserNameHeader({ userName = '' }: UserNameHeaderProps) {
 const Wrapper = styled.div`
   font-family: 'Marcellus' !important;
   font-size: 1.625rem;
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
 `

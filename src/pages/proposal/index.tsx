@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React, { useState } from 'react'
 
+import { tm } from '~/styles/theme'
+
 import Image from '../../components/Base/Image'
 import Footer from '../../components/Footer'
 import FundsCountWithAmount from '../../components/FundsCountWithAmount/FundsCountWithAmount'
@@ -64,7 +66,7 @@ export default function ProposalPage() {
 
 const HeadSection = styled.div`
   padding: 1.5rem;
-  background: #1e1730;
+  background: ${tm((t) => t.colors.primaryBgColor)};
 `
 const Wrapper = styled.div`
   height: 100vh;
@@ -72,14 +74,14 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: ${tm((t) => t.colors.white)};
   padding-bottom: 7rem;
   .funds-amount-wrapper {
     margin-top: 0.8rem;
   }
 `
 const PartnerName = styled.p`
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
   font-size: 1rem;
   font-family: 'Maven Pro';
   text-align: center;

@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react'
 
+import { tm } from '~/styles/theme'
+
 export const KycLink = styled.a`
   font-family: 'Maven Pro';
   font-weight: 500;
@@ -27,7 +29,7 @@ export const DoneStatus = styled.div`
 export const SubTxt = styled.p`
   font-family: 'Maven Pro';
   font-size: 0.75rem;
-  color: #7e7e7e;
+  color: ${tm((t) => t.colors.secondaryTextColor)};
   margin: 8px 0;
 `
 export const Details = styled.div`
@@ -41,7 +43,7 @@ export const PanNo = styled.p`
   margin: 0;
 `
 export const KycCard = styled.div`
-  background: #ffffff;
+  background: ${tm((t) => t.colors.white)};
   border-radius: 4px;
   display: flex;
   padding: 1.25rem;
@@ -55,12 +57,12 @@ export const HeadText = styled.p`
   font-family: 'Maven Pro';
   font-size: 0.75rem;
   line-height: 14px;
-  color: #7e7e7e;
+  color: ${tm((t) => t.colors.secondaryTextColor)};
   margin: 0;
   margin-bottom: 1rem;
 `
 export const KycStatus = styled.div`
-  background: #f6f2ff;
+  background: ${tm((t) => t.colors.lightBgColor)};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -78,7 +80,7 @@ export const Wrapper = styled.div`
 
 export const HeaderSection = styled.div`
   padding: 1.25rem;
-  background: #1e1730;
+  background: ${tm((t) => t.colors.primaryBgColor)};
   color: #fff;
 `
 export const Body = styled.div`
@@ -90,7 +92,7 @@ export const PageHeading = styled.p`
   font-size: 1.25rem;
   line-height: 21px;
 
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
 `
 export const Text = styled.p`
   font-family: 'Maven Pro';

@@ -5,6 +5,7 @@ import FundsSwitchOverview from '~/components/FundsSwitchOverview'
 import PortfolioAllocation from '~/components/PortfolioAllocation'
 import FullScreenSpinner from '~/components/Spinner/FullScreenSpinner'
 import UserNameHeader from '~/components/UserNameHeader'
+import { tm } from '~/styles/theme'
 
 import Image from '../../components/Base/Image'
 
@@ -41,7 +42,7 @@ export default function ProposalProcessed() {
 }
 
 const HeaderSection = styled.div`
-  background: #1e1730;
+  background: ${tm((t) => t.colors.primaryBgColor)};
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
@@ -57,7 +58,7 @@ const Text = styled.p`
   font-weight: 500;
   font-size: 1rem;
   text-align: center;
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
   margin: 0;
   margin-bottom: 2rem;
 `

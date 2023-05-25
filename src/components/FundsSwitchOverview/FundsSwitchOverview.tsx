@@ -2,6 +2,8 @@ import { styled } from '@linaria/react'
 import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 import StackedImages from '../StackedImages'
 
 interface FundsSwitchOverviewProps {
@@ -38,7 +40,7 @@ const AmountAndLogos = styled.div`
 `
 const Wrapper = styled.div`
   padding: 1.25rem 1.25rem 2rem 1.25rem;
-  background: #3b2c62;
+  background: ${tm((t) => t.colors.secondaryBgColor)};
   border-radius: 8px;
 `
 const FundsCount = styled.p`
@@ -55,7 +57,7 @@ const Heading = styled.p`
   font-weight: 600;
   font-size: 1rem;
   line-height: 19px;
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
   align-items: center;
 `
 const Header = styled.div`
@@ -68,6 +70,6 @@ const Amount = styled.p`
   font-size: 1.25rem;
   line-height: 24px;
   text-align: center;
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
   mix-blend-mode: normal;
 `

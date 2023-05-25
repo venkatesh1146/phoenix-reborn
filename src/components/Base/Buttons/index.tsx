@@ -1,9 +1,10 @@
 import { styled } from '@linaria/react'
 
+import { tm } from '~/styles/theme'
+
 const primaryColor = '#6725f4'
 const primaryDenseColor = '#571fd1'
 const secondaryColor = '#fbf9ff'
-const secondaryTextColor = '#7e7e7e'
 
 export const DefaultButton = styled.button<{
   full_width?: boolean
@@ -23,7 +24,7 @@ export const DefaultButton = styled.button<{
   }
   &[disabled] {
     background-color: #c8c6cc !important;
-    color: #ffffff !important;
+    color: ${tm((t) => t.colors.white)} !important;
     opacity: 0.7;
     cursor: not-allowed;
   }
@@ -63,9 +64,9 @@ export const FooterButton = styled(PrimaryButton)`
       props.primary ? `${secondaryColor}` : `${primaryColor}`};
   }
   &[disabled] {
-    color: ${secondaryTextColor};
+    color: ${tm((t) => t.colors.secondaryTextColor)};
     &::after {
-      color: ${secondaryTextColor};
+      color: ${tm((t) => t.colors.secondaryTextColor)};
     }
   }
   z-index: 1;

@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 import Image from '../Base/Image'
 
 import { WealthyImages } from '~/assets'
@@ -24,7 +26,7 @@ export default function Info({ text, wrapperClassName = '' }: InfoPropsTypes) {
   )
 }
 const Wrapper = styled.div`
-  background: #1e1730;
+  background: ${tm((t) => t.colors.primaryBgColor)};
   border-radius: 8px;
   padding: 1.25rem;
   display: flex;

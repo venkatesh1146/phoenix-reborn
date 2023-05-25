@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 import Image from '../Base/Image'
 import FundsSwitchOverview from '../FundsSwitchOverview'
 import PortfolioAllocation from '../PortfolioAllocation'
@@ -40,7 +42,7 @@ export default function ProposalProcessed() {
 }
 
 const HeaderSection = styled.div`
-  background: #1e1730;
+  background: ${tm((t) => t.colors.primaryBgColor)};
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
@@ -56,7 +58,7 @@ const Text = styled.p`
   font-weight: 500;
   font-size: 1rem;
   text-align: center;
-  color: #ffffff;
+  color: ${tm((t) => t.colors.white)};
   margin: 0;
   margin-bottom: 2rem;
 `

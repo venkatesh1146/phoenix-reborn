@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import { tm } from '~/styles/theme'
+
 import FundSwitchCard from '../FundSwitchCard'
 
 import { FundMetaDataType } from '~/constants/interfaces'
@@ -42,7 +44,7 @@ const FundsCount = styled.p`
   font-family: 'Maven Pro';
 `
 const Wrapper = styled.div`
-  background: #f6f2ff;
+  background: ${tm((t) => t.colors.lightBgColor)};
   padding: 1.2rem 1.2rem 3.8rem 1.2rem;
   @media (min-width: 1100px) {
     border-radius: 16px;
