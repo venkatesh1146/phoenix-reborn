@@ -4,9 +4,13 @@ import Image from '../../components/Base/Image'
 import Footer from '../../components/Footer'
 import FundsSwitchOverview from '../../components/FundsSwitchOverview'
 import Info from '../../components/Info/Info'
+import {
+  Divider,
+  SubText,
+  Text,
+  Wrapper,
+} from '../../components/OrderPlaced/styledComponents'
 import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
-
-import { Divider, SubText, Text, Wrapper } from './styledComponents'
 
 import { WealthyImages } from '~/assets'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'

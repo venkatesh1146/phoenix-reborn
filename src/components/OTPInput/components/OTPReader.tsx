@@ -111,7 +111,6 @@ const OtpInput = ({
       focusInput(activeInput + 1)
     } else {
       const { nativeEvent } = event
-      // @ts-expect-error - This was added previosly to handle and edge case
       // for dealing with keyCode "229 Unidentified" on Android. Check if this is
       // still needed.
       if (

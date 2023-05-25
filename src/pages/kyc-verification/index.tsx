@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Image from '../../components/Base/Image'
 import Footer from '../../components/Footer'
 import Info from '../../components/Info/Info'
-import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
-
 import {
   Details,
   DoneStatus,
@@ -18,7 +16,8 @@ import {
   SubTxt,
   Text,
   Wrapper,
-} from './styledComponents'
+} from '../../components/KycVerification/styledComponents'
+import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'

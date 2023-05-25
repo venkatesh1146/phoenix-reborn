@@ -5,6 +5,6 @@ export type Props = {
   description: string
 }
 
-export function Main(p: Props) {
+export function Main() {
   return <Container>Welcome to Client Web App</Container>
 }

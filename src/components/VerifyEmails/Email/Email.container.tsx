@@ -186,11 +186,3 @@ const EmailTxt = styled.p`
 
   color: #000000;
 `
-const VerifiedTxt = styled.p`
-  color: #61bf5f;
-  font-family: 'Maven Pro';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 0.85rem;
-  margin-left: 0.5rem;
-`

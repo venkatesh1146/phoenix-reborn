@@ -1,6 +1,6 @@
 import humps from 'humps'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 

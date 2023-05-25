@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { getErrorMessage } from '~/utils/ErrorUtils'
