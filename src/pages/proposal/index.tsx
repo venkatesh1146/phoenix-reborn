@@ -48,7 +48,7 @@ export default function ProposalPage() {
         <FundsCountWithAmount
           amount={
             proposalData?.schemes.reduce(
-              (prev, current) => prev + current.switchin.amount,
+              (prev: any, current: any) => prev + current.switchin.amount,
               0
             ) ?? 0
           }

@@ -26,7 +26,7 @@ export default function useMFSwitchProposal() {
   const router = useRouter()
   const proposalId = router.query.proposalId || router.query.proposal_id
   const getAMCLogos = () => {
-    return response?.data?.proposalData?.schemes.map((s) => s?.amcIconUrl)
+    return response?.data?.proposalData?.schemes.map((s: any) => s?.amcIconUrl)
   }
 
   const getPathBasedOnStatus = (status: string) => {

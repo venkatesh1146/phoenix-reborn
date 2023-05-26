@@ -44,7 +44,7 @@ export default function KycVerification() {
       completed: [],
     }
 
-    proposalData?.schemes.forEach((scheme) => {
+    proposalData?.schemes.forEach((scheme: any) => {
       if (scheme.kycCompleted) {
         kycData.completed.push({
           pan: scheme?.pan,
