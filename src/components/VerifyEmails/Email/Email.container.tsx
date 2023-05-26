@@ -10,7 +10,7 @@ import { useTheme } from '~/styles/theme'
 import { EmailAndButton, EmailTxt, EmailWrapper } from '../styledComponents'
 
 import { WealthyImages } from '~/assets'
-import useAsync from '~/hooks/useAsync'
+import useRestApi from '~/hooks/useRestApi'
 import { resendOTP, sendOTP, verifyOTP } from '~/rest/MFSwitch'
 
 interface EmailPropTypes {
@@ -34,14 +34,15 @@ export default function EmailContainer({
   const [isExpanded, setIsExpanded] = useState(false)
   const [otp, setOtp] = useState('')
 
-  const { isLoading: isSendOtpLoading, makeApiCall: handleSentOTP } =
-    useAsync(sendOTP)
+  const { isLoading: isSendOtpLoading, doApiCall: handleSentOTP } = useRestApi({
+    apiFunction: sendOTP,
+  })
 
-  const { isLoading: isResendOTPLoading, makeApiCall: handleResendOTP } =
-    useAsync(resendOTP)
+  const { isLoading: isResendOTPLoading, doApiCall: handleResendOTP } =
+    useRestApi({ apiFunction: resendOTP })
 
-  const { isLoading: isVerifyOTPLoading, makeApiCall: handleVerifyOTP } =
-    useAsync(verifyOTP)
+  const { isLoading: isVerifyOTPLoading, doApiCall: handleVerifyOTP } =
+    useRestApi({ apiFunction: verifyOTP })
 
   const toggleIsExpanded = () => {
     setIsExpanded(!isExpanded)
@@ -56,8 +57,10 @@ export default function EmailContainer({
         templateName: 'TEMPLATE_1',
         userid: userId,
       },
-      () => {
-        setIsExpanded(true)
+      {
+        onSuccess: () => {
+          setIsExpanded(true)
+        },
       }
     )
   }
@@ -76,8 +79,10 @@ export default function EmailContainer({
         referenceid: proposalId,
         otp: parseInt(otp),
       },
-      () => {
-        onVerify && onVerify(email)
+      {
+        onSuccess: () => {
+          onVerify && onVerify(email)
+        },
       }
     )
   }

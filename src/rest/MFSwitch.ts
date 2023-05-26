@@ -5,6 +5,8 @@ import {
   VerifyOTPRequestType,
 } from './interfaces'
 
+import queryClient from '~/providers/queryClient'
+
 const BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/quinjet`
 
 export const sendOTP = (req: SendOTPRequestType) => {
@@ -30,5 +32,9 @@ export const getProposalStatus = (proposalId: string) => {
         '3da15256-a435-455d-bad9-8af927159321:LYgwEBLlwZpTAzHOM-N7jYOrHq8',
     },
   }
-  return transformedAxios.get(url, config)
+  return queryClient.fetchQuery({
+    queryFn: () => transformedAxios.get(url, config),
+    queryKey: ['mf-switch-proposal-status'],
+    staleTime: 15 * 1000,
+  })
 }
