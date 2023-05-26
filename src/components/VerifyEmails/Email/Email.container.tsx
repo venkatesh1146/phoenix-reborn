@@ -1,4 +1,3 @@
-import { styled } from '@linaria/react'
 import React, { useState } from 'react'
 
 import { RoundButton, TextButton } from '~/components/Base/Buttons'
@@ -6,7 +5,9 @@ import Image from '~/components/Base/Image'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
 import Spinner from '~/components/Spinner'
-import { tm, useTheme } from '~/styles/theme'
+import { useTheme } from '~/styles/theme'
+
+import { EmailAndButton, EmailTxt, EmailWrapper } from '../styledComponents'
 
 import { WealthyImages } from '~/assets'
 import useAsync from '~/hooks/useAsync'
@@ -111,7 +112,10 @@ export default function EmailContainer({
   }
 
   return (
-    <Wrapper className={`email-wrapper ${className}`} isExpanded={isExpanded}>
+    <EmailWrapper
+      className={`email-wrapper ${className}`}
+      isExpanded={isExpanded}
+    >
       <EmailAndButton>
         <Image
           alt="email"
@@ -125,9 +129,9 @@ export default function EmailContainer({
       </EmailAndButton>
       {isExpanded ? (
         <>
-          <Text style={{ color: theme.colors.secondaryTextColor }}>
+          <EmailTxt style={{ color: theme.colors.secondaryTextColor }}>
             We have sent an OTP to above email
-          </Text>
+          </EmailTxt>
           <OtpInput
             value={otp}
             onChange={setOtp}
@@ -150,41 +154,6 @@ export default function EmailContainer({
       ) : (
         <></>
       )}
-    </Wrapper>
+    </EmailWrapper>
   )
 }
-
-const EmailAndButton = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-`
-
-const Text = styled.p`
-  font-size: 0.875rem;
-`
-
-const Wrapper = styled.div<{ isExpanded: boolean }>`
-  background: ${tm((t) => t.colors.white)};
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.75rem 1.25rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  height: ${(props) => (props.isExpanded ? '11.25rem' : '2.75rem')};
-  transition: height 0.1s cubic-bezier(0.89, -0.11, 1, 1);
-  .otp-input-component {
-    max-width: 60px;
-  }
-`
-const EmailTxt = styled.p`
-  margin-right: auto;
-  font-family: 'Maven Pro';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 16px;
-
-  color: #000000;
-`

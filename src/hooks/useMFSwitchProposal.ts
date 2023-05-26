@@ -1,9 +1,7 @@
 import humps from 'humps'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
-import { getErrorMessage } from '~/utils/ErrorUtils'
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import ProposalData from './MockResponse.json'
@@ -11,7 +9,6 @@ import ProposalData from './MockResponse.json'
 import { MF_SWITCH_PROPOSAL_STAGES } from '~/constants'
 import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
-import { getProposalStatus } from '~/rest/MFSwitch'
 
 interface MFSwitchProposalStateType {
   isLoading: boolean

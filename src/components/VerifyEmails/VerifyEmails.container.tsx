@@ -1,8 +1,6 @@
-import { styled } from '@linaria/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
-import { tm } from '~/styles/theme'
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import Footer from '../Footer'
@@ -10,6 +8,16 @@ import Info from '../Info/Info'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 
 import EmailContainer from './Email'
+import {
+  Body,
+  Emails,
+  EmailsSection,
+  HeaderSection,
+  Heading,
+  PageHeading,
+  Text,
+  Wrapper,
+} from './styledComponents'
 
 import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
@@ -106,77 +114,3 @@ export default function VerifyEmailsContainer({
     </Wrapper>
   )
 }
-
-const PageHeading = styled.p`
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 21px;
-
-  color: ${tm((t) => t.colors.white)};
-`
-const Emails = styled.div`
-  margin-bottom: 6rem;
-
-  @media (min-width: 1024px) {
-    display: flex;
-    flex-wrap: wrap;
-
-    .email-wrapper {
-      margin: 0.5rem !important;
-      min-width: 28.125rem;
-    }
-  }
-  .email-wrapper {
-    margin: 1rem 0;
-  }
-`
-const Heading = styled.div`
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
-`
-const HeaderSection = styled.div`
-  padding: 1.25rem;
-  background: ${tm((t) => t.colors.primaryBgColor)};
-  color: #fff;
-`
-const EmailsSection = styled.div`
-  background: ${tm((t) => t.colors.lightBgColor)};
-  padding: 2rem 1.8rem;
-  flex-grow: 1;
-`
-
-const Wrapper = styled.div`
-  background-color: ${tm((t) => t.colors.white)};
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-  font-family: 'Maven Pro';
-  display: flex;
-  flex-direction: column;
-  @media (min-width: 1024px) {
-    max-width: 1100px;
-    margin: auto;
-  }
-  .footer-btn {
-    @media screen and (max-width: 780px) {
-      max-width: 300px;
-      transform: translate(-50%);
-      left: 50%;
-    }
-  }
-`
-
-const Body = styled.div`
-  flex-grow: 1;
-`
-const Text = styled.p`
-  font-family: 'Maven Pro';
-  font-size: 1rem;
-  margin-bottom: 32px;
-  .bold {
-    font-weight: 500;
-  }
-`

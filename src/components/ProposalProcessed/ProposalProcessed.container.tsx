@@ -9,6 +9,8 @@ import PortfolioAllocation from '../PortfolioAllocation'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 import UserNameHeader from '../UserNameHeader'
 
+import { HeaderSection, Text, Wrapper } from './styledComponents'
+
 import { WealthyImages } from '~/assets'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
@@ -40,27 +42,3 @@ export default function ProposalProcessed() {
     </Wrapper>
   )
 }
-
-const HeaderSection = styled.div`
-  background: ${tm((t) => t.colors.primaryBgColor)};
-  display: flex;
-  flex-direction: column;
-  padding: 1.25rem;
-  .tick-icon {
-    align-self: center;
-  }
-  .funds-switch-wrapper {
-    margin-bottom: 1.5rem;
-  }
-`
-const Text = styled.p`
-  font-family: 'Maven Pro';
-  font-weight: 500;
-  font-size: 1rem;
-  text-align: center;
-  color: ${tm((t) => t.colors.white)};
-  margin: 0;
-  margin-bottom: 2rem;
-`
-
-const Wrapper = styled.div``

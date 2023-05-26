@@ -1,5 +1,6 @@
-import { styled } from '@linaria/react'
 import React from 'react'
+
+import { Wrapper } from './styledComponents'
 
 import Spinner from '.'
 
@@ -10,11 +11,3 @@ export default function FullScreenSpinner() {
     </Wrapper>
   )
 }
-
-const Wrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`

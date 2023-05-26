@@ -3,5 +3,6 @@
   "trailingComma": "es5",
   "singleQuote": true,
   "printWidth": 80,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "eslintIntegration": true
 }
