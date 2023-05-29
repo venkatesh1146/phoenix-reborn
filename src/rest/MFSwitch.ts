@@ -30,6 +30,10 @@ export const getProposalStatus = (proposalId: string) => {
     headers: {
       Authorization:
         '3da15256-a435-455d-bad9-8af927159321:LYgwEBLlwZpTAzHOM-N7jYOrHq8',
+      'sec-fetch-mode': 'cors',
+      'Sec-Fetch-Site': 'same-site',
+      accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
     },
   }
   return queryClient.fetchQuery({

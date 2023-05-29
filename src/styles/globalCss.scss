@@ -18,3 +18,14 @@
     left: 50%;
   }
 }
+
+body,
+html {
+  font-family: 'Maven Pro';
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
