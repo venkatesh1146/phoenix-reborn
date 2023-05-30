@@ -21,10 +21,7 @@ export default function PortfolioAllocation({
 }: PortfolioAllocationPropsType) {
   return (
     <Wrapper>
-      <Heading>
-        Portfolio Allocation
-        <FundsCount>{switchFunds.length} Funds</FundsCount>
-      </Heading>
+      <Heading>Reallocation Details</Heading>
       <FundSwitches>
         {switchFunds.map((sf, index) => (
           <FundSwitchCard

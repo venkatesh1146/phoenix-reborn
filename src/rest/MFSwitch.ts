@@ -1,11 +1,13 @@
+import humps from 'humps'
+
+import data from '../hooks/MockResponse.json'
+
 import { transformedAxios } from './axios'
 import {
   ResendOTPRequestType,
   SendOTPRequestType,
   VerifyOTPRequestType,
 } from './interfaces'
-
-import queryClient from '~/providers/queryClient'
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/quinjet`
 
@@ -36,9 +38,17 @@ export const getProposalStatus = (proposalId: string) => {
       'content-type': 'application/json',
     },
   }
-  return queryClient.fetchQuery({
-    queryFn: () => transformedAxios.get(url, config),
-    queryKey: ['mf-switch-proposal-status'],
-    staleTime: 15 * 1000,
+  return new Promise((r, rej) => {
+    setTimeout(() => {
+      r({
+        data: humps.camelizeKeys(data),
+      })
+    }, 1000)
   })
+
+  // return queryClient.fetchQuery({
+  //   queryFn: () => new Promise((r, rej) => r(data)),
+  //   queryKey: ['mf-switch-proposal-status'],
+  //   staleTime: 15 * 1000,
+  // })
 }

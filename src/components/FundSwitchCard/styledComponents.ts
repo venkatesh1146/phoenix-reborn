@@ -19,16 +19,18 @@ export const Wrapper = styled.div`
   padding: 1rem;
   font-family: 'Maven Pro';
   justify-content: space-around;
-  .circular-image {
-    border-radius: 50% !important;
-  }
+
   .arrow-icon {
     margin: 0 1.25rem;
     align-self: center;
   }
 `
 
-export const FundDetails = styled.div``
+export const FundDetails = styled.div`
+  .circular-image {
+    border-radius: 50% !important;
+  }
+`
 export const Name = styled.p`
   font-size: 0.75rem;
   font-weight: 500;

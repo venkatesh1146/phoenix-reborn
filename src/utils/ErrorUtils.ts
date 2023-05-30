@@ -15,6 +15,10 @@ const SERVER_ERROR_KEYWORDS = [
 export const getErrorMessage = (error: any) => {
   const defaultMessage = 'Something went wrong... Please try again'
 
+  if (error?.response?.data?.errorMessage) {
+    return error?.response?.data?.errorMessage
+  }
+
   // graphql errors
   if (error?.data?.errors[0]?.message) return error?.data?.errors[0]?.message
 

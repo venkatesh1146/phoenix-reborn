@@ -5,6 +5,7 @@ import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import Footer from '../Footer'
 import Info from '../Info/Info'
+import ProgressCircle from '../ProgressCircle'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 
 import EmailContainer from './Email'
@@ -37,6 +38,7 @@ export default function VerifyEmailsContainer({
   const router = useRouter()
   const isAllEmailsVerified =
     emails.findIndex((e) => e.isVerified === false) < 0
+  const verifiedEmailsCount = emails.filter((e) => e.isVerified).length
 
   useEffect(() => {
     const emails = proposalData?.schemes.reduce<
@@ -92,7 +94,18 @@ export default function VerifyEmailsContainer({
         </Body>
       </HeaderSection>
       <EmailsSection>
-        <Heading>Verify the below Emails</Heading>
+        <Heading>
+          Verify the below Emails
+          <ProgressCircle
+            wrapperClassName={'progress-circle-wrapper'}
+            size={32}
+            indicatorCap={'square'}
+            indicatorWidth={6}
+            trackWidth={4}
+            progress={(verifiedEmailsCount / emails.length) * 100}
+            variant="textOnRight"
+          />
+        </Heading>
         <Emails>
           {emails?.map((eachMail) => (
             <EmailContainer

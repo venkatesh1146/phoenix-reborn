@@ -17,6 +17,7 @@ import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalAccepted() {
   const { proposalData, isLoading, getAMCLogos } = useMFSwitchProposal()
+
   return isLoading ? (
     <FullScreenSpinner />
   ) : (
@@ -30,19 +31,16 @@ export default function ProposalAccepted() {
       />
       <Text>Congratulations!</Text>
       <SubText>You have successfully accepted the Proposal</SubText>
-      <Info
-        text={
-          'it usually takes 3-4 Days for all the funds to switch to wealthy'
-        }
-        wrapperClassName="info-text"
-      />
       <Divider />
       <FundsSwitchOverview
         totalAmount={proposalData?.totalAmount}
         numberOfFunds={proposalData?.schemes?.length || ''}
         fundsIcons={getAMCLogos() ?? []}
       />
-      <Footer btnTxt="Done" />
+      <Info
+        text={'It usually takes 3-4 Days for all the funds to reallocate'}
+        wrapperClassName="info-text"
+      />
     </Wrapper>
   )
 }

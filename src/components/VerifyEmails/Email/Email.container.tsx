@@ -6,6 +6,7 @@ import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
 import Spinner from '~/components/Spinner'
 import { useTheme } from '~/styles/theme'
+import { handleApiError } from '~/utils/ErrorUtils'
 
 import { EmailAndButton, EmailTxt, EmailWrapper } from '../styledComponents'
 
@@ -61,6 +62,7 @@ export default function EmailContainer({
         onSuccess: () => {
           setIsExpanded(true)
         },
+        onError: (error: any) => handleApiError(error),
       }
     )
   }
@@ -102,7 +104,7 @@ export default function EmailContainer({
     else if (isExpanded)
       return (
         <TextButton
-          style={{ color: '#000000', padding: 0 }}
+          style={{ color: '#000000', padding: 0, marginLeft: '0.5rem' }}
           onClick={toggleIsExpanded}
         >
           Cancel
@@ -110,7 +112,10 @@ export default function EmailContainer({
       )
     else
       return (
-        <TextButton style={{ padding: 0 }} onClick={onClickVerify}>
+        <TextButton
+          style={{ padding: 0, marginLeft: '0.5rem' }}
+          onClick={onClickVerify}
+        >
           {isSendOtpLoading ? <Spinner /> : 'Verify'}
         </TextButton>
       )

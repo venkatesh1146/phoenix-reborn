@@ -3,9 +3,10 @@ import { styled } from '@linaria/react'
 export const Wrapper = styled.div`
   display: flex;
   background: rgba(255, 170, 92, 0.2);
-  border-radius: 24px;
-  padding: 0.7rem;
+  border-radius: 40px;
+  padding: 0 0.7rem;
   align-items: center;
+  font-family: 'Maven Pro';
 `
 
 export const Text = styled.p`
@@ -18,7 +19,7 @@ export const Text = styled.p`
 export const DoneWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   background: rgba(20, 177, 149, 0.2);
-  border-radius: 0.85rem;
+  border-radius: 3rem;
 `

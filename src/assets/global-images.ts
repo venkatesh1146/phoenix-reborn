@@ -16,6 +16,9 @@ const WealthyImages = {
   tickWithBgDesign: 'https://i.wlycdn.com/articles/tick-with-bg-design.svg',
   diamondTick: 'https://i.wlycdn.com/articles/realistic-diamond-tick-icon.svg',
   profileCardIcon: 'https://i.wlycdn.com/articles/profile-card-icon.svg',
+  linesDesignBg: 'https://i.wlycdn.com/articles/lines-design-background.svg',
+  wealthyLogoLinesOnBothSides:
+    'https://i.wlycdn.com/articles/wealthy-logo-with-lines-on-both-sides.svg',
 }
 
 export default WealthyImages

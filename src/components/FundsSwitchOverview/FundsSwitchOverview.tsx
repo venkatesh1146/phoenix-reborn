@@ -27,7 +27,7 @@ export default function FundsSwitchOverview({
   return (
     <Wrapper className={wrapperClassName}>
       <Header>
-        <Heading>Switch Funds from Tracker</Heading>
+        <Heading>Reallocation of Funds</Heading>
         <FundsCount>{numberOfFunds}&nbsp;Funds</FundsCount>
       </Header>
       <AmountAndLogos>

@@ -29,9 +29,16 @@ export default function ProposalPage() {
   ) : (
     <Wrapper className="desktop_container">
       <HeadSection>
+        <Image
+          alt="logo"
+          style={{ alignSelf: 'center' }}
+          src={WealthyImages.wealthyLogoLinesOnBothSides}
+          height={24}
+          width={197}
+        />
         <UserNameHeader userName={proposalData?.clientName} />
         <PartnerName>
-          Here’s an Investment proposal shared by &nbsp;
+          Here’s a proposal shared by your partner &nbsp;
           <span className="name">
             <Image
               alt="profile"
@@ -41,9 +48,9 @@ export default function ProposalPage() {
               className="profile-pic"
             />
             &nbsp;
-            {proposalData?.partnerName}.
+            {proposalData?.partnerName}
           </span>
-          &nbsp; Please have a look!
+          &nbsp; to reallocate your mutual funds. Please have a look!
         </PartnerName>
         <FundsCountWithAmount
           amount={
@@ -52,10 +59,13 @@ export default function ProposalPage() {
               0
             ) ?? 0
           }
+          totalFunds={proposalData?.schemes.length}
           className={'funds-amount-wrapper'}
         />
       </HeadSection>
       <PortfolioAllocation switchFunds={proposalData?.schemes || []} />
+      <Declaimer>*New Investments will come under Wealthy ARN</Declaimer>
+      <Declaimer>*Capital Gains Tax will be Applicable</Declaimer>
       <Footer
         onClick={navigateToVerifyPage}
         agentPhoneNumber={proposalData?.partnerPhone}
@@ -64,17 +74,28 @@ export default function ProposalPage() {
   )
 }
 
+const Declaimer = styled.p`
+  font-family: 'Maven Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  padding-left: 1.25rem;
+  color: ${tm((t) => t.colors.secondaryTextColor)};
+`
 const HeadSection = styled.div`
-  padding: 1.5rem;
+  padding: 1.2rem;
   background: ${tm((t) => t.colors.primaryBgColor)};
+  display: flex;
+  flex-direction: column;
 `
 const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
+  overflow: auto;
   position: relative;
   display: flex;
   flex-direction: column;
-  background: ${tm((t) => t.colors.white)};
+  background: ${tm((t) => t.colors.lightBgColor)};
   padding-bottom: 7rem;
   .funds-amount-wrapper {
     margin-top: 0.8rem;

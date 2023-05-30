@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import ProgressCircle from '~/components/ProgressCircle'
+
 import Image from '../../components/Base/Image'
 import Footer from '../../components/Footer'
 import Info from '../../components/Info/Info'
@@ -27,39 +29,50 @@ interface KycDataType {
     pan: string
     email: string
     kycUrl: string
+    phoneNumber?: string
   }[]
   completed: {
     pan: string
     email: string
+    phoneNumber?: string
   }[]
 }
 
 export default function KycVerification() {
-  const { proposalData, isLoading, getProposal } = useMFSwitchProposal()
+  const { proposalData, isLoading, getProposal, isSuccess } =
+    useMFSwitchProposal()
   const [kycData, setKycData] = useState<KycDataType | null>(null)
 
   useEffect(() => {
-    const kycData: { pending: any[]; completed: any[] } = {
-      pending: [],
-      completed: [],
-    }
-
-    proposalData?.schemes.forEach((scheme: any) => {
-      if (scheme.kycCompleted) {
-        kycData.completed.push({
-          pan: scheme?.pan,
-          email: scheme.email,
-        })
-      } else {
-        kycData.pending.push({
-          pan: scheme?.pan,
-          email: scheme.email,
-          kycUrl: scheme.kycLink,
-        })
+    if (isSuccess) {
+      const kycData: { pending: any[]; completed: any[] } = {
+        pending: [],
+        completed: [],
       }
-    })
-    setKycData(kycData)
-  }, [proposalData])
+
+      proposalData?.schemes.forEach((scheme: any) => {
+        if (scheme.kycCompleted) {
+          kycData.completed.push({
+            pan: scheme?.pan,
+            email: scheme.email,
+            phoneNumber: scheme.phoneNumber,
+          })
+        } else {
+          kycData.pending.push({
+            pan: scheme?.pan,
+            email: scheme.email,
+            kycUrl: scheme.kycLink,
+            phoneNumber: scheme.phoneNumber,
+          })
+        }
+      })
+      setKycData(kycData)
+    }
+  }, [isSuccess, proposalData?.schemes])
+
+  const totalPans = kycData
+    ? kycData.completed.length + kycData.pending.length
+    : 0
 
   return isLoading ? (
     <FullScreenSpinner />
@@ -69,7 +82,8 @@ export default function KycVerification() {
         <PageHeading>KYC Completion</PageHeading>
         <Text>
           We have found
-          <span className="bold"> {3} pan cards</span> mapped to the funds
+          <span className="bold"> {totalPans} pan cards</span> mapped to the
+          funds
         </Text>
         <Info
           text={
@@ -78,7 +92,20 @@ export default function KycVerification() {
         />
       </HeaderSection>
       <KycStatus>
-        {kycData?.pending.length ? <HeadText>KYC Pending</HeadText> : null}
+        {kycData?.pending.length ? (
+          <HeadText>
+            KYC Pending
+            <ProgressCircle
+              wrapperClassName={'progress-circle-wrapper'}
+              size={32}
+              indicatorCap={'square'}
+              indicatorWidth={6}
+              trackWidth={4}
+              progress={(kycData.completed.length / totalPans) * 100}
+              variant="textOnRight"
+            />
+          </HeadText>
+        ) : null}
         {kycData?.pending.map((data, index) => (
           <KycCard key={index}>
             <Image
@@ -91,7 +118,7 @@ export default function KycVerification() {
             <Details>
               <PanNo>{data.pan}</PanNo>
               <SubTxt>{data.email}</SubTxt>
-              {/* <SubTxt>{data?.phoneNumber}</SubTxt> */}
+              {data?.phoneNumber ? <SubTxt>{data?.phoneNumber}</SubTxt> : null}
             </Details>
             <KycLink
               href={'https://www.wealthy.in/'}
@@ -104,7 +131,20 @@ export default function KycVerification() {
         ))}
 
         {kycData?.completed?.length ? (
-          <HeadText className="kyc-completion">KYC Completion</HeadText>
+          <HeadText className="kyc-completion">
+            KYC Completion
+            {kycData?.pending.length === 0 ? (
+              <ProgressCircle
+                wrapperClassName={'progress-circle-wrapper'}
+                size={32}
+                indicatorCap={'square'}
+                indicatorWidth={6}
+                trackWidth={4}
+                progress={100}
+                variant="textOnRight"
+              />
+            ) : null}
+          </HeadText>
         ) : null}
         {kycData?.completed.map((data, index) => (
           <KycCard key={index}>
@@ -118,7 +158,7 @@ export default function KycVerification() {
             <Details>
               <PanNo>{data.pan}</PanNo>
               <SubTxt>{data.email}</SubTxt>
-              {/* <SubTxt>{data.phoneNumber}</SubTxt> */}
+              {data?.phoneNumber ? <SubTxt>{data?.phoneNumber}</SubTxt> : null}
             </Details>
             <DoneStatus>
               <Image
@@ -128,7 +168,6 @@ export default function KycVerification() {
                 className="done-icon"
                 src={WealthyImages.tickWithBgDesign}
               />
-              KYC Done
             </DoneStatus>
           </KycCard>
         ))}
