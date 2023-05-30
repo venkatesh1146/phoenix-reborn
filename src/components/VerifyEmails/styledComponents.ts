@@ -68,6 +68,9 @@ export const Wrapper = styled.div`
       left: 50%;
     }
   }
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 `
 
 export const Body = styled.div`

@@ -3,13 +3,12 @@ import { styled } from '@linaria/react'
 import { tm } from '~/styles/theme'
 
 export const ImageContainer = styled.div`
-  width: 0.2rem;
+  width: 3px;
   margin: 0 2rem 0 1.5rem;
   background: ${tm((t) => t.colors.lightBgColor)};
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
 `
 
 export const Wrapper = styled.div`

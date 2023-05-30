@@ -19,6 +19,9 @@ const WealthyImages = {
   linesDesignBg: 'https://i.wlycdn.com/articles/lines-design-background.svg',
   wealthyLogoLinesOnBothSides:
     'https://i.wlycdn.com/articles/wealthy-logo-with-lines-on-both-sides.svg',
+  wealthyLogoLightPurple:
+    'https://i.wlycdn.com/articles/wealthy-logo-light-purple.svg',
+  callIconWhite: 'https://i.wlycdn.com/articles/call-icon-white.svg',
 }
 
 export default WealthyImages

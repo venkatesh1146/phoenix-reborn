@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   background: ${tm((t) => t.colors.primaryBgColor)};
   padding: 1.25rem;
   display: flex;
-  border-top: 0.4px dashed #a69ebc;
+  border-top: 0.5px dashed #a69ebc;
 `
 export const Text = styled.p`
   font-size: 0.8rem;

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
+import DesktopLeftSection from '../DesktopLeftSection'
 import Footer from '../Footer'
 import Info from '../Info/Info'
 import ProgressCircle from '../ProgressCircle'
@@ -22,6 +23,7 @@ import {
 
 import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
+import { useIsDesktop } from '~/hooks/useIsDesktop'
 
 interface VerifyEmailsContainerPropsType {
   proposalData: MFSwitchStatusResponseType | null
@@ -39,7 +41,7 @@ export default function VerifyEmailsContainer({
   const isAllEmailsVerified =
     emails.findIndex((e) => e.isVerified === false) < 0
   const verifiedEmailsCount = emails.filter((e) => e.isVerified).length
-
+  const isDesktop = useIsDesktop()
   useEffect(() => {
     const emails = proposalData?.schemes.reduce<
       { email: string; isVerified: boolean }[]
@@ -74,9 +76,34 @@ export default function VerifyEmailsContainer({
       )
   }
 
-  return isLoading ? (
-    <FullScreenSpinner />
-  ) : (
+  if (isLoading) return <FullScreenSpinner />
+  else if (isDesktop)
+    return (
+      <Wrapper>
+        <DesktopLeftSection
+          footerTxt={
+            'As per SEBI guidelines, you are required to verify email via OTP to process reallocation of funds.'
+          }
+          childrenContainerStyles={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '3rem',
+          }}
+        >
+          <>
+            <PageHeading>Verify Email</PageHeading>
+            <Body>
+              <Text>
+                We have found the
+                <span className="bold"> {emails?.length} email IDs</span> mapped
+                to the funds
+              </Text>
+            </Body>
+          </>
+        </DesktopLeftSection>
+      </Wrapper>
+    )
+  return (
     <Wrapper>
       <HeaderSection>
         <PageHeading>Verify Email</PageHeading>
