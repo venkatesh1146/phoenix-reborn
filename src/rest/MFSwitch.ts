@@ -42,7 +42,7 @@ export const getProposalStatus = (proposalId: string) => {
   }
 
   return queryClient.fetchQuery({
-    queryFn: () => new Promise((r, rej) => r(data)),
+    queryFn: () => transformedAxios.get(url, config),
     queryKey: ['mf-switch-proposal-status'],
     staleTime: 15 * 1000,
   })
