@@ -66,7 +66,7 @@ const ProgressBar = (props: ProgressBarPropsTypes) => {
           className={`svg-pi-indicator ${
             spinnerMode ? 'svg-pi-indicator--spinner' : ''
           }`}
-          style={{ animationDuration: spinnerSpeed * 1000 }}
+          style={{ animationDuration: (spinnerSpeed * 1000) as any }}
           cx={center}
           cy={center}
           fill="transparent"

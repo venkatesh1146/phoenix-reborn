@@ -1,3 +1,5 @@
+import env from '~/utils/env'
+
 import data from '../hooks/MockResponse.json'
 
 import { transformedAxios } from './axios'
@@ -9,7 +11,7 @@ import {
 
 import queryClient from '~/providers/queryClient'
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/quinjet`
+const BASE_URL = env.QUIENJET_URL
 
 export const sendOTP = (req: SendOTPRequestType) => {
   const url = `${BASE_URL}/otp-flow/api/v0/send-otp`
