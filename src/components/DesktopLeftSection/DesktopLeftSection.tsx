@@ -19,7 +19,7 @@ export default function DesktopLeftSection({
   footerTxt = 'New investments will come under Wealthy ARN Capital Gain Taxes will be applicable',
 }: DesktopLeftSectionPropsType) {
   return (
-    <Wrapper className="desktop-left-section-wrapper">
+    <Wrapper className="mf-desktop-left-section-wrapper">
       <Image
         alt="logo"
         height={37}

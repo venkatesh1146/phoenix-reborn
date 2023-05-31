@@ -80,7 +80,7 @@ export default function ProposalPage() {
           >
             <>
               {greetingAndPartnerName}
-              <OutlinedButton
+              {/* <OutlinedButton
                 onClick={console.log}
                 className="mf-switch-connect-with-partner-btn"
               >
@@ -92,7 +92,7 @@ export default function ProposalPage() {
                   style={{ marginRight: '1rem' }}
                 />
                 {'Connect with Partner'}
-              </OutlinedButton>
+              </OutlinedButton> */}
             </>
           </DesktopLeftSection>
           <DesktopRightSection>
@@ -144,7 +144,7 @@ export default function ProposalPage() {
 
 const DesktopRightSection = styled.div`
   flex-grow: 1;
-  padding: 1.25rem;
+  padding: 2.5rem;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -179,9 +179,6 @@ const Wrapper = styled.div`
   @media (min-width: 1024px) {
     flex-direction: row;
     padding: 0;
-    .desktop-left-section-wrapper {
-      max-width: 45%;
-    }
     .funds-cards-container {
       padding: 0 !important;
       margin-top: 2.5rem;

@@ -44,6 +44,8 @@ html {
 *::after {
   box-sizing: border-box;
 }
+
+// Mutual Funds switch styles
 .mf-switch-connect-with-partner-btn {
   border: 1px solid #ffffff !important;
   color: #ffffff !important;
@@ -67,4 +69,7 @@ html {
       display: none;
     }
   }
+}
+.mf-desktop-left-section-wrapper {
+  max-width: 45%;
 }

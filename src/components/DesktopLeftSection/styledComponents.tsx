@@ -4,7 +4,7 @@ import { tm } from '~/styles/theme'
 
 export const Wrapper = styled.div`
   background-color: ${tm((t) => t.colors.primaryBgColor)};
-  /* background-image: url('https://i.wlycdn.com/articles/lines-design-background.svg'); */
+  background-image: url('https://i.wlycdn.com/articles/lines-design-pattern-with-transparency.svg');
   background-position: top right;
   background-repeat: no-repeat;
   height: 100%;

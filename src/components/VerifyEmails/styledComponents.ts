@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 import { tm } from '~/styles/theme'
 
 export const PageHeading = styled.p`
-  font-family: 'Marcellus ';
+  font-family: 'Marcellus';
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 21px;
@@ -37,6 +37,9 @@ export const Heading = styled.div`
     flex-shrink: 0;
     margin-left: 0.5rem;
   }
+  @media screen and (min-width: 1024px) {
+    font-family: 'Marcellus';
+  } ;
 `
 export const HeaderSection = styled.div`
   padding: 1.25rem;
@@ -47,6 +50,9 @@ export const EmailsSection = styled.div`
   background: ${tm((t) => t.colors.lightBgColor)};
   padding: 2rem 1.25rem;
   flex-grow: 1;
+  @media screen and (min-width: 1024px) {
+    padding: 0;
+  }
 `
 
 export const Wrapper = styled.div`
@@ -57,10 +63,7 @@ export const Wrapper = styled.div`
   font-family: 'Maven Pro';
   display: flex;
   flex-direction: column;
-  @media (min-width: 1024px) {
-    max-width: 1100px;
-    margin: auto;
-  }
+
   .footer-btn {
     @media screen and (max-width: 780px) {
       max-width: 300px;
@@ -68,8 +71,14 @@ export const Wrapper = styled.div`
       left: 50%;
     }
   }
-  @media (min-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     flex-direction: row;
+  }
+  .desktop-right-section {
+    background: ${tm((t) => t.colors.lightBgColor)};
+  }
+  .mf-desktop-left-section-wrapper {
+    color: ${tm((t) => t.colors.white)};
   }
 `
 
@@ -102,7 +111,6 @@ export const EmailWrapper = styled.div<{ isExpanded: boolean }>`
   flex-direction: column;
   align-items: center;
   padding: 0.75rem 1.25rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   height: ${(props) => (props.isExpanded ? '12.25rem' : '4rem')};
   transition: height 0.1s cubic-bezier(0.89, -0.11, 1, 1);
   .otp-input-component {
