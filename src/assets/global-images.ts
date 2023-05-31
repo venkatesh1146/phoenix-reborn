@@ -23,6 +23,8 @@ const WealthyImages = {
   wealthyLogoLightPurple:
     'https://i.wlycdn.com/articles/wealthy-logo-light-purple.svg',
   callIconWhite: 'https://i.wlycdn.com/articles/call-icon-white.svg',
+  wealthyLogoDarkPurple:
+    'https://i.wlycdn.com/wealthy-home-page/wealthy-new-purple-logo.svg',
 }
 
 export default WealthyImages

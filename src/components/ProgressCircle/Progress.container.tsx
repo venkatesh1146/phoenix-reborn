@@ -12,7 +12,7 @@ interface ProgressContainerPropsType extends ProgressBarPropsTypes {
 }
 export default function ProgressContainer({
   variant = 'plain',
-  text = '2 more to go',
+  text = '',
   wrapperClassName = '',
   ...barProps
 }: ProgressContainerPropsType) {

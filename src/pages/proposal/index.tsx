@@ -42,6 +42,7 @@ export default function ProposalPage() {
         <Footer
           onClick={navigateToVerifyPage}
           agentPhoneNumber={proposalData?.partnerPhone}
+          btnTxt="Proceed"
         />
       </>
     )
@@ -148,6 +149,7 @@ const DesktopRightSection = styled.div`
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  overflow: auto;
 `
 
 const Declaimer = styled.p`

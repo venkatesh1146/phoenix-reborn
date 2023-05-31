@@ -54,7 +54,7 @@ export const KycCard = styled.div`
 
 export const HeadText = styled.p`
   font-family: 'Maven Pro';
-  font-size: 0.75rem;
+  font-size: 1rem;
   line-height: 14px;
   display: flex;
   align-items: center;
@@ -62,6 +62,10 @@ export const HeadText = styled.p`
   color: ${tm((t) => t.colors.secondaryTextColor)};
   margin: 0;
   margin-bottom: 1rem;
+  @media screen and (min-width: 1024px) {
+    font-family: 'Marcellus';
+    color: ${tm((t) => t.colors.primaryTextColor)};
+  }
 `
 export const KycStatus = styled.div`
   background: ${tm((t) => t.colors.lightBgColor)};
@@ -72,6 +76,9 @@ export const KycStatus = styled.div`
   .kyc-completion {
     margin-top: 2rem;
   }
+  @media screen and (min-width: 1024px) {
+    flex-grow: 1;
+  }
 `
 export const Wrapper = styled.div`
   height: 100vh;
@@ -80,6 +87,14 @@ export const Wrapper = styled.div`
   flex-direction: column;
   padding-bottom: 4rem;
   overflow: auto;
+  @media screen and (min-width: 1024px) {
+    padding: 0;
+    flex-direction: row;
+    .desktop-right-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `
 
 export const HeaderSection = styled.div`
@@ -97,6 +112,10 @@ export const PageHeading = styled.p`
   line-height: 21px;
 
   color: ${tm((t) => t.colors.white)};
+  @media screen and (min-width: 1024px) {
+    font-family: 'Marcellus';
+    margin-top: 3rem;
+  }
 `
 export const Text = styled.p`
   font-family: 'Maven Pro';
@@ -105,4 +124,9 @@ export const Text = styled.p`
   .bold {
     font-weight: 500;
   }
+`
+export const Divider = styled.div`
+  height: 0;
+  border: 0.6px dashed ${tm((t) => t.colors.secondaryTextColor)};
+  margin-top: 1.25rem;
 `

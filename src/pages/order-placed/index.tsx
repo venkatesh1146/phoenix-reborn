@@ -1,11 +1,12 @@
 import React from 'react'
 
 import Image from '../../components/Base/Image'
-import Footer from '../../components/Footer'
 import FundsSwitchOverview from '../../components/FundsSwitchOverview'
 import Info from '../../components/Info/Info'
 import {
   Divider,
+  FundsWrapper,
+  ImageContainer,
   SubText,
   Text,
   Wrapper,
@@ -13,34 +14,48 @@ import {
 import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
+import { useIsDesktop } from '~/hooks/useIsDesktop'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalAccepted() {
   const { proposalData, isLoading, getAMCLogos } = useMFSwitchProposal()
-
-  return isLoading ? (
-    <FullScreenSpinner />
-  ) : (
+  const isDesktop = useIsDesktop()
+  const imageSize = isDesktop ? 236 : 148
+  if (isLoading) return <FullScreenSpinner />
+  return (
     <Wrapper>
-      <Image
-        alt="diamond"
-        className="diamond-tick"
-        src={WealthyImages.diamondTick}
-        height={148}
-        width={148}
-      />
-      <Text>Congratulations!</Text>
-      <SubText>You have successfully accepted the Proposal</SubText>
-      <Divider />
-      <FundsSwitchOverview
-        totalAmount={proposalData?.totalAmount}
-        numberOfFunds={proposalData?.schemes?.length || ''}
-        fundsIcons={getAMCLogos() ?? []}
-      />
-      <Info
-        text={'It usually takes 3-4 Days for all the funds to reallocate'}
-        wrapperClassName="info-text"
-      />
+      {isDesktop ? (
+        <Image
+          src={WealthyImages.wealthyLogoDarkPurple}
+          alt="wealthy"
+          width={127}
+          height={37}
+          style={{ marginTop: '1rem', marginRight: '-6rem' }}
+        />
+      ) : null}
+      <ImageContainer>
+        <Image
+          alt="diamond"
+          className="diamond-tick"
+          src={WealthyImages.diamondTick}
+          height={imageSize}
+          width={imageSize}
+        />
+        <Text>Congratulations!</Text>
+        <SubText>You have successfully accepted the Proposal</SubText>
+      </ImageContainer>
+      {!isDesktop ? <Divider /> : null}
+      <FundsWrapper>
+        <FundsSwitchOverview
+          totalAmount={proposalData?.totalAmount}
+          numberOfFunds={proposalData?.schemes?.length || ''}
+          fundsIcons={getAMCLogos() ?? []}
+        />
+        <Info
+          text={'It usually takes 3-4 Days for all the funds to reallocate'}
+          wrapperClassName="info-text"
+        />
+      </FundsWrapper>
     </Wrapper>
   )
 }

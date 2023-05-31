@@ -1,3 +1,5 @@
+import humps from 'humps'
+
 import env from '~/utils/env'
 
 import data from '../hooks/MockResponse.json'
@@ -29,21 +31,24 @@ export const resendOTP = (req: ResendOTPRequestType) => {
 }
 
 export const getProposalStatus = (proposalId: string) => {
-  const url = `${BASE_URL}/api/v0/mf/status/?proposal_id=${proposalId}`
+  const url = `https://api.wealthydev.in/quinjet/proposals/api/v0/mf/status?proposal_id=${proposalId}`
   const config = {
     headers: {
       Authorization:
-        '3da15256-a435-455d-bad9-8af927159321:LYgwEBLlwZpTAzHOM-N7jYOrHq8',
-      'sec-fetch-mode': 'cors',
-      'Sec-Fetch-Site': 'same-site',
-      accept: 'application/json, text/plain, */*',
-      'content-type': 'application/json',
+        'fa6c41b6-c8f2-4a08-912d-afc9d4838662:GGbDKj0DXwYwu5VdG7G1Ds3Ap',
     },
   }
-
-  return queryClient.fetchQuery({
-    queryFn: () => transformedAxios.get(url, config),
-    queryKey: ['mf-switch-proposal-status'],
-    staleTime: 15 * 1000,
+  return new Promise((r, rej) => {
+    setTimeout(() => {
+      r({
+        data: humps.camelizeKeys(data),
+      })
+    }, 1000)
   })
+
+  // return queryClient.fetchQuery({
+  //   queryFn: () => transformedAxios.get(url, config),
+  //   queryKey: ['mf-switch-proposal-status'],
+  //   staleTime: 15 * 1000,
+  // })
 }

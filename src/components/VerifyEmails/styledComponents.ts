@@ -13,9 +13,8 @@ export const PageHeading = styled.p`
 export const Emails = styled.div`
   margin-bottom: 6rem;
 
-  @media (min-width: 1024px) {
-    display: flex;
-    flex-wrap: wrap;
+  @media screen and (min-width: 1024px) {
+    width: max-content;
 
     .email-wrapper {
       margin: 0.5rem !important;
@@ -39,6 +38,9 @@ export const Heading = styled.div`
   }
   @media screen and (min-width: 1024px) {
     font-family: 'Marcellus';
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
   } ;
 `
 export const HeaderSection = styled.div`
@@ -52,6 +54,8 @@ export const EmailsSection = styled.div`
   flex-grow: 1;
   @media screen and (min-width: 1024px) {
     padding: 0;
+    width: max-content;
+    margin: auto;
   }
 `
 
@@ -76,6 +80,11 @@ export const Wrapper = styled.div`
   }
   .desktop-right-section {
     background: ${tm((t) => t.colors.lightBgColor)};
+    display: flex;
+    flex-direction: column;
+    .emails-section {
+      flex-grow: 1;
+    }
   }
   .mf-desktop-left-section-wrapper {
     color: ${tm((t) => t.colors.white)};

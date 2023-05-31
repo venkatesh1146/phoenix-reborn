@@ -50,7 +50,7 @@ export default function useMFSwitchProposal() {
   const getProposal = () => {
     if (proposalId) {
       doApiCall(proposalId as string, {
-        onSuccess: (response) => {
+        onSuccess: (response: any) => {
           const pathAsPerStatus =
             getPathBasedOnStatus(response.data.status) ?? ''
           if (router.pathname !== pathAsPerStatus) {

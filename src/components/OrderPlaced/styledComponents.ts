@@ -38,4 +38,26 @@ export const Wrapper = styled.div`
   .diamond-tick {
     align-self: center;
   }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+  }
+`
+export const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media screen and (min-width: 1024px) {
+    width: 45%;
+    margin-right: 2rem;
+    border-right: 0.4px dashed ${tm((t) => t.colors.lightBgColor)};
+  }
+`
+export const FundsWrapper = styled.div`
+  @media screen and (min-width: 1024px) {
+    flex-grow: 1;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `

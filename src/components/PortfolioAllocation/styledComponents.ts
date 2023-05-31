@@ -25,9 +25,7 @@ export const FundSwitches = styled.div`
   margin: 1.5rem 0;
   display: flex;
   flex-direction: column;
-  @media (min-width: 1024px) {
-    flex-direction: row;
-  }
+
   .fund-switch-wrapper {
     margin: 0.5rem;
   }

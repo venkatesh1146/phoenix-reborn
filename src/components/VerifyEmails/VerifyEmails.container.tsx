@@ -26,6 +26,18 @@ import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
 import { useIsDesktop } from '~/hooks/useIsDesktop'
 
+const verifiedTexts = {
+  heading: 'Verification successful',
+  description:
+    'Well Done! You’ve verified all Email ID’s. Kindly proceed on to the next step!',
+  subHeading: 'Email’s Verified',
+}
+const verifyingTexts = {
+  heading: 'Verify Email',
+  description: '',
+  subHeading: 'Verify the below Emails to proceed',
+}
+
 interface VerifyEmailsContainerPropsType {
   proposalData: MFSwitchStatusResponseType | null
   isLoading: boolean
@@ -43,6 +55,7 @@ export default function VerifyEmailsContainer({
     emails.findIndex((e) => e.isVerified === false) < 0
   const verifiedEmailsCount = emails.filter((e) => e.isVerified).length
   const isDesktop = useIsDesktop()
+  const texts = isAllEmailsVerified ? verifiedTexts : verifyingTexts
   useEffect(() => {
     const emails = proposalData?.schemes.reduce<
       { email: string; isVerified: boolean }[]
@@ -79,10 +92,9 @@ export default function VerifyEmailsContainer({
 
   const renderMFSwitchesAndFooter = () => (
     <>
-      {' '}
-      <EmailsSection>
+      <EmailsSection className="emails-section">
         <Heading>
-          Verify the below Emails to proceed
+          {texts.subHeading}
           <ProgressCircle
             wrapperClassName={'progress-circle-wrapper'}
             size={32}
@@ -91,6 +103,7 @@ export default function VerifyEmailsContainer({
             trackWidth={4}
             progress={(verifiedEmailsCount / emails.length) * 100}
             variant="textOnRight"
+            text={`${emails.length - verifiedEmailsCount} more to go`}
           />
         </Heading>
         <Emails>
@@ -110,6 +123,7 @@ export default function VerifyEmailsContainer({
         isDisabled={!isAllEmailsVerified}
         agentPhoneNumber={proposalData?.partnerPhone}
         onClick={handleProceed}
+        btnTxt="Proceed"
       />
     </>
   )
@@ -129,12 +143,20 @@ export default function VerifyEmailsContainer({
           }}
         >
           <>
-            <PageHeading>Verify Email</PageHeading>
+            <PageHeading>{texts.heading}</PageHeading>
             <Body>
               <Text>
-                We have found the
-                <span className="bold"> {emails?.length} email IDs</span> mapped
-                to the funds
+                {isAllEmailsVerified ? (
+                  texts.description
+                ) : (
+                  <>
+                    We have found the&nbsp;
+                    <span className="bold">
+                      {emails?.length} email IDs
+                    </span>{' '}
+                    mapped to the funds
+                  </>
+                )}
               </Text>
             </Body>
           </>

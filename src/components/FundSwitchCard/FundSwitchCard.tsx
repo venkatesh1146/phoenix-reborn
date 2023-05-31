@@ -10,6 +10,7 @@ import {
   FundDetails,
   ImageContainer,
   Name,
+  Numbers,
   Units,
   Wrapper,
 } from './styledComponents'
@@ -42,11 +43,13 @@ function FundSwitchCard({
             height={64}
             width={64}
           />
-          <Name>{switchout.fundName}</Name>
-          <Units>{`${switchout.units} units`}</Units>
-          <Amount>
-            {WealthyAmount.init(switchout.amount).currencyFormat(2)}
-          </Amount>
+          <Numbers>
+            <Name>{switchout.fundName}</Name>
+            <Units>{`${switchout.units} units`}</Units>
+            <Amount>
+              {WealthyAmount.init(switchout.amount).currencyFormat(2)}
+            </Amount>
+          </Numbers>
         </FundDetails>
         <ImageContainer>
           <Image
@@ -66,11 +69,13 @@ function FundSwitchCard({
             height={64}
             width={64}
           />
-          <Name>{switchin.fundName}</Name>
-          <Units>{`${switchin.units} units`}</Units>
-          <Amount>
-            {WealthyAmount.init(switchin.amount).currencyFormat(2)}
-          </Amount>
+          <Numbers>
+            <Name>{switchin.fundName}</Name>
+            <Units>{`${switchin.units} units`}</Units>
+            <Amount>
+              {WealthyAmount.init(switchin.amount).currencyFormat(2)}
+            </Amount>
+          </Numbers>
         </FundDetails>
       </Wrapper>
     </>

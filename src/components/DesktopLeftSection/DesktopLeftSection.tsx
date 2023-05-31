@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useTheme, withTheme } from '~/styles/theme'
+
 import Image from '../Base/Image'
 import Info from '../Info'
 
@@ -11,9 +13,10 @@ interface DesktopLeftSectionPropsType {
   children: JSX.Element
   footerTxt?: string
   childrenContainerStyles?: React.CSSProperties
+  theme: any
 }
 
-export default function DesktopLeftSection({
+function DesktopLeftSection({
   children,
   childrenContainerStyles = {},
   footerTxt = 'New investments will come under Wealthy ARN Capital Gain Taxes will be applicable',
@@ -35,3 +38,5 @@ export default function DesktopLeftSection({
     </Wrapper>
   )
 }
+
+export default withTheme(DesktopLeftSection)

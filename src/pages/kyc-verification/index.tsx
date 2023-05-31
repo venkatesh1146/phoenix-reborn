@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import { DesktopRightSection } from '~/components/CommonStyledComponents'
+import DesktopLeftSection from '~/components/DesktopLeftSection'
 import ProgressCircle from '~/components/ProgressCircle'
 
 import Image from '../../components/Base/Image'
@@ -7,6 +9,7 @@ import Footer from '../../components/Footer'
 import Info from '../../components/Info/Info'
 import {
   Details,
+  Divider,
   DoneStatus,
   HeadText,
   HeaderSection,
@@ -22,6 +25,7 @@ import {
 import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
+import { useIsDesktop } from '~/hooks/useIsDesktop'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 interface KycDataType {
@@ -42,6 +46,8 @@ export default function KycVerification() {
   const { proposalData, isLoading, getProposal, isSuccess } =
     useMFSwitchProposal()
   const [kycData, setKycData] = useState<KycDataType | null>(null)
+  const isDesktop = useIsDesktop()
+  const isKycCompleted = kycData?.pending.length === 0
 
   useEffect(() => {
     if (isSuccess) {
@@ -74,23 +80,8 @@ export default function KycVerification() {
     ? kycData.completed.length + kycData.pending.length
     : 0
 
-  return isLoading ? (
-    <FullScreenSpinner />
-  ) : (
-    <Wrapper>
-      <HeaderSection>
-        <PageHeading>KYC Completion</PageHeading>
-        <Text>
-          We have found
-          <span className="bold"> {totalPans} pan cards</span> mapped to the
-          funds
-        </Text>
-        <Info
-          text={
-            'To successfully process the Switch funds, Kindly complete the KYC for the below mentioned'
-          }
-        />
-      </HeaderSection>
+  const renderKycStatus = () => (
+    <>
       <KycStatus>
         {kycData?.pending.length ? (
           <HeadText>
@@ -103,6 +94,7 @@ export default function KycVerification() {
               trackWidth={4}
               progress={(kycData.completed.length / totalPans) * 100}
               variant="textOnRight"
+              text={`${kycData.pending.length}  more to go`}
             />
           </HeadText>
         ) : null}
@@ -129,7 +121,7 @@ export default function KycVerification() {
             </KycLink>
           </KycCard>
         ))}
-
+        {isDesktop && kycData?.pending.length ? <Divider /> : null}
         {kycData?.completed?.length ? (
           <HeadText className="kyc-completion">
             KYC Completion
@@ -179,6 +171,52 @@ export default function KycVerification() {
         onClick={getProposal}
         isLoading={isLoading}
       />
+    </>
+  )
+
+  if (isLoading) return <FullScreenSpinner />
+  else if (isDesktop)
+    return (
+      <Wrapper>
+        <DesktopLeftSection footerTxt="To successfully process the Switch funds, Kindly complete the KYC for the mentioned">
+          <>
+            <PageHeading>
+              {isKycCompleted ? 'KYC Completed' : 'KYC Completion'}
+            </PageHeading>
+            <Text>
+              {isKycCompleted ? (
+                'All done! Click on the proceed button to confirm reallocation of mutual funds.'
+              ) : (
+                <>
+                  We have found
+                  <span className="bold"> {totalPans} pan cards</span> mapped to
+                  the funds
+                </>
+              )}
+            </Text>
+          </>
+        </DesktopLeftSection>
+        <DesktopRightSection className="desktop-right-container">
+          {renderKycStatus()}
+        </DesktopRightSection>
+      </Wrapper>
+    )
+  return (
+    <Wrapper>
+      <HeaderSection>
+        <PageHeading>KYC Completion</PageHeading>
+        <Text>
+          We have found
+          <span className="bold"> {totalPans} pan cards</span> mapped to the
+          funds
+        </Text>
+        <Info
+          text={
+            'To successfully process the Switch funds, Kindly complete the KYC for the below mentioned'
+          }
+        />
+      </HeaderSection>
+      {renderKycStatus()}
     </Wrapper>
   )
 }
