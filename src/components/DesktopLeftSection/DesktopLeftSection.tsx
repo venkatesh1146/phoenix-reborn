@@ -10,7 +10,7 @@ import { ChildrenContainer, FooterWrapper, Wrapper } from './styledComponents'
 import { WealthyImages } from '~/assets'
 
 interface DesktopLeftSectionPropsType {
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
   footerTxt?: string
   childrenContainerStyles?: React.CSSProperties
   theme: any

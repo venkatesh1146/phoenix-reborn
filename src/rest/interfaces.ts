@@ -14,5 +14,5 @@ export interface VerifyOTPRequestType {
 
 export interface ResendOTPRequestType {
   email: string
-  referenceid: string
+  reference_id: string
 }

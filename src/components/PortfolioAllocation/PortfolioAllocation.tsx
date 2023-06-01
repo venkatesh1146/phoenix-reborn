@@ -24,7 +24,7 @@ export default function PortfolioAllocation({
   return (
     <Wrapper className={wrapperClassName}>
       <Heading>Reallocation Details</Heading>
-      <FundSwitches>
+      <FundSwitches className="portfolio-funds-wrapper">
         {switchFunds.map((sf, index) => (
           <FundSwitchCard
             key={index}

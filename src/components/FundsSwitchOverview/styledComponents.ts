@@ -7,11 +7,21 @@ export const AmountAndLogos = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-left: 1rem;
+  @media screen and (min-width: 1024px) {
+    border-top: 0.2px solid #888888;
+    padding-top: 1.25rem;
+    padding-left: 0;
+    align-items: flex-start;
+  }
 `
 export const Wrapper = styled.div`
   padding: 1.25rem 1.25rem 2rem 1.25rem;
   background: ${tm((t) => t.colors.secondaryBgColor)};
   border-radius: 8px;
+  @media screen and (min-width: 1024px) {
+    color: ${tm((t) => t.colors.white)};
+    padding: 1.25rem;
+  }
 `
 export const FundsCount = styled.p`
   font-family: 'Maven Pro';
@@ -20,6 +30,10 @@ export const FundsCount = styled.p`
   color: #e6e6e6;
   display: flex;
   align-items: center;
+  @media screen and (min-width: 1024px) {
+    justify-content: right;
+    font-size: 1.25rem;
+  }
 `
 export const Heading = styled.p`
   font-family: 'Maven Pro';
@@ -33,6 +47,9 @@ export const Heading = styled.p`
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  @media screen and (min-width: 1024px) {
+    align-items: center;
+  }
 `
 export const Amount = styled.p`
   font-family: 'Maven Pro';

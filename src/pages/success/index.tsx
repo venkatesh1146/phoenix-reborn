@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
 import React from 'react'
 
+import { DesktopRightSection } from '~/components/CommonStyledComponents'
+import DesktopLeftSection from '~/components/DesktopLeftSection'
 import FundsSwitchOverview from '~/components/FundsSwitchOverview'
 import PortfolioAllocation from '~/components/PortfolioAllocation'
 import FullScreenSpinner from '~/components/Spinner/FullScreenSpinner'
@@ -10,14 +12,47 @@ import { tm } from '~/styles/theme'
 import Image from '../../components/Base/Image'
 
 import { WealthyImages } from '~/assets'
+import { useIsDesktop } from '~/hooks/useIsDesktop'
 import useMFSwitchProposal from '~/hooks/useMFSwitchProposal'
 
 export default function ProposalProcessed() {
   const { proposalData, isLoading, getAMCLogos } = useMFSwitchProposal()
+  const isDesktop = useIsDesktop()
+  const imageSize = isDesktop
+    ? { width: 236, height: 221 }
+    : { width: 148, height: 138 }
 
-  return isLoading ? (
-    <FullScreenSpinner />
-  ) : (
+  if (isLoading) return <FullScreenSpinner />
+  else if (isDesktop)
+    return (
+      <Wrapper>
+        <DesktopLeftSection
+          childrenContainerStyles={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <UserNameHeader userName={proposalData?.clientName} />
+          <Image
+            alt="tick"
+            className="tick-icon"
+            src={WealthyImages.diamondTick}
+            {...imageSize}
+          />
+          <Text>The investment proposal has been successfully processed!</Text>
+        </DesktopLeftSection>
+        <DesktopRightSection>
+          <FundsSwitchOverview
+            wrapperClassName="funds-switch-wrapper"
+            totalAmount={proposalData?.totalAmount}
+            numberOfFunds={proposalData?.schemes.length ?? ''}
+            fundsIcons={getAMCLogos() ?? []}
+          />
+          <PortfolioAllocation
+            wrapperClassName="portfolio-allocation"
+            switchFunds={proposalData?.schemes ?? []}
+          />
+        </DesktopRightSection>
+      </Wrapper>
+    )
+  return (
     <Wrapper>
       <HeaderSection>
         <UserNameHeader userName={proposalData?.clientName} />
@@ -63,4 +98,19 @@ const Text = styled.p`
   margin-bottom: 2rem;
 `
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  height: 100%;
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    .tick-icon {
+      align-self: center;
+    }
+    .portfolio-allocation {
+      padding: 0;
+      margin-top: 0.7rem;
+    }
+    .portfolio-funds-wrapper {
+      margin-top: 0.8rem;
+    }
+  }
+`

@@ -50,13 +50,10 @@ export default function EmailContainer({
   }
 
   const onClickVerify = () => {
-    handleSentOTP(
+    handleResendOTP(
       {
-        emails: [email],
-        phoneNumbers: [],
-        referenceid: proposalId,
-        templateName: 'TEMPLATE_1',
-        userid: userId,
+        email: email,
+        reference_id: proposalId,
       },
       {
         onSuccess: () => {

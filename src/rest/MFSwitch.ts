@@ -38,17 +38,17 @@ export const getProposalStatus = (proposalId: string) => {
         'fa6c41b6-c8f2-4a08-912d-afc9d4838662:GGbDKj0DXwYwu5VdG7G1Ds3Ap',
     },
   }
-  return new Promise((r, rej) => {
-    setTimeout(() => {
-      r({
-        data: humps.camelizeKeys(data),
-      })
-    }, 1000)
-  })
-
-  // return queryClient.fetchQuery({
-  //   queryFn: () => transformedAxios.get(url, config),
-  //   queryKey: ['mf-switch-proposal-status'],
-  //   staleTime: 15 * 1000,
+  // return new Promise((r, rej) => {
+  //   setTimeout(() => {
+  //     r({
+  //       data: humps.camelizeKeys(data),
+  //     })
+  //   }, 1000)
   // })
+
+  return queryClient.fetchQuery({
+    queryFn: () => transformedAxios.get(url, config),
+    queryKey: ['mf-switch-proposal-status'],
+    staleTime: 15 * 1000,
+  })
 }

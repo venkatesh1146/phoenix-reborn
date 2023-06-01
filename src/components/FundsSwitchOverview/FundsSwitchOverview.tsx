@@ -1,6 +1,9 @@
 import { WealthyAmount } from 'frontend-models'
 import React from 'react'
 
+import { withTheme } from '~/styles/theme'
+
+import { TotalTxt } from '../FundsCountWithAmount/styledComponents'
 import StackedImages from '../StackedImages'
 
 import {
@@ -12,18 +15,45 @@ import {
   Wrapper,
 } from './styledComponents'
 
+import { useIsDesktop } from '~/hooks/useIsDesktop'
+
 interface FundsSwitchOverviewProps {
   totalAmount?: number
   numberOfFunds: string | number
   fundsIcons: string[]
   wrapperClassName?: string
+  theme: any
 }
-export default function FundsSwitchOverview({
+function FundsSwitchOverview({
   totalAmount,
   numberOfFunds,
   fundsIcons,
   wrapperClassName = '',
 }: FundsSwitchOverviewProps) {
+  const isDesktop = useIsDesktop()
+  if (isDesktop)
+    return (
+      <Wrapper className={wrapperClassName}>
+        <Header>
+          <Heading>Reallocation of Funds</Heading>
+          <StackedImages urls={fundsIcons} />
+        </Header>
+        <AmountAndLogos>
+          <div>
+            <TotalTxt>Total Reallocation Amount</TotalTxt>
+            <Amount style={{ textAlign: 'left' }}>
+              {WealthyAmount.init(totalAmount).currencyFormat(2)}
+            </Amount>
+          </div>
+          <div>
+            <TotalTxt>Total Funds</TotalTxt>
+            <FundsCount>
+              {numberOfFunds < 10 ? '0' + numberOfFunds : numberOfFunds}
+            </FundsCount>
+          </div>
+        </AmountAndLogos>
+      </Wrapper>
+    )
   return (
     <Wrapper className={wrapperClassName}>
       <Header>
@@ -37,3 +67,4 @@ export default function FundsSwitchOverview({
     </Wrapper>
   )
 }
+export default withTheme(FundsSwitchOverview)

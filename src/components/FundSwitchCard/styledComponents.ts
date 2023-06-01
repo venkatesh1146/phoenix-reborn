@@ -40,15 +40,15 @@ export const FundDetails = styled.div`
 export const Name = styled.p`
   font-size: 0.75rem;
   font-weight: 500;
-  margin: 0.1rem 0;
+  margin: 0.2rem 0;
 `
 export const Units = styled.p`
   font-size: 0.75rem;
-  margin: 0.1rem 0;
+  margin: 0.2rem 0;
   color: ${tm((t) => t.colors.secondaryTextColor)};
 `
 export const Amount = styled.p`
   font-size: 0.875rem;
-  margin: 0.1rem 0;
+  margin: 0.2rem 0;
 `
 export const Numbers = styled.div``
