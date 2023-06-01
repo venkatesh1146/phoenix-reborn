@@ -1,16 +1,17 @@
-# Dockerfile.production
-
 FROM 614358145679.dkr.ecr.ap-south-1.amazonaws.com/wealthyalpine:node19.8.1
 
-MAINTAINER somit srivastava "corp@wealthy.in"
+USER root
+RUN apk update && apk add aws-cli
+LABEL maintainer="somit srivastava <corp@wealthy.in>"
 
 ENV PROJECT_DIR=/opt/wealthy/app
 
 ENV LOG_DIR=/var/log/wealthy/app
 
 WORKDIR $PROJECT_DIR
-
-# setup all the configfiles
+COPY ./secret_entrypoint.sh $PROJECT_DIR/
+RUN chmod +x $PROJECT_DIR/secret_entrypoint.sh
+# USER pptruser
 
 COPY . $PROJECT_DIR/
 
@@ -18,4 +19,3 @@ EXPOSE 9000
 EXPOSE 80
 
 CMD ["sh","./secret_entrypoint.sh"]
-CMD ["npm", "run", "start:prod"]

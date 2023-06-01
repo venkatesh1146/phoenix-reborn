@@ -13,7 +13,7 @@ const handle = app.getRequestHandler()
 const PORT = process.env.SERVER_PORT || 3000
 app.use(cors())
 
-const pheonixBaseUrl = '/rise'
+const pheonixBaseUrl = '/rising'
 
 app
   .prepare()
