@@ -67,7 +67,7 @@ export default function EmailContainer({
   const resendOtp = () => {
     handleResendOTP({
       email,
-      referenceid: proposalId,
+      reference_id: proposalId,
     })
   }
 
@@ -75,7 +75,7 @@ export default function EmailContainer({
     handleVerifyOTP(
       {
         email,
-        referenceid: proposalId,
+        reference_id: proposalId,
         otp: parseInt(otp),
       },
       {
