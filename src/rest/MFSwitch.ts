@@ -1,3 +1,7 @@
+import env from '~/utils/env'
+
+import data from '../hooks/MockResponse.json'
+
 import { transformedAxios } from './axios'
 import {
   ResendOTPRequestType,
@@ -5,7 +9,9 @@ import {
   VerifyOTPRequestType,
 } from './interfaces'
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/quinjet`
+import queryClient from '~/providers/queryClient'
+
+const BASE_URL = env.QUIENJET_URL
 
 export const sendOTP = (req: SendOTPRequestType) => {
   const url = `${BASE_URL}/otp-flow/api/v0/send-otp`
@@ -28,7 +34,16 @@ export const getProposalStatus = (proposalId: string) => {
     headers: {
       Authorization:
         '3da15256-a435-455d-bad9-8af927159321:LYgwEBLlwZpTAzHOM-N7jYOrHq8',
+      'sec-fetch-mode': 'cors',
+      'Sec-Fetch-Site': 'same-site',
+      accept: 'application/json, text/plain, */*',
+      'content-type': 'application/json',
     },
   }
-  return transformedAxios.get(url, config)
+
+  return queryClient.fetchQuery({
+    queryFn: () => transformedAxios.get(url, config),
+    queryKey: ['mf-switch-proposal-status'],
+    staleTime: 15 * 1000,
+  })
 }

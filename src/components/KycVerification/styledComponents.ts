@@ -20,10 +20,9 @@ export const DoneStatus = styled.div`
   text-align: center;
   height: max-content;
   display: flex;
+  flex-shrink: 0;
+  margin-left: auto;
   align-items: center;
-  .done-icon {
-    margin-right: 0.5rem;
-  }
 `
 
 export const SubTxt = styled.p`
@@ -57,6 +56,9 @@ export const HeadText = styled.p`
   font-family: 'Maven Pro';
   font-size: 0.75rem;
   line-height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: ${tm((t) => t.colors.secondaryTextColor)};
   margin: 0;
   margin-bottom: 1rem;
@@ -76,6 +78,8 @@ export const Wrapper = styled.div`
   font-family: 'Maven Pro';
   display: flex;
   flex-direction: column;
+  padding-bottom: 4rem;
+  overflow: auto;
 `
 
 export const HeaderSection = styled.div`

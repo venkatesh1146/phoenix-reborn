@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react'
 
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
+import { DesktopRightSection } from '../CommonStyledComponents'
+import DesktopLeftSection from '../DesktopLeftSection'
 import Footer from '../Footer'
 import Info from '../Info/Info'
+import ProgressCircle from '../ProgressCircle'
 import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 
 import EmailContainer from './Email'
@@ -21,6 +24,7 @@ import {
 
 import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
+import { useIsDesktop } from '~/hooks/useIsDesktop'
 
 interface VerifyEmailsContainerPropsType {
   proposalData: MFSwitchStatusResponseType | null
@@ -37,7 +41,8 @@ export default function VerifyEmailsContainer({
   const router = useRouter()
   const isAllEmailsVerified =
     emails.findIndex((e) => e.isVerified === false) < 0
-
+  const verifiedEmailsCount = emails.filter((e) => e.isVerified).length
+  const isDesktop = useIsDesktop()
   useEffect(() => {
     const emails = proposalData?.schemes.reduce<
       { email: string; isVerified: boolean }[]
@@ -51,7 +56,7 @@ export default function VerifyEmailsContainer({
       return list
     }, [])
     setEmail(emails ?? [])
-  }, [])
+  }, [proposalData?.schemes])
 
   const onVerifyEmail = (emailId: string) => {
     const index = emails.findIndex((email) => email.email === emailId)
@@ -72,27 +77,22 @@ export default function VerifyEmailsContainer({
       )
   }
 
-  return isLoading ? (
-    <FullScreenSpinner />
-  ) : (
-    <Wrapper>
-      <HeaderSection>
-        <PageHeading>Verify Email</PageHeading>
-        <Body>
-          <Text>
-            We have found the
-            <span className="bold"> {emails?.length} email IDs</span> mapped to
-            the funds
-          </Text>
-          <Info
-            text={
-              'As per SEBI guidelines, you are required to verify email via OTP to proceed with fund switch'
-            }
-          />
-        </Body>
-      </HeaderSection>
+  const renderMFSwitchesAndFooter = () => (
+    <>
+      {' '}
       <EmailsSection>
-        <Heading>Verify the below Emails</Heading>
+        <Heading>
+          Verify the below Emails to proceed
+          <ProgressCircle
+            wrapperClassName={'progress-circle-wrapper'}
+            size={32}
+            indicatorCap={'square'}
+            indicatorWidth={6}
+            trackWidth={4}
+            progress={(verifiedEmailsCount / emails.length) * 100}
+            variant="textOnRight"
+          />
+        </Heading>
         <Emails>
           {emails?.map((eachMail) => (
             <EmailContainer
@@ -111,6 +111,57 @@ export default function VerifyEmailsContainer({
         agentPhoneNumber={proposalData?.partnerPhone}
         onClick={handleProceed}
       />
+    </>
+  )
+
+  if (isLoading) return <FullScreenSpinner />
+  else if (isDesktop)
+    return (
+      <Wrapper>
+        <DesktopLeftSection
+          footerTxt={
+            'As per SEBI guidelines, you are required to verify email via OTP to process reallocation of funds.'
+          }
+          childrenContainerStyles={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '3rem',
+          }}
+        >
+          <>
+            <PageHeading>Verify Email</PageHeading>
+            <Body>
+              <Text>
+                We have found the
+                <span className="bold"> {emails?.length} email IDs</span> mapped
+                to the funds
+              </Text>
+            </Body>
+          </>
+        </DesktopLeftSection>
+        <DesktopRightSection className="desktop-right-section">
+          {renderMFSwitchesAndFooter()}
+        </DesktopRightSection>
+      </Wrapper>
+    )
+  return (
+    <Wrapper>
+      <HeaderSection>
+        <PageHeading>Verify Email</PageHeading>
+        <Body>
+          <Text>
+            We have found the
+            <span className="bold"> {emails?.length} email IDs</span> mapped to
+            the funds
+          </Text>
+          <Info
+            text={
+              'As per SEBI guidelines, you are required to verify email via OTP to proceed with fund switch'
+            }
+          />
+        </Body>
+      </HeaderSection>
+      {renderMFSwitchesAndFooter()}
     </Wrapper>
   )
 }

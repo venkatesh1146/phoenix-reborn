@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Marcellus';
+  src: url('https://i.wlycdn.com/articles/Marcellus-regular-font-.ttf');
+}
+@font-face {
+  font-family: 'DM Serif Display';
+  src: url('https://i.wlycdn.com/articles/dm-serif-display-regular.ttf');
+}
+
 .desktop_container {
   @media screen and (min-width: 1024px) {
     max-width: 1100px;
@@ -17,4 +26,50 @@
     transform: translate(-50%);
     left: 50%;
   }
+}
+
+body,
+html {
+  font-family: 'Maven Pro';
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  @media only screen and (min-width: 1024px) {
+    font-size: 20px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Mutual Funds switch styles
+.mf-switch-connect-with-partner-btn {
+  border: 1px solid #ffffff !important;
+  color: #ffffff !important;
+  border-radius: 51px !important;
+  margin-top: 1.5rem;
+  max-width: 14rem;
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mf-switch-footer-wrapper {
+  @media (min-width: 1024px) {
+    width: 100% !important;
+    position: absolute !important;
+    right: 0 !important;
+    left: unset !important;
+    background: transparent !important ;
+    .call-icon-container {
+      display: none;
+    }
+  }
+}
+.mf-desktop-left-section-wrapper {
+  max-width: 45%;
 }

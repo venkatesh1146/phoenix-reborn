@@ -14,17 +14,16 @@ interface SwitchFundType {
 
 interface PortfolioAllocationPropsType {
   switchFunds: SwitchFundType[]
+  wrapperClassName?: string
 }
 
 export default function PortfolioAllocation({
   switchFunds,
+  wrapperClassName = '',
 }: PortfolioAllocationPropsType) {
   return (
-    <Wrapper>
-      <Heading>
-        Portfolio Allocation
-        <FundsCount>{switchFunds.length} Funds</FundsCount>
-      </Heading>
+    <Wrapper className={wrapperClassName}>
+      <Heading>Reallocation Details</Heading>
       <FundSwitches>
         {switchFunds.map((sf, index) => (
           <FundSwitchCard

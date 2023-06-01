@@ -26,7 +26,12 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "import", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "import",
+    "@typescript-eslint"
+  ],
   "rules": {
     "no-undef": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -104,7 +109,9 @@
             "group": "internal"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
         "alphabetize": {
           "order": "asc"
         }

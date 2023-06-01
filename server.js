@@ -3,6 +3,7 @@ Author - Venkatesh Pullaganti 😃
 Git - https://github.com/venkatesh1146
 * */
 
+const cors = require('cors')
 const express = require('express')
 const next = require('next')
 
@@ -10,8 +11,9 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const PORT = process.env.SERVER_PORT || 3000
+app.use(cors())
 
-const pheonixBaseUrl = '/rise'
+const pheonixBaseUrl = '/rising'
 
 app
   .prepare()

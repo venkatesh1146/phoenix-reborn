@@ -64,7 +64,11 @@ function ResendOTP({
         <ResendTxt>
           Not received OTP yet ?{' '}
           <TextButton
-            style={{ color: '#000', padding: '0', fontWeight: '500' }}
+            style={{
+              color: '#000',
+              padding: '0',
+              fontWeight: '500',
+            }}
             onClick={handelResendClick}
           >
             Resend OTP

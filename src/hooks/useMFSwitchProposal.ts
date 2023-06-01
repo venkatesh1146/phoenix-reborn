@@ -2,31 +2,33 @@ import humps from 'humps'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+import { handleApiError } from '~/utils/ErrorUtils'
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
 import ProposalData from './MockResponse.json'
+import useRestApi from './useRestApi'
 
 import { MF_SWITCH_PROPOSAL_STAGES } from '~/constants'
 import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
-
-interface MFSwitchProposalStateType {
-  isLoading: boolean
-  proposalData: null | MFSwitchStatusResponseType
-  error: null | Error
-}
+import { getProposalStatus } from '~/rest/MFSwitch'
 
 export default function useMFSwitchProposal() {
-  const [state, setProposalData] = useState<MFSwitchProposalStateType>({
-    isLoading: true,
-    proposalData: null,
-    error: null,
+  const {
+    isLoading,
+    doApiCall,
+    data: response,
+    error,
+    isSuccess,
+    ...rest
+  } = useRestApi<any, any, string, any>({
+    apiFunction: getProposalStatus,
   })
 
   const router = useRouter()
   const proposalId = router.query.proposalId || router.query.proposal_id
   const getAMCLogos = () => {
-    return state.proposalData?.schemes.map((s) => s?.amcIconUrl)
+    return response?.data?.schemes.map((s: any) => s?.amcIconUrl)
   }
 
   const getPathBasedOnStatus = (status: string) => {
@@ -47,48 +49,21 @@ export default function useMFSwitchProposal() {
 
   const getProposal = () => {
     if (proposalId) {
-      new Promise((res, _) => {
-        setTimeout(() => {
-          res(ProposalData)
-        }, 2000)
-      }).then((res: any) => {
-        const pathAsPerStatus = getPathBasedOnStatus(res.status)
-        if (router.pathname !== pathAsPerStatus) {
-          router.push(
-            getMFSwitchUrlWithProposalId(
-              pathAsPerStatus ?? '',
-              proposalId as string
+      doApiCall(proposalId as string, {
+        onSuccess: (response: any) => {
+          const pathAsPerStatus =
+            getPathBasedOnStatus(response.data.status) ?? ''
+          if (router.pathname !== pathAsPerStatus) {
+            router.push(
+              getMFSwitchUrlWithProposalId(
+                pathAsPerStatus,
+                proposalId as string
+              )
             )
-          )
-        } else
-          setProposalData({
-            isLoading: false,
-            proposalData: humps.camelizeKeys(res) as any,
-            error: null,
-          })
+          }
+        },
+        onError: handleApiError,
       })
-
-      //   getProposalStatus(proposalId as string)
-      //     .then((res) => {
-      //       const data = {
-      //         ...ProposalData,
-      //       }
-      //       const pathAsPerStatus = getPathBasedOnStatus(data.status) ?? ''
-      //       if (router.pathname !== pathAsPerStatus) {
-      //         router.push(
-      //           getMFSwitchUrlWithProposalId(
-      //             pathAsPerStatus,
-      //             proposalId as string
-      //           )
-      //         )
-      //       } else
-      //         setProposalData({
-      //           isLoading: false,
-      //           proposalData: res.data,
-      //           error: null,
-      //         })
-      //     })
-      //     .catch((e) => toast.error(getErrorMessage(e)))
     }
   }
 
@@ -96,5 +71,13 @@ export default function useMFSwitchProposal() {
     getProposal()
   }, [proposalId])
 
-  return { ...state, getProposal, getAMCLogos }
+  return {
+    isLoading,
+    error,
+    proposalData: response ? { ...response.data } : null,
+    getProposal,
+    getAMCLogos,
+    isSuccess,
+    ...rest,
+  }
 }

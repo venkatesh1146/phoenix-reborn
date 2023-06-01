@@ -7,8 +7,8 @@ import {
   Amount,
   Heading,
   NameSection,
+  NumbersContainer,
   SubSection,
-  SubText,
   Text,
   TotalTxt,
   Wrapper,
@@ -19,11 +19,13 @@ import { WealthyImages } from '~/assets'
 interface FundsCountWithAmountProps {
   className?: string
   amount: number
+  totalFunds: number
 }
 
 export default function FundsCountWithAmount({
   className = '',
   amount,
+  totalFunds,
 }: FundsCountWithAmountProps) {
   return (
     <Wrapper className={className}>
@@ -35,15 +37,26 @@ export default function FundsCountWithAmount({
           width={32}
         />
         <Heading>
-          <Text>Switch Funds from Tracker</Text>
-          <SubText>Move your investments to Wealthy</SubText>
+          <Text>Reallocation Summary</Text>
         </Heading>
       </NameSection>
       <SubSection>
-        <TotalTxt>Total Amount</TotalTxt>
-        <Amount>
-          {amount ? WealthyAmount.init(amount).currencyFormat(2) : '--'}
-        </Amount>
+        <NumbersContainer>
+          <TotalTxt>Total Reallocation Amount</TotalTxt>
+          <Amount style={{ textAlign: 'left' }}>
+            {amount ? WealthyAmount.init(amount).currencyFormat(2) : '--'}
+          </Amount>
+        </NumbersContainer>
+        <NumbersContainer>
+          <TotalTxt>Total Funds</TotalTxt>
+          <Amount style={{ textAlign: 'right' }}>
+            {totalFunds
+              ? totalFunds < 10
+                ? `0` + totalFunds
+                : totalFunds
+              : '--'}
+          </Amount>
+        </NumbersContainer>
       </SubSection>
     </Wrapper>
   )

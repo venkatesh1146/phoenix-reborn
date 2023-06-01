@@ -23,9 +23,12 @@ export default function Footer({
   isLoading = false,
 }: FooterProps) {
   return (
-    <Wrapper className="footer-wrapper">
+    <Wrapper className="footer-wrapper mf-switch-footer-wrapper">
       {agentPhoneNumber ? (
-        <CallIconContainer href={`tel:${agentPhoneNumber}`}>
+        <CallIconContainer
+          className="call-icon-container"
+          href={`tel:${agentPhoneNumber}`}
+        >
           <Image
             alt={'call-icon'}
             src={WealthyImages.callIcon}
