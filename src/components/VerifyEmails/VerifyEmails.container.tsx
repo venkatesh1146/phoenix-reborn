@@ -110,8 +110,7 @@ export default function VerifyEmailsContainer({
           {emails?.map((eachMail) => (
             <EmailContainer
               key={eachMail.isVerified + eachMail.email}
-              email={eachMail.email}
-              isVerified={eachMail.isVerified}
+              emailData={eachMail}
               proposalId={proposalData?.ticketNumber || ''}
               userId={proposalData?.userid || ''}
               onVerify={onVerifyEmail}

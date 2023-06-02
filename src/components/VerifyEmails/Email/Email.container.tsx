@@ -15,8 +15,11 @@ import useRestApi from '~/hooks/useRestApi'
 import { resendOTP, sendOTP, verifyOTP } from '~/rest/MFSwitch'
 
 interface EmailPropTypes {
-  email: string
-  isVerified: boolean
+  emailData: {
+    email: string
+    uuid?: string
+    isVerified: boolean
+  }
   onVerify?: (email: string) => void
   className?: string
   proposalId: string
@@ -24,13 +27,13 @@ interface EmailPropTypes {
 }
 
 export default function EmailContainer({
-  email,
-  isVerified,
+  emailData,
   onVerify,
   className = '',
   proposalId,
   userId,
 }: EmailPropTypes) {
+  const { email, isVerified } = emailData
   const theme = useTheme()
   const [isExpanded, setIsExpanded] = useState(false)
   const [otp, setOtp] = useState('')
@@ -50,10 +53,11 @@ export default function EmailContainer({
   }
 
   const onClickVerify = () => {
-    handleResendOTP(
+    handleSentOTP(
       {
-        email: email,
+        emails: [email],
         reference_id: proposalId,
+        template_name: 'OTP-MF-EMAIL',
       },
       {
         onSuccess: () => {
@@ -77,6 +81,7 @@ export default function EmailContainer({
         email,
         reference_id: proposalId,
         otp: parseInt(otp),
+        request_type: 'EXTSWH',
       },
       {
         onSuccess: () => {
@@ -149,7 +154,7 @@ export default function EmailContainer({
           <RoundButton
             disabled={otp.length !== 6 || isResendOTPLoading}
             onClick={handleVerify}
-            style={{ fontWeight: '600' }}
+            style={{ fontWeight: '600', height: '36px' }}
           >
             {isResendOTPLoading || isVerifyOTPLoading ? (
               <Spinner />
