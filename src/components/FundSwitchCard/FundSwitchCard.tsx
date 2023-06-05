@@ -11,6 +11,7 @@ import {
   ImageContainer,
   Name,
   Numbers,
+  Status,
   Units,
   Wrapper,
 } from './styledComponents'
@@ -24,17 +25,35 @@ interface FundSwitchCardProps {
     switchout: FundMetaDataType
     switchin: FundMetaDataType
     amcIconUrl: string
+    status?: string
   }
   theme: any
+  showStatus?: boolean
+}
+
+const getColorBasedOnStatus = (status: string) => {
+  switch (status) {
+    case 'success':
+      return '#7AFF82'
+    case 'failed':
+      return '#FF7A8E'
+    case 'inprogress':
+    default:
+      return '#ffe47a'
+  }
 }
 
 function FundSwitchCard({
-  data: { switchout, switchin, amcIconUrl },
+  data: { switchout, switchin, amcIconUrl, status },
   WrapperClassName = '',
+  showStatus,
 }: FundSwitchCardProps) {
   return (
     <>
       <Wrapper className={WrapperClassName}>
+        {showStatus && !!status ? (
+          <Status color={getColorBasedOnStatus(status)}>{status}</Status>
+        ) : null}
         <FundDetails>
           <Image
             alt={switchout.fundName}

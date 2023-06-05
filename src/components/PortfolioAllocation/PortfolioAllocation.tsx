@@ -10,16 +10,19 @@ interface SwitchFundType {
   switchout: FundMetaDataType
   switchin: FundMetaDataType
   amcIconUrl: string
+  status?: string
 }
 
 interface PortfolioAllocationPropsType {
   switchFunds: SwitchFundType[]
   wrapperClassName?: string
+  showEachFundStatus?: boolean
 }
 
 export default function PortfolioAllocation({
   switchFunds,
   wrapperClassName = '',
+  showEachFundStatus,
 }: PortfolioAllocationPropsType) {
   return (
     <Wrapper className={wrapperClassName}>
@@ -30,6 +33,7 @@ export default function PortfolioAllocation({
             key={index}
             WrapperClassName={'fund-switch-wrapper'}
             data={sf}
+            showStatus={showEachFundStatus}
           />
         ))}
       </FundSwitches>

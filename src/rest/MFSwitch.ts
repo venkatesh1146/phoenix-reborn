@@ -31,15 +31,15 @@ export const resendOTP = (req: ResendOTPRequestType) => {
 }
 
 export const getProposalStatus = (proposalId: string) => {
-  const url = `https://api.wealthydev.in/quinjet/proposals/api/v0/mf/status?proposal_id=${proposalId}`
+  const url = `${BASE_URL}/proposals/api/v0/mf/status?proposal_id=${proposalId}`
 
-  return new Promise((r, rej) => {
-    setTimeout(() => {
-      r({
-        data: humps.camelizeKeys(data),
-      })
-    }, 1000)
-  })
+  // return new Promise((r, rej) => {
+  //   setTimeout(() => {
+  //     r({
+  //       data: humps.camelizeKeys(data),
+  //     })
+  //   }, 1000)
+  // })
 
   return queryClient.fetchQuery({
     queryFn: () => transformedAxios.get(url),

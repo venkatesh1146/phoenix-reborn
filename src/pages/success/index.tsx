@@ -22,6 +22,37 @@ export default function ProposalProcessed() {
     ? { width: 236, height: 221 }
     : { width: 148, height: 138 }
 
+  const renderHeaderOrSidebarData = () => (
+    <>
+      {' '}
+      <UserNameHeader userName={proposalData?.clientName} />
+      <Image
+        alt="tick"
+        className="tick-icon"
+        src={WealthyImages.diamondTick}
+        {...imageSize}
+      />
+      <Text>The investment proposal has been successfully processed!</Text>
+    </>
+  )
+
+  const renderPortfolioAllocation = () => (
+    <PortfolioAllocation
+      wrapperClassName="portfolio-allocation"
+      switchFunds={proposalData?.schemes ?? []}
+      showEachFundStatus={true}
+    />
+  )
+
+  const RenderFundsSwitchOverview = () => (
+    <FundsSwitchOverview
+      wrapperClassName="funds-switch-wrapper"
+      totalAmount={proposalData?.totalAmount}
+      numberOfFunds={proposalData?.schemes.length ?? ''}
+      fundsIcons={getAMCLogos() ?? []}
+    />
+  )
+
   if (isLoading) return <FullScreenSpinner />
   else if (isDesktop)
     return (
@@ -29,49 +60,21 @@ export default function ProposalProcessed() {
         <DesktopLeftSection
           childrenContainerStyles={{ display: 'flex', flexDirection: 'column' }}
         >
-          <UserNameHeader userName={proposalData?.clientName} />
-          <Image
-            alt="tick"
-            className="tick-icon"
-            src={WealthyImages.diamondTick}
-            {...imageSize}
-          />
-          <Text>The investment proposal has been successfully processed!</Text>
+          {renderHeaderOrSidebarData()}
         </DesktopLeftSection>
         <DesktopRightSection>
-          <FundsSwitchOverview
-            wrapperClassName="funds-switch-wrapper"
-            totalAmount={proposalData?.totalAmount}
-            numberOfFunds={proposalData?.schemes.length ?? ''}
-            fundsIcons={getAMCLogos() ?? []}
-          />
-          <PortfolioAllocation
-            wrapperClassName="portfolio-allocation"
-            switchFunds={proposalData?.schemes ?? []}
-          />
+          <RenderFundsSwitchOverview />
+          {renderPortfolioAllocation()}
         </DesktopRightSection>
       </Wrapper>
     )
   return (
     <Wrapper>
       <HeaderSection>
-        <UserNameHeader userName={proposalData?.clientName} />
-        <Image
-          alt="tick"
-          className="tick-icon"
-          src={WealthyImages.diamondTick}
-          width={148}
-          height={138}
-        />
-        <Text>The investment proposal has been successfully processed!</Text>
-        <FundsSwitchOverview
-          wrapperClassName="funds-switch-wrapper"
-          totalAmount={proposalData?.totalAmount}
-          numberOfFunds={proposalData?.schemes.length ?? ''}
-          fundsIcons={getAMCLogos() ?? []}
-        />
+        {renderHeaderOrSidebarData()}
+        <RenderFundsSwitchOverview />
       </HeaderSection>
-      <PortfolioAllocation switchFunds={proposalData?.schemes ?? []} />
+      {renderPortfolioAllocation()}
     </Wrapper>
   )
 }

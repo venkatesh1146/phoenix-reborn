@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
   padding: 1rem;
   font-family: 'Maven Pro';
   justify-content: space-around;
+  position: relative;
 
   .arrow-icon {
     margin: 0 1.25rem;
@@ -52,3 +53,18 @@ export const Amount = styled.p`
   margin: 0.2rem 0;
 `
 export const Numbers = styled.div``
+export const Status = styled.span<{
+  color: string
+}>`
+  background-color: ${(props) => props.color ?? '#ffe47a'};
+  border-radius: 0 0 8px 8px;
+  font-size: 0.6rem;
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  margin: 0 !important;
+  padding: 4px 8px;
+  min-width: 3rem;
+  text-align: center;
+  text-transform: capitalize;
+`
