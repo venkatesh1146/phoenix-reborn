@@ -35,7 +35,7 @@ export const getProposalStatus = (proposalId: string) => {
   const config = {
     headers: {
       Authorization:
-        '07acb4d1-5563-4bf1-94f2-693c068367a5:z9jy5dKdDZvSCUwelFIVc7W8F',
+        ' 971d5183-8208-461c-a38d-7b929391c7da:1A7sSF13kFASrTbdAghc4PcMr',
     },
   }
   // return new Promise((r, rej) => {
