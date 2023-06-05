@@ -32,22 +32,17 @@ export const resendOTP = (req: ResendOTPRequestType) => {
 
 export const getProposalStatus = (proposalId: string) => {
   const url = `https://api.wealthydev.in/quinjet/proposals/api/v0/mf/status?proposal_id=${proposalId}`
-  const config = {
-    headers: {
-      Authorization:
-        ' 971d5183-8208-461c-a38d-7b929391c7da:1A7sSF13kFASrTbdAghc4PcMr',
-    },
-  }
-  // return new Promise((r, rej) => {
-  //   setTimeout(() => {
-  //     r({
-  //       data: humps.camelizeKeys(data),
-  //     })
-  //   }, 1000)
-  // })
+
+  return new Promise((r, rej) => {
+    setTimeout(() => {
+      r({
+        data: humps.camelizeKeys(data),
+      })
+    }, 1000)
+  })
 
   return queryClient.fetchQuery({
-    queryFn: () => transformedAxios.get(url, config),
+    queryFn: () => transformedAxios.get(url),
     queryKey: ['mf-switch-proposal-status'],
     staleTime: 15 * 1000,
   })
