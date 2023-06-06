@@ -35,7 +35,7 @@ export const getProposalStatus = (proposalId: string) => {
 
   // return new Promise((r, rej) => {
   //   setTimeout(() => {
-  //     r({
+  //     r({k
   //       data: humps.camelizeKeys(data),
   //     })
   //   }, 1000)

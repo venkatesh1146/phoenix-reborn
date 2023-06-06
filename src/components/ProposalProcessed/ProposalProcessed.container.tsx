@@ -6,8 +6,8 @@ import { tm } from '~/styles/theme'
 import Image from '../Base/Image'
 import FundsSwitchOverview from '../FundsSwitchOverview'
 import PortfolioAllocation from '../PortfolioAllocation'
-import FullScreenSpinner from '../Spinner/FullScreenSpinner'
 import UserNameHeader from '../UserNameHeader'
+import FullScreenSpinner from '../common/Spinner/FullScreenSpinner'
 
 import { HeaderSection, Text, Wrapper } from './styledComponents'
 

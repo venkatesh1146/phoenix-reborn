@@ -4,7 +4,7 @@ import { RoundButton, TextButton } from '~/components/Base/Buttons'
 import Image from '~/components/Base/Image'
 import OtpInput from '~/components/OTPInput'
 import ResendOTP from '~/components/OTPInput/components/ResendOTP'
-import Spinner from '~/components/Spinner'
+import Spinner from '~/components/common/Spinner'
 import { useTheme } from '~/styles/theme'
 import { handleApiError } from '~/utils/ErrorUtils'
 

@@ -22,7 +22,7 @@ import {
   Text,
   Wrapper,
 } from '../../components/KycVerification/styledComponents'
-import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
+import FullScreenSpinner from '../../components/common/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
 import { useIsDesktop } from '~/hooks/useIsDesktop'

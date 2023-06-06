@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PrimaryButton } from '../Base/Buttons'
 import Image from '../Base/Image'
-import Spinner from '../Spinner'
+import Spinner from '../common/Spinner'
 
 import { CallIconContainer, Wrapper } from './styledComponents'
 

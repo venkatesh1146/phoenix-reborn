@@ -9,9 +9,9 @@ import Image from '../../components/Base/Image'
 import Footer from '../../components/Footer'
 import FundsCountWithAmount from '../../components/FundsCountWithAmount/FundsCountWithAmount'
 import PortfolioAllocation from '../../components/PortfolioAllocation'
-import FullScreenSpinner from '../../components/Spinner/FullScreenSpinner'
 import UserNameHeader from '../../components/UserNameHeader'
 import VerifyEmailsContainer from '../../components/VerifyEmails'
+import FullScreenSpinner from '../../components/common/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
 import { useIsDesktop } from '~/hooks/useIsDesktop'
@@ -104,12 +104,7 @@ export default function ProposalPage() {
             }}
           >
             <FundsCountWithAmount
-              amount={
-                proposalData?.schemes.reduce(
-                  (prev: any, current: any) => prev + current.switchin.amount,
-                  0
-                ) ?? 0
-              }
+              amount={proposalData?.totalAmount}
               totalFunds={proposalData?.schemes.length}
               className={'funds-amount-wrapper'}
             />

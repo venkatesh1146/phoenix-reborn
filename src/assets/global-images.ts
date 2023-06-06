@@ -25,6 +25,8 @@ const WealthyImages = {
   callIconWhite: 'https://i.wlycdn.com/articles/call-icon-white.svg',
   wealthyLogoDarkPurple:
     'https://i.wlycdn.com/wealthy-home-page/wealthy-new-purple-logo.svg',
+  failureIcon: 'https://i.wlycdn.com/mera-business/failure_icon.svg',
+  ellipsis: 'https://i.wlycdn.com/phoenix/v1/ellipsis.svg',
 }
 
 export default WealthyImages

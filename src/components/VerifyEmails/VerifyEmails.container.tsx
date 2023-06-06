@@ -8,7 +8,7 @@ import DesktopLeftSection from '../DesktopLeftSection'
 import Footer from '../Footer'
 import Info from '../Info/Info'
 import ProgressCircle from '../ProgressCircle'
-import FullScreenSpinner from '../Spinner/FullScreenSpinner'
+import FullScreenSpinner from '../common/Spinner/FullScreenSpinner'
 
 import EmailContainer from './Email'
 import {
