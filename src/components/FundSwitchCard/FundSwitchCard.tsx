@@ -59,8 +59,8 @@ function FundSwitchCard({
             alt={switchout.fundName}
             className="circular-image"
             src={amcIconUrl}
-            height={64}
-            width={64}
+            height={48}
+            width={48}
           />
           <Numbers>
             <Name>{switchout.fundName}</Name>
@@ -85,8 +85,8 @@ function FundSwitchCard({
             alt={switchin.fundName}
             className="circular-image"
             src={amcIconUrl}
-            height={64}
-            width={64}
+            height={48}
+            width={48}
           />
           <Numbers>
             <Name>{switchin.fundName}</Name>

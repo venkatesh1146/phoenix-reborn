@@ -96,7 +96,13 @@ export default function ProposalPage() {
               </OutlinedButton> */}
             </>
           </DesktopLeftSection>
-          <DesktopRightSection>
+          <DesktopRightSection
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'auto',
+            }}
+          >
             <FundsCountWithAmount
               amount={
                 proposalData?.schemes.reduce(
@@ -180,10 +186,12 @@ const Wrapper = styled.div`
   }
   @media (min-width: 1024px) {
     flex-direction: row;
+    display: flex;
     padding: 0;
     .funds-cards-container {
       padding: 0 !important;
       margin-top: 2.5rem;
+      flex-grow: 1;
     }
   }
 `

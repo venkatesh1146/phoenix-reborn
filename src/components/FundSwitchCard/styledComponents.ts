@@ -34,7 +34,8 @@ export const FundDetails = styled.div`
     display: flex;
     align-items: center;
     .circular-image {
-      margin-right: 4px;
+      margin-right: 12px;
+      margin-top: 4px;
     }
   }
 `
