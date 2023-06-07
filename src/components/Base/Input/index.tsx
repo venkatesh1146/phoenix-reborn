@@ -25,68 +25,7 @@ const defaultStyle = css`
   }
 `
 
-const StyledInput = styled.input`
-  -webkit-font-smoothing: antialiased;
-  ${(props: any) => (props.inputType === 'default' ? defaultStyle : '')}
-
-  ${(props: any) =>
-    props.type === 'currency'
-      ? css`
-          padding: 0.6em 2em 0.5em;
-        `
-      : ''}
-
-  ${(props: any) =>
-    props.inputType === 'registration'
-      ? css`
-          outline: none;
-          background: #fafafa;
-          color: var(--gray);
-          font-family: inherit;
-          border: 0;
-          font-size: 1.12em;
-          padding: 1.2em;
-          margin-top: 1.5em;
-          letter-spacing: 0.1em;
-          width: 100%;
-          -webkit-appearance: none;
-          border-radius: var(--card-radius);
-          font-weight: 900;
-          transition: 0.2s all ease-in;
-          background: white;
-          font-weight: 500;
-          box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.1);
-          &::placeholder {
-            color: var(--lighter-gray);
-            text-transform: none;
-          }
-
-          &:focus {
-            background: var(--white);
-            outline: none;
-            box-shadow: var(--box-shadow);
-          }
-        `
-      : ''}
-
-  ${(props: any) =>
-    props.fontSize &&
-    css`
-      font-size: ${props.fontSize};
-    `}
-
-  ${(props: any) =>
-    props.transform &&
-    css`
-      text-transform: ${props.transform};
-    `}
-
-  ${(props: any) =>
-    props.isDisabled &&
-    css`
-      pointer-events: none;
-    `}
-`
+const StyledInput = styled.input``
 
 const InputContainer = styled.div<any>`
   display: flex;
@@ -113,16 +52,6 @@ const InputContainer = styled.div<any>`
     padding-left: 1em;
     padding-top: 0.4em;
   }
-
-  ${(props: any) =>
-    props.isInvalid &&
-    css`
-      .err-msg {
-        transform: translateY(100%);
-        opacity: 1;
-        transition: 0.4s;
-      }
-    `}
 `
 
 interface InputPropTypes {

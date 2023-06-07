@@ -4,26 +4,28 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import { Button, DateInput, Heading, Input, Text } from 'components'
-import PropTypes from 'prop-types'
+import { styled } from '@linaria/react'
 import Dialog from 'rc-dialog'
 import React from 'react'
-import styled from 'styled-components'
 
-const propTypes = {
-  checkedState: PropTypes.array.isRequired,
-  checkField: PropTypes.array.isRequired,
-  checkingPan: PropTypes.bool.isRequired,
-  errorMsg: PropTypes.string.isRequired,
-  handleOnCheckboxChange: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
-  onChangeHandler: PropTypes.func.isRequired,
-  onProceed: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  setShowModal: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-  state: PropTypes.object.isRequired,
+import Button from '~/components/Base/Button'
+import DateInput from '~/components/Base/DateInput'
+import Input from '~/components/Base/Input'
+
+interface PersonalDetailsPropTypes {
+  checkedState: any[]
+  checkField: any[]
+  checkingPan: boolean
+  errorMsg: string
+  handleOnCheckboxChange: (param: any) => void
+  loading: boolean
+  name: string
+  onChangeHandler: (param: any) => void
+  onProceed: (param: any) => void
+  onSubmit: (param: any) => void
+  setShowModal: (param: any) => void
+  showModal: boolean
+  state: Record<string, any>
 }
 
 const today = new Date().toISOString().substring(0, 10)
@@ -45,7 +47,7 @@ const PersonalDetails = ({
   setShowModal,
   showModal,
   state,
-}) => {
+}: PersonalDetailsPropTypes) => {
   const { panError, panNumber, dob } = state
 
   return (
@@ -102,7 +104,7 @@ const PersonalDetails = ({
             })}
 
             <Button
-              isDisabled={
+              disabled={
                 panNumber.length !== 10 ||
                 panError ||
                 !dob ||
@@ -139,17 +141,19 @@ const PersonalDetails = ({
           </DetailWrapper>
           {errorMsg && (
             <ErrorWrapper>
-              <Text type="tertiary">Note: {errorMsg}</Text>
+              <p>Note: {errorMsg}</p>
             </ErrorWrapper>
           )}
           <form onSubmit={onSubmit}>
             <Button
-              isDisabled={loading}
+              disabled={loading}
               isLoading={loading}
               label="Proceed"
               margin="2em 0"
               onClick={onSubmit}
-            />
+            >
+              Proceed
+            </Button>
           </form>
         </ConfirmationWrapper>
       </Dialog>
@@ -267,7 +271,5 @@ const CheckboxText = styled.p`
   color: #7e7e7e;
   font-size: 1rem;
 `
-
-PersonalDetails.propTypes = propTypes
 
 export default PersonalDetails

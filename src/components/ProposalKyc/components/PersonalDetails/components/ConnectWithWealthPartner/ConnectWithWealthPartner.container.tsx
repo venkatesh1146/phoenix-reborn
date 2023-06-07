@@ -6,7 +6,7 @@
 
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { graphql } from 'react-apollo'
+// import { graphql } from 'react-apollo'
 
 import ConnectWithWealthPartner from './ConnectWithWealthPartner'
 import PARTNER_QUERY from './graphql/partner.query'
@@ -31,19 +31,19 @@ const ConnectWithWealthPartnerContainer = ({ hydra, loading, error }: any) => {
   )
 }
 
-const withData = graphql(PARTNER_QUERY, {
-  props: ({ data: { hydra, loading, error } }: any) => ({
-    hydra,
-    loading,
-    error,
-  }),
-  options: (props: any) => ({
-    variables: {
-      userId: props?.user.userId,
-    },
-  }),
-})
+// const withData = graphql(PARTNER_QUERY, {
+//   props: ({ data: { hydra, loading, error } }: any) => ({
+//     hydra,
+//     loading,
+//     error,
+//   }),
+//   options: (props: any) => ({
+//     variables: {
+//       userId: props?.user.userId,
+//     },
+//   }),
+// })
 
 ConnectWithWealthPartnerContainer.propTypes = propTypes
 
-export default withData(ConnectWithWealthPartnerContainer)
+export default ConnectWithWealthPartnerContainer

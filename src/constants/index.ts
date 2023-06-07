@@ -509,7 +509,7 @@ const STR_STORAGE_SESSION = 'session'
 const STR_TOKEN_ACCESS = 'access'
 const STR_TOKEN_REFRESH = 'refresh'
 
-export const storageConstants = {
+export const StorageConstants = {
   ALTERNATE_ACCESS_TOKEN_KEY,
   PROPOSAL_ACCESS_TOKEN_KEY,
   PROPOSAL_ACCESS_TOKEN_EXPIRY_KEY,
@@ -528,3 +528,12 @@ export const storageConstants = {
   STR_TOKEN_ACCESS,
   STR_TOKEN_REFRESH,
 }
+
+const WealthyConstants = {
+  MF_SWITCH_PROPOSAL_STAGES,
+  StorageConstants,
+  ISO_COUNTRY_CODE,
+  countryCodes,
+}
+
+export default WealthyConstants

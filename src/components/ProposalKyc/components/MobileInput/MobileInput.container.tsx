@@ -5,7 +5,6 @@
 */
 
 import React, { useEffect, useState } from 'react'
-import { graphql } from 'react-apollo'
 
 import { handleApiError } from '~/utils/ErrorUtils'
 import { showErrorToast } from '~/utils/ToastUtils'
@@ -110,17 +109,17 @@ const MobileInputContainer = ({
   )
 }
 
-const withMutation = graphql(REQUEST_USER_PROFILE_UPDATE, {
-  props: ({ mutate }) => ({
-    requestUserProfileUpdate: (payload: any) =>
-      mutate
-        ? mutate({
-            variables: {
-              input: payload,
-            },
-          })
-        : {},
-  }),
-})
+// const withMutation = graphql(REQUEST_USER_PROFILE_UPDATE, {
+//   props: ({ mutate }) => ({
+//     requestUserProfileUpdate: (payload: any) =>
+//       mutate
+//         ? mutate({
+//             variables: {
+//               input: payload,
+//             },
+//           })
+//         : {},
+//   }),
+// })
 
-export default withMutation(MobileInputContainer)
+export default MobileInputContainer

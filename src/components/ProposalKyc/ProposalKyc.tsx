@@ -90,7 +90,7 @@ const ProposalKyc = ({
         reverseTransition={state.navigatingBack}
         visible={state.stage === 8}
       >
-        <Otp isMobile dispatch={dispatch} state={state} user={user} />
+        <Otp dispatch={dispatch} state={state} user={user} />
       </TransitionContainer>
       <TransitionContainer
         customStyles={customStyles}
@@ -116,7 +116,5 @@ const ProposalLoader = styled.div`
   align-items: center;
   justify-contents: center;
 `
-
-ProposalKyc.propTypes = propTypes
 
 export default ProposalKyc

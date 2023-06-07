@@ -21,6 +21,7 @@
     "isolatedModules": true,
     "incremental": true,
     "baseUrl": ".",
+    "noImplicitAny": false,
     "paths": {
       "~/*": ["src/*"]
     },

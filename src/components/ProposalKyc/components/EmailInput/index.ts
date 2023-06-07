@@ -4,6 +4,6 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import EmailInput from "./EmailInput.container";
+import EmailInput from './EmailInput.container'
 
-export default EmailInput;
+export default EmailInput

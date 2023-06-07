@@ -2,12 +2,12 @@ import WealthyEncrypt from './EncryptionUtils'
 import WealthyStorage from './StorageUtils'
 import WealthyEnv from './env'
 
-import { storageConstants } from '~/constants'
+import { StorageConstants } from '~/constants'
 
 const getTokenType = (tokenType) => {
   return tokenType === 'refresh'
-    ? storageConstants.REFRESH_TOKEN_KEY
-    : storageConstants.ACCESS_TOKEN_KEY
+    ? StorageConstants.REFRESH_TOKEN_KEY
+    : StorageConstants.ACCESS_TOKEN_KEY
 }
 
 const getToken = (tokenType = 'access') => {
@@ -80,7 +80,7 @@ export default {
       return getToken()
     }
     if (expiry && expiry <= Date.now()) {
-      WealthyStorage.removeCookie(storageConstants.RSESSIONID_KEY, true)
+      WealthyStorage.removeCookie(StorageConstants.RSESSIONID_KEY, true)
       return tokenCheck() ? getToken() : null
     }
     return null
@@ -93,7 +93,7 @@ export default {
       return decrypedToken
     }
     if (expiry && expiry <= Date.now()) {
-      WealthyStorage.removeCookie(storageConstants.RSESSIONID_KEY, true)
+      WealthyStorage.removeCookie(StorageConstants.RSESSIONID_KEY, true)
       WealthyStorage.removeCookie('proposal_access_token')
     }
     return decrypedToken || null

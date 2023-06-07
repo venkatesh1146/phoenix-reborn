@@ -4,20 +4,27 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import { Container, RadioButton } from 'components'
-import PropTypes from 'prop-types'
+import { css } from '@linaria/core'
+import { styled } from '@linaria/react'
 import React from 'react'
-import styled, { css } from 'styled-components'
 
-const propTypes = {
-  isMobile: PropTypes.bool,
-  onOptionChange: PropTypes.func.isRequired,
-  selectedUser: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+import Container from '~/components/Base/Container'
+import RadioButton from '~/components/Base/RadioButton'
+
+interface FamilyPropTypes {
+  isMobile?: boolean
+  onOptionChange: Function
+  selectedUser: Record<string, any>
+  user: Record<string, any>
 }
 
-const Family = ({ isMobile, onOptionChange, selectedUser, user }) => {
-  const content = []
+const Family = ({
+  isMobile,
+  onOptionChange,
+  selectedUser,
+  user,
+}: FamilyPropTypes) => {
+  const content: any[] = []
   user.families.forEach((familyMember) => {
     const ownerDetails = familyMember.ownerDetails
     const isVerified = isMobile
@@ -61,9 +68,7 @@ const Family = ({ isMobile, onOptionChange, selectedUser, user }) => {
   )
 }
 
-Family.propTypes = propTypes
-
-const EachRadioForm = styled.div`
+const EachRadioForm = styled.div<any>`
   display: flex;
   overflow: auto;
   align-items: center;
@@ -79,14 +84,12 @@ const EachRadioForm = styled.div`
     margin-bottom: 0.2em;
     border: 0.5px solid var(--cobalt);
   }
-  ${(props) =>
-    props.isActive &&
-    css`
-      color: var(--cobalt);
-      font-weight: 600;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-      background-color: white;
-    `}
+  &[isActive] {
+    color: var(--cobalt);
+    font-weight: 600;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
 `
 
 const FamilyContainer = styled.div`
@@ -98,7 +101,7 @@ const FamilyContainer = styled.div`
   font-size: 0.85rem;
 `
 
-const FamilyHeader = Container.extend`
+const FamilyHeader = styled(Container)`
   font-size: 1.5rem;
   font-weight: 500;
   justify-content: center;

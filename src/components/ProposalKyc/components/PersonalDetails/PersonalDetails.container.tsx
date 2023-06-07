@@ -5,15 +5,15 @@
 */
 
 import { PanUsageSubtype, WealthyDate } from 'frontend-models'
-import { WealthyEnv } from 'helpers'
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { graphql, withApollo } from 'react-apollo'
+// import { graphql, withApollo } from 'react-apollo'
 
 import { getErrorMessage, handleApiError } from '~/utils/ErrorUtils'
+import WealthyStorage from '~/utils/StorageUtils'
+import WealthyEnv from '~/utils/env'
 
 import PersonalDetails from './PersonalDetails'
-import PAN_CHECK_QUERY from './graphql/PanCheck.query.js'
+import PAN_CHECK_QUERY from './graphql/PanCheck.query'
 
 import { CREATE_USER_PROFILE } from '~/graphql'
 
@@ -143,7 +143,8 @@ const PersonalDetailsContainer = ({
           // }
         }
         const kycUrl = data.createUserProfile.userProfile.kycUrl
-        let kycDestination = getSessionStorageKey('kycDestination')
+        let kycDestination =
+          WealthyStorage.getSessionStorageKey('kycDestination')
         const domain = WealthyEnv.IS_LOCAL
           ? 'http://localhost:9000'
           : WealthyEnv.API_URL
@@ -153,8 +154,7 @@ const PersonalDetailsContainer = ({
         window.location.assign(
           kycUrl
             ? `${kycUrl}&redirect_to=${domain}${kycDestination}`
-            : kycDestination,
-          '_self'
+            : kycDestination
         )
       })
       .catch((error: any) => {
@@ -187,17 +187,17 @@ const PersonalDetailsContainer = ({
   )
 }
 
-const withMutation = graphql(CREATE_USER_PROFILE, {
-  props: ({ mutate }) => ({
-    createUserProfile: (payload) =>
-      mutate({
-        variables: {
-          input: payload,
-        },
-      }),
-  }),
-})
+// const withMutation = graphql(CREATE_USER_PROFILE, {
+//   props: ({ mutate }) => ({
+//     createUserProfile: (payload: any) =>
+//       mutate
+//         ? mutate({
+//             variables: {
+//               input: payload,
+//             },
+//           })
+//         : {},
+//   }),
+// })
 
-PersonalDetailsContainer.propTypes = propTypes
-
-export default withApollo(withMutation(PersonalDetailsContainer))
+export default PersonalDetailsContainer

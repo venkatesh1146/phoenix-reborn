@@ -13,54 +13,7 @@ import PropTypes from 'prop-types'
 /**
  * Basic text component to use all over the app
  */
-const Text = styled.p<any>`
-  font-family: var(--primary-font);
-  /* -webkit-font-smoothing: antialiased; */
-  ${(props) =>
-    props.type === 'primary'
-      ? css`
-          font-size: 1.12em;
-          margin: 0;
-          color: var(--primary-color);
-          font-weight: 400;
-        `
-      : ''}
-  ${(props) =>
-    props.type === 'secondary'
-      ? css`
-          font-size: 1em;
-          margin: 0;
-          color: var(--dove-gray);
-        `
-      : ''} 
-      
-      ${(props) =>
-    props.type === 'tertiary'
-      ? css`
-          font-size: 0.9em;
-          color: var(--light-gray);
-          margin: 0;
-          font-weight: 300;
-        `
-      : ''}
-  ${(props) =>
-    props.fontSize &&
-    css`
-      font-size: ${props.fontSize};
-    `}
-  ${(props) =>
-    props.textAlign &&
-    css`
-      text-align: ${props.textAlign};
-    `}
-  ${(props) =>
-    props.color
-      ? css`
-          color: ${props.color};
-        `
-      : ''}
-  ${(props) => (props.additionalStyles ? css(props.additionalStyles) : '')}
-`
+const Text = styled.p<any>``
 
 const propTypes = {
   /** Type of the Text field */

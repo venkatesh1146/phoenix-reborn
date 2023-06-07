@@ -4,9 +4,8 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { compose, graphql } from 'react-apollo'
+// import { compose, graphql } from 'react-apollo'
 import { toast } from 'react-hot-toast'
 
 import { handleApiError } from '~/utils/ErrorUtils'
@@ -133,34 +132,34 @@ const OtpContainer = ({
   )
 }
 
-const withVerify = graphql(VERIFY_USER_PROFILE_UPDATE, {
-  props: ({ mutate }) => ({
-    verifyUserProfileUpdate: (payload: any) =>
-      mutate
-        ? mutate({
-            variables: {
-              input: payload,
-            },
-          })
-        : {},
-  }),
-})
+// const withVerify = graphql(VERIFY_USER_PROFILE_UPDATE, {
+//   props: ({ mutate }) => ({
+//     verifyUserProfileUpdate: (payload: any) =>
+//       mutate
+//         ? mutate({
+//             variables: {
+//               input: payload,
+//             },
+//           })
+//         : {},
+//   }),
+// })
 
-const withResend = graphql(REQUEST_USER_PROFILE_UPDATE, {
-  props: ({ mutate }) => ({
-    requestUserProfileUpdate: (payload: any) =>
-      mutate
-        ? mutate({
-            variables: {
-              input: payload,
-            },
-          })
-        : {},
-  }),
-})
+// const withResend = graphql(REQUEST_USER_PROFILE_UPDATE, {
+//   props: ({ mutate }) => ({
+//     requestUserProfileUpdate: (payload: any) =>
+//       mutate
+//         ? mutate({
+//             variables: {
+//               input: payload,
+//             },
+//           })
+//         : {},
+//   }),
+// })
 
-const withMutation = compose(withVerify, withResend)
+// const withMutation = compose(withVerify, withResend)
 
 OtpContainer.defaultProps = defaultProps
 
-export default withMutation(OtpContainer)
+export default OtpContainer

@@ -4,12 +4,15 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 const PREFILL_QUERY = gql`
-  query PrefillQuery ($onBoardProduct: String, $declarationType: String) {
+  query PrefillQuery($onBoardProduct: String, $declarationType: String) {
     hagrid {
-      wealthyUserDetailsPrefill (onBoardProduct: $onBoardProduct, declarationType: $declarationType) {
+      wealthyUserDetailsPrefill(
+        onBoardProduct: $onBoardProduct
+        declarationType: $declarationType
+      ) {
         userId
         name
         email
@@ -76,6 +79,7 @@ const PREFILL_QUERY = gql`
         }
       }
     }
-  }`;
+  }
+`
 
-export default PREFILL_QUERY;
+export default PREFILL_QUERY

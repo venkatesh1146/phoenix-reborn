@@ -4,12 +4,10 @@ import PropTypes from 'prop-types'
 /**
  * Generic icon component
  */
-const Icon = styled.i.attrs({
-  className: (props) => props.name,
-})`
+const Icon = styled.i<any>`
   display: flex;
   cursor: ${(props) => (props.onClick ? 'pointer' : 'normal')};
-  color: ${(props) => props.color};
+  /* color: ${(props) => props.color}; */
   font-size: ${(props) => props.size};
   align-self: ${(props) => props.alignSelf};
   transition: 0.2s all ease-in;

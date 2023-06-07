@@ -4,8 +4,6 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-"use strict";
+import ProposalKyc from './ProposalKyc.container'
 
-import ProposalKyc from "./ProposalKyc.container";
-
-export default ProposalKyc;
+export default ProposalKyc

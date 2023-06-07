@@ -4,77 +4,76 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import React from "react";
+import { css } from '@linaria/core'
+import { styled } from '@linaria/react'
+import React from 'react'
 
-import PropTypes from "prop-types";
-import styled, {css} from "styled-components";
-import {
-  Button,
-  Icon,
-  Input
-} from "components";
-import Family from "../Family";
+import { PrimaryButton } from '~/components/Base/Buttons'
+import Icon from '~/components/Base/Icon'
+import Input from '~/components/Base/Input'
 
-const propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  onChangeHandler: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  state: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
-};
+import Family from '../Family'
+
+interface EmailInputPropTypes {
+  dispatch: (param: any) => void
+  onChangeHandler: (param: any) => void
+  onSubmit: (param: any) => void
+  state: Record<string, any>
+  user: Record<string, any>
+}
 
 const EmailInput = ({
   dispatch,
   onChangeHandler,
   onSubmit,
   state,
-  user
-}) => {
-  const rendered = user.families.length ? user.emailDeclaration.template.replace("{name}", user.name).replace("{relation}", `my ${state.emailRelation}`) : user.emailDeclaration.rendered;
+  user,
+}: EmailInputPropTypes) => {
+  const rendered = user.families.length
+    ? user.emailDeclaration.template
+        .replace('{name}', user.name)
+        .replace('{relation}', `my ${state.emailRelation}`)
+    : user.emailDeclaration.rendered
 
   return (
     <EmailInputWrapper>
       <Container>
         <Title>Choose Email for investment</Title>
         <InputsContainer>
-          <form style={{marginBottom: "3.3rem"}} onSubmit={onSubmit}>
-            {
-              user.families.length ? (
-                <Family
-                  dispatch={dispatch}
-                  user={user}
-                />
-              ) : null
-            }
+          <form style={{ marginBottom: '3.3rem' }} onSubmit={onSubmit}>
+            {user.families.length ? (
+              <Family dispatch={dispatch} user={user} />
+            ) : null}
             <Label>Email Id</Label>
             <InputContainer>
               <Input
-                inputType='registration'
+                inputType="registration"
                 isDisabled={state.isEmailVerified}
                 isError={false}
-                name='email'
-                placeholder=''
+                name="email"
+                placeholder=""
                 value={state.email}
-                width='fill'
+                width="full"
                 onChange={onChangeHandler}
               />
               <VerificationStatus status={state.isEmailVerified}>
-                {state.isEmailVerified && <Icon name='wl-icon-check-circle' />}
+                {state.isEmailVerified && <Icon name="wl-icon-check-circle" />}
               </VerificationStatus>
             </InputContainer>
             <p>{rendered}</p>
-            <Button
-              isDisabled={!state.email.length}
-              label='Proceed'
-              margin="3em 0"
+            <PrimaryButton
+              disabled={!state.email.length}
+              style={{ margin: '3em 0' }}
               onClick={onSubmit}
-            />
+            >
+              Proceed
+            </PrimaryButton>
           </form>
         </InputsContainer>
       </Container>
     </EmailInputWrapper>
-  );
-};
+  )
+}
 
 const EmailInputWrapper = styled.div`
   height: 100vh;
@@ -85,7 +84,7 @@ const EmailInputWrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 
 const Container = styled.div`
   padding: 2.4rem 0;
@@ -95,7 +94,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
+`
 
 const Title = styled.h1`
   margin: 0;
@@ -104,17 +103,17 @@ const Title = styled.h1`
   font-weight: 400;
   color: #000000;
   font-family: DmSerif;
-`;
+`
 
 const InputContainer = styled.div`
   position: relative;
-`;
+`
 
 const Label = styled.p`
   font-size: 1.4rem;
   font-weight: 400;
-  color: #7E7E7E;
-`;
+  color: #7e7e7e;
+`
 
 const InputsContainer = styled.div`
   margin: 3rem 0 0 0;
@@ -122,9 +121,9 @@ const InputsContainer = styled.div`
   @media (max-width: 768px) {
     width: 90%;
   }
-`;
+`
 
-const VerificationStatus = styled.div`
+const VerificationStatus = styled.div<any>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,19 +131,19 @@ const VerificationStatus = styled.div`
   position: absolute;
   right: 1em;
   color: red;
-  ${props => props.status && css`
-    color: #51a905;
-  `}
+  ${(props) =>
+    props.status &&
+    css`
+      color: #51a905;
+    `}
   text-transform: uppercase;
-  font-size: .8em;
-  i{
+  font-size: 0.8em;
+  i {
     margin-right: 0.5em;
     margin-bottom: 4px;
     color: #51a905;
     font-size: 1.25em;
   }
-`;
+`
 
-EmailInput.propTypes = propTypes;
-
-export default EmailInput;
+export default EmailInput

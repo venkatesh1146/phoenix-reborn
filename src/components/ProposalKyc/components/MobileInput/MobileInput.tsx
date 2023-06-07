@@ -150,12 +150,8 @@ const Label = styled.p`
 `
 
 const PhoneNumberInput = styled(Input)`
-  ${(props: any) =>
-    props.isError &&
-    css`
-      border: 1px solid #f21976;
-      box-shadow: 0 0 10px #f21976;
-    `}
+  border: ${(props: any) => (props.isError ? '1px solid #f21976' : '')};
+  box-shadow: ${(props: any) => (props.isError ? '0 0 10px #f21976' : '')};
 `
 
 const InputsContainer = styled.div`
@@ -210,12 +206,7 @@ const VerificationStatus = styled.div<any>`
   margin-top: 4em;
   position: absolute;
   right: 1em;
-  color: red;
-  ${(props) =>
-    props.status &&
-    css`
-      color: #51a905;
-    `}
+  color: ${(props) => (props.status ? '#51a905' : 'red')};
   text-transform: uppercase;
   font-size: 0.8em;
   i {

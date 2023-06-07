@@ -4,28 +4,33 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import { WealthyUtils, WealthyValidations } from 'helpers'
-import PropTypes from 'prop-types'
 import React from 'react'
-import { graphql } from 'react-apollo'
+
+import { handleApiError } from '~/utils/ErrorUtils'
+import { showErrorToast } from '~/utils/ToastUtils'
+import WealthyValidations from '~/utils/ValidationUtils'
 
 import EmailInput from './EmailInput'
 
 import { REQUEST_USER_PROFILE_UPDATE } from '~/graphql'
+import useGqlMutation from '~/hooks/useGqlMutation'
 
-const propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  requestUserProfileUpdate: PropTypes.func.isRequired,
-  state: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+interface EmailInputContainerPropTypes {
+  dispatch: Function
+  requestUserProfileUpdate: Function
+  state: object
+  user: object
 }
 
 const EmailInputContainer = ({
   dispatch,
-  requestUserProfileUpdate,
+
   state,
   user,
 }) => {
+  const { mutate: requestUserProfileUpdate } = useGqlMutation({
+    mutation: REQUEST_USER_PROFILE_UPDATE,
+  })
   const onChangeHandler = (event) => {
     const { name, value } = event.target
 
@@ -35,7 +40,7 @@ const EmailInputContainer = ({
   const onSubmit = (event) => {
     event.preventDefault()
     if (!WealthyValidations.validateFormField['email'](state.email)) {
-      WealthyUtils.showToast('Please check the email entered')
+      showErrorToast('Please check the email entered')
       return
     }
     if (state.isEmailVerified) {
@@ -43,16 +48,18 @@ const EmailInputContainer = ({
       return
     }
 
-    requestUserProfileUpdate({ email: state.email })
-      .then(({ data }) => {
+    requestUserProfileUpdate({
+      variables: { input: { email: state.email } },
+      onSuccess: ({ data }) => {
         dispatch({
           type: 'update',
           name: 'token',
           value: data.requestUserProfileUpdate.token,
         })
         dispatch({ type: 'email-otp' })
-      })
-      .catch(WealthyUtils.handleApiError)
+      },
+      onFailure: handleApiError,
+    })
   }
 
   return (
@@ -66,17 +73,4 @@ const EmailInputContainer = ({
   )
 }
 
-const withMutation = graphql(REQUEST_USER_PROFILE_UPDATE, {
-  props: ({ mutate }) => ({
-    requestUserProfileUpdate: (payload) =>
-      mutate({
-        variables: {
-          input: payload,
-        },
-      }),
-  }),
-})
-
-EmailInputContainer.propTypes = propTypes
-
-export default withMutation(EmailInputContainer)
+export default EmailInputContainer
