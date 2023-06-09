@@ -1,9 +1,12 @@
 import { QueryOptions, useApolloClient } from '@apollo/client'
 import React, { useState } from 'react'
 
+import { handleApiError } from '~/utils/ErrorUtils'
+
 interface useGqlQueryPropTypes extends QueryOptions {
   onSuccess?: (data: any) => void
   onFailure?: (error: any) => void
+  showErrorToast?: boolean
 }
 
 interface StateType {
@@ -15,6 +18,7 @@ interface StateType {
 export default function useGqlQuery({
   onSuccess = (data) => {},
   onFailure = (err) => {},
+  showErrorToast = false,
   ...rest
 }: useGqlQueryPropTypes) {
   const [state, setState] = useState<StateType>({
@@ -42,6 +46,7 @@ export default function useGqlQuery({
       })
       .catch((err) => {
         onFailure(err)
+        showErrorToast && handleApiError(err)
         setState({
           data: null,
           isLoading: false,

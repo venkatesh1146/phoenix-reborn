@@ -46,69 +46,7 @@ const StyledButton = styled.button<any>`
   }
   &[type='outline'] {
   }
-  /* ${(props) =>
-    props.type === 'outline' &&
-    css`
-      border: 2px solid ${buttonThemes[props.theme].bdCol};
-      background: transparent;
-      color: ${buttonThemes[props.theme].bdCol};
-      padding: 0.55em 0 0.45em;
-      &:disabled {
-        border: solid 1px #9b9b9b;
-        color: #9b9b9b;
-      }
-      &:hover {
-        background: transparent;
-        ${(props) =>
-          props.theme === 'new' &&
-          css`
-            border: 2px solid #1e17a0;
-            background: white;
-          `}
-      }
-    `}
-    ${(props) =>
-    props.type === 'text' &&
-    css`
-      background: transparent;
-      color: ${buttonThemes[props.theme].bdCol};
-      align-self: center;
-      box-shadow: none;
-      &:hover {
-        background: transparent;
-        box-shadow: none;
-      }
-      &:disabled {
-        border: none;
-        color: #9b9b9b;
-      }
-    `}
-    ${(props) =>
-    props.isDisabled &&
-    css`
-      pointer-events: none;
-      background-color: #e5e5e5;
-      color: #9b9b9b;
-    `}
-    ${(props) =>
-    props.isLoading &&
-    css`
-      background: repeating-linear-gradient(
-          -45deg,
-          rgba(242, 25, 118, 0.8),
-          rgba(242, 25, 118, 0.8) 25%,
-          rgba(242, 25, 118, 0.5) 25%,
-          rgba(242, 25, 118, 0.5) 50%,
-          rgba(242, 25, 118, 0.8) 50%
-        )
-        top left fixed;
-      background-size: 48px 48px;
-      animation: animate-stripes 3s linear infinite;
-      pointer-events: none;
-      &:hover {
-        background-color: initial;
-      }
-    `} */
+
   @keyframes animate-stripes {
     0% {
       background-position: 0 0;

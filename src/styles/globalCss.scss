@@ -75,3 +75,26 @@ html {
 .mf-desktop-left-section-wrapper {
   max-width: 45%;
 }
+
+.rc-dialog-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rc-dialog-mask {
+  background: rgba(14, 26, 65, 0.9) !important;
+}
+.wl-payment-dialog {
+  width: 95%;
+  max-width: 500px;
+  margin: auto !important;
+  position: absolute;
+}
+.wl-payment-dialog.custom-fullscreen {
+  .rc-dialog-close {
+    display: none;
+  }
+  .rc-dialog-body {
+    padding: 0;
+  }
+}

@@ -53,6 +53,7 @@ export const ImageContainer = styled.div`
   }
 `
 export const FundsWrapper = styled.div`
+  background: ${tm((t) => t.colors.lightBgColor)};
   @media screen and (min-width: 1024px) {
     flex-grow: 1;
     padding: 0 2rem;

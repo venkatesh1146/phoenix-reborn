@@ -19,7 +19,7 @@ interface DesktopLeftSectionPropsType {
 function DesktopLeftSection({
   children,
   childrenContainerStyles = {},
-  footerTxt = 'New investments will come under Wealthy ARN Capital Gain Taxes will be applicable',
+  footerTxt = '',
 }: DesktopLeftSectionPropsType) {
   return (
     <Wrapper className="mf-desktop-left-section-wrapper">
@@ -32,9 +32,11 @@ function DesktopLeftSection({
       <ChildrenContainer style={childrenContainerStyles}>
         {children}
       </ChildrenContainer>
-      <FooterWrapper>
-        <Info text={footerTxt} />
-      </FooterWrapper>
+      {footerTxt ? (
+        <FooterWrapper>
+          <Info text={footerTxt} />
+        </FooterWrapper>
+      ) : null}
     </Wrapper>
   )
 }

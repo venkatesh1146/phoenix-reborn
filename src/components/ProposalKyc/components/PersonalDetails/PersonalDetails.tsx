@@ -8,9 +8,10 @@ import { styled } from '@linaria/react'
 import Dialog from 'rc-dialog'
 import React from 'react'
 
-import Button from '~/components/Base/Button'
+import { PrimaryButton } from '~/components/Base/Buttons'
 import DateInput from '~/components/Base/DateInput'
 import Input from '~/components/Base/Input'
+import Spinner from '~/components/common/Spinner'
 
 interface PersonalDetailsPropTypes {
   checkedState: any[]
@@ -52,78 +53,77 @@ const PersonalDetails = ({
 
   return (
     <PersonalDetailsWrapper>
-      <Container>
-        <Title>Personal Details</Title>
-        <SubHeader>Confirm your personal details</SubHeader>
-        <InputsContainer>
-          <form onSubmit={onProceed}>
-            <InputContainer>
-              <Label>PAN</Label>
-              <Input
-                inputType="registration"
-                isInvalid={panError}
-                name="panNumber"
-                placeholder=""
-                transform="uppercase"
-                value={panNumber}
-                width="full"
-                onChange={onChangeHandler}
-                onPaste={onChangeHandler}
+      <SubHeader className="section-title">
+        Confirm your personal details
+      </SubHeader>
+
+      <form onSubmit={onProceed}>
+        <InputContainer>
+          <Label>PAN</Label>
+          <Input
+            inputType="registration"
+            isInvalid={panError}
+            name="panNumber"
+            placeholder=""
+            transform="uppercase"
+            value={panNumber}
+            onChange={onChangeHandler}
+            onPaste={onChangeHandler}
+          />
+        </InputContainer>
+
+        <InputContainer>
+          <Label>Date of birth</Label>
+          <DateInput
+            inputType="registration"
+            max={startDate}
+            name="dob"
+            placeholder="dd/mm/yyyy"
+            value={dob}
+            width="small"
+            onChange={onChangeHandler}
+            containerStyles={{ width: 'max-content' }}
+          />
+        </InputContainer>
+
+        {checkField.map(({ name }, index) => {
+          return (
+            <CheckBoxContainer
+              key={name}
+              onClick={() => handleOnCheckboxChange(index)}
+            >
+              <CheckBox
+                readOnly
+                checked={checkedState[index]}
+                name={name}
+                type="checkbox"
+                value={name}
               />
-            </InputContainer>
+              <CheckboxText>{name}</CheckboxText>
+            </CheckBoxContainer>
+          )
+        })}
 
-            <InputContainer>
-              <Label>Date of birth</Label>
-              <DateInput
-                inputType="registration"
-                max={startDate}
-                name="dob"
-                placeholder="dd/mm/yyyy"
-                value={dob}
-                width="full"
-                onChange={onChangeHandler}
-              />
-            </InputContainer>
+        <PrimaryButton
+          disabled={
+            panNumber.length !== 10 ||
+            panError ||
+            !dob ||
+            loading ||
+            checkingPan
+          }
+          onClick={onProceed}
+          className="proceed-btn"
+        >
+          {checkingPan ? <Spinner color={'#fff'} /> : 'Proceed'}
+        </PrimaryButton>
+      </form>
 
-            {checkField.map(({ name }, index) => {
-              return (
-                <CheckBoxContainer
-                  key={name}
-                  onClick={() => handleOnCheckboxChange(index)}
-                >
-                  <CheckBox
-                    readOnly
-                    checked={checkedState[index]}
-                    name={name}
-                    type="checkbox"
-                    value={name}
-                  />
-                  <CheckboxText>{name}</CheckboxText>
-                </CheckBoxContainer>
-              )
-            })}
-
-            <Button
-              disabled={
-                panNumber.length !== 10 ||
-                panError ||
-                !dob ||
-                loading ||
-                checkingPan
-              }
-              isLoading={checkingPan}
-              label="Proceed"
-              margin="3em 0"
-              onClick={onProceed}
-            />
-          </form>
-        </InputsContainer>
-      </Container>
       <Dialog
         animation="zoom"
         className="wl-payment-dialog custom-fullscreen"
         maskAnimation="fade"
-        visible={showModal}
+        visible={true}
         onClose={() => setShowModal(false)}
       >
         <ConfirmationWrapper>
@@ -145,15 +145,9 @@ const PersonalDetails = ({
             </ErrorWrapper>
           )}
           <form onSubmit={onSubmit}>
-            <Button
-              disabled={loading}
-              isLoading={loading}
-              label="Proceed"
-              margin="2em 0"
-              onClick={onSubmit}
-            >
-              Proceed
-            </Button>
+            <PrimaryButton disabled={loading} onClick={onSubmit}>
+              {loading ? <Spinner /> : 'Proceed'}
+            </PrimaryButton>
           </form>
         </ConfirmationWrapper>
       </Dialog>
@@ -208,20 +202,16 @@ const ConfirmationWrapper = styled.div`
 `
 
 const PersonalDetailsWrapper = styled.div`
-  height: 100vh;
-  width: 35%;
-  margin: 0 auto;
   position: relative;
-  text-align: center;
-  @media (max-width: 768px) {
+  width: 100%;
+  height: 100%;
+  .proceed-btn {
     width: 100%;
+    margin-top: auto;
   }
-`
-
-const Container = styled.div`
-  padding: 2.4rem 0;
-  width: 90%;
-  margin: 0 auto;
+  form {
+    height: 100%;
+  }
 `
 
 const Title = styled.h1`
@@ -234,7 +224,7 @@ const Title = styled.h1`
 `
 
 const SubHeader = styled.p`
-  margin: 1rem 0 0 0;
+  margin: 0;
   padding: 0;
   color: #7e7e7e;
   font-size: 1.4rem;
@@ -243,18 +233,17 @@ const SubHeader = styled.p`
 `
 
 const InputContainer = styled.div`
-  margin-bottom: 3.3rem;
+  margin-bottom: 1rem;
+  .date-input {
+    min-width: 12rem;
+  }
 `
 
 const Label = styled.p`
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 400;
   color: #7e7e7e;
-  margin-bottom: 0;
-`
-
-const InputsContainer = styled.div`
-  margin: 7rem 0 0 0;
+  margin-bottom: 0.5rem;
 `
 
 const CheckBoxContainer = styled.div`

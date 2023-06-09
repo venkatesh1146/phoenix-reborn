@@ -58,14 +58,23 @@ export const Status = styled.span<{
   color: string
 }>`
   background-color: ${(props) => props.color ?? '#ffe47a'};
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0.5rem 0px 0.5rem;
   font-size: 0.6rem;
   position: absolute;
   top: 0;
-  right: 0.5rem;
+  right: 0;
   margin: 0 !important;
-  padding: 4px 8px;
+  padding: 6px 8px;
   min-width: 3rem;
   text-align: center;
   text-transform: capitalize;
+
+  font-family: 'Maven Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.5rem;
+  line-height: 12px;
+
+  display: flex;
+  align-items: center;
 `

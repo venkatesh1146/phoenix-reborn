@@ -10,6 +10,7 @@ export const DefaultButton = styled.button<{
   full_width?: boolean
   primary?: boolean
 }>`
+  height: 3rem;
   background-color: ${(props) =>
     props.primary ? `${primaryColor}` : '#FBF9FF'};
   font-size: 0.8rem;
@@ -34,6 +35,7 @@ export const PrimaryButton = styled(DefaultButton)`
   background-color: ${primaryColor};
   color: #fff;
   font-family: 'Maven Pro';
+  border-radius: 51px;
   &[disabled] {
     border: none !important;
   }

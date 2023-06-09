@@ -14,22 +14,26 @@ import MobileInput from './MobileInput'
 
 import { countryCodes } from '~/constants'
 import { REQUEST_USER_PROFILE_UPDATE } from '~/graphql'
+import useGqlMutation from '~/hooks/useGqlMutation'
+import useGqlQuery from '~/hooks/useGqlQuery'
 
 interface MobileInputContainerPropTypes {
   dispatch: Function
-  requestUserProfileUpdate: Function
   state: Record<string, any>
   user: Record<string, any>
 }
 
 const MobileInputContainer = ({
   dispatch,
-  requestUserProfileUpdate,
   state,
   user,
 }: MobileInputContainerPropTypes) => {
   const [selectedCountry, setSelectedCountry] = useState<any[]>([])
   const [isCodeEditing, setIsCodeEditing] = useState(false)
+
+  const { mutate: requestUserProfileUpdate } = useGqlMutation({
+    mutation: REQUEST_USER_PROFILE_UPDATE,
+  })
 
   useEffect(() => {
     if (user.exists) {
@@ -56,17 +60,21 @@ const MobileInputContainer = ({
     }
 
     requestUserProfileUpdate({
-      phoneNumber: `(${state.countryCode})${state.phoneNumber}`,
-    })
-      .then(({ data }: any) => {
+      variables: {
+        input: {
+          phoneNumber: `(${state.countryCode})${state.phoneNumber}`,
+        },
+      },
+      onSuccess: ({ data }: any) => {
         dispatch({
           type: 'update',
           name: 'token',
           value: data.requestUserProfileUpdate.token,
         })
         dispatch({ type: 'mobile-otp' })
-      })
-      .catch(handleApiError)
+      },
+      onFailure: handleApiError,
+    })
   }
 
   const getSelectedCountry = (countryCode: string) => {
@@ -108,18 +116,5 @@ const MobileInputContainer = ({
     />
   )
 }
-
-// const withMutation = graphql(REQUEST_USER_PROFILE_UPDATE, {
-//   props: ({ mutate }) => ({
-//     requestUserProfileUpdate: (payload: any) =>
-//       mutate
-//         ? mutate({
-//             variables: {
-//               input: payload,
-//             },
-//           })
-//         : {},
-//   }),
-// })
 
 export default MobileInputContainer

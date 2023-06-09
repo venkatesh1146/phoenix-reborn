@@ -52,6 +52,7 @@ const TransitionContainer = (props: TransitionContainerPropTypes) => {
               ...defaultStyle,
               ...transitionStyle[state],
             }}
+            className="transition-wrapper"
           >
             {props.children}
           </div>

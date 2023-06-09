@@ -58,6 +58,7 @@ export default function ProposalProcessed() {
     return (
       <Wrapper>
         <DesktopLeftSection
+          footerTxt="New investments will come under Wealthy ARN Capital Gain Taxes will be applicable"
           childrenContainerStyles={{ display: 'flex', flexDirection: 'column' }}
         >
           {renderHeaderOrSidebarData()}

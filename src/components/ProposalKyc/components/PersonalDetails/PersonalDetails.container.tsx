@@ -4,6 +4,7 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
+import { useApolloClient } from '@apollo/client'
 import { PanUsageSubtype, WealthyDate } from 'frontend-models'
 import React, { useState } from 'react'
 // import { graphql, withApollo } from 'react-apollo'
@@ -16,6 +17,7 @@ import PersonalDetails from './PersonalDetails'
 import PAN_CHECK_QUERY from './graphql/PanCheck.query'
 
 import { CREATE_USER_PROFILE } from '~/graphql'
+import useGqlMutation from '~/hooks/useGqlMutation'
 
 const checkField = [
   {
@@ -38,8 +40,6 @@ interface PersonalDetailsContainerPropTypes {
 }
 
 const PersonalDetailsContainer = ({
-  client,
-  createUserProfile,
   dispatch,
   state,
   user,
@@ -47,7 +47,11 @@ const PersonalDetailsContainer = ({
   const [checkedState, setCheckedState] = useState(
     new Array(checkField.length).fill(true)
   )
-  const [loading, setLoading] = useState(false)
+  const { mutate: createUserProfile, isLoading: loading } = useGqlMutation({
+    mutation: CREATE_USER_PROFILE,
+  })
+
+  const client = useApolloClient()
   const [checkingPan, setCheckingPan] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [name, setName] = useState('')
@@ -133,9 +137,9 @@ const PersonalDetailsContainer = ({
 
     let goNextPage = false
 
-    setLoading(true)
-    createUserProfile(payload)
-      .then(({ data }: any) => {
+    createUserProfile({
+      variables: { input: { payload } },
+      onSuccess: ({ data }: any) => {
         if (!isChecked) {
           // if (isNotCheckedIndex !== 0) {
           dispatch({ type: 'update', name: 'stage', value: 4 })
@@ -156,16 +160,17 @@ const PersonalDetailsContainer = ({
             ? `${kycUrl}&redirect_to=${domain}${kycDestination}`
             : kycDestination
         )
-      })
-      .catch((error: any) => {
+
+        setShowModal(false)
+      },
+      onFailure: (error) => {
         const errorText = getErrorMessage(error)
         goNextPage = errorText.toLowerCase().includes('valid flows')
-      })
-      .finally(() => {
-        setLoading(false)
+
         setShowModal(false)
         goNextPage && dispatch({ type: 'update', name: 'stage', value: 4 })
-      })
+      },
+    })
   }
 
   return (
@@ -186,18 +191,5 @@ const PersonalDetailsContainer = ({
     />
   )
 }
-
-// const withMutation = graphql(CREATE_USER_PROFILE, {
-//   props: ({ mutate }) => ({
-//     createUserProfile: (payload: any) =>
-//       mutate
-//         ? mutate({
-//             variables: {
-//               input: payload,
-//             },
-//           })
-//         : {},
-//   }),
-// })
 
 export default PersonalDetailsContainer

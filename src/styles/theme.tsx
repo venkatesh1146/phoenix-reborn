@@ -11,6 +11,7 @@ export const lightTheme = {
     primaryBgColor: '#1e1730',
     secondaryBgColor: '#3b2c62',
     lightBgColor: '#F6F2FF',
+    disabledBgColor: '#C8C6CC',
   },
 }
 

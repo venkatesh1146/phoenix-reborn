@@ -17,17 +17,15 @@ import useGqlMutation from '~/hooks/useGqlMutation'
 
 interface EmailInputContainerPropTypes {
   dispatch: Function
-  requestUserProfileUpdate: Function
-  state: object
+  state: Record<string, any>
   user: object
 }
 
 const EmailInputContainer = ({
   dispatch,
-
   state,
   user,
-}) => {
+}: EmailInputContainerPropTypes) => {
   const { mutate: requestUserProfileUpdate } = useGqlMutation({
     mutation: REQUEST_USER_PROFILE_UPDATE,
   })

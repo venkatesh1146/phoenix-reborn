@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: ${tm((t) => t.colors.white)};
+  min-width: 40%;
 `
 
 export const ChildrenContainer = styled.div``

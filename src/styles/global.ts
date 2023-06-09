@@ -1,5 +1,7 @@
 import { css } from '@linaria/core'
 
+import icons from './icons.scss'
+import WealthyFont from './wealthy-icon.ttf'
 export const globals = css`
   :global() {
     html {

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PortfolioAllocation from '~/components/PortfolioAllocation'
+
 import Image from '../../components/Base/Image'
 import FundsSwitchOverview from '../../components/FundsSwitchOverview'
 import Info from '../../components/Info/Info'
@@ -21,6 +23,14 @@ export default function ProposalAccepted() {
   const { proposalData, isLoading, getAMCLogos } = useMFSwitchProposal()
   const isDesktop = useIsDesktop()
   const imageSize = isDesktop ? 236 : 148
+
+  const renderPortfolioAllocation = () => (
+    <PortfolioAllocation
+      wrapperClassName="portfolio-allocation"
+      switchFunds={proposalData?.schemes ?? []}
+      showEachFundStatus={true}
+    />
+  )
   if (isLoading) return <FullScreenSpinner />
   return (
     <Wrapper>
@@ -51,6 +61,7 @@ export default function ProposalAccepted() {
           numberOfFunds={proposalData?.schemes?.length || ''}
           fundsIcons={getAMCLogos() ?? []}
         />
+        {renderPortfolioAllocation()}
         <Info
           text={'It usually takes 3-4 Days for all the funds to reallocate'}
           wrapperClassName="info-text"

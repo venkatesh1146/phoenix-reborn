@@ -4,30 +4,35 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import { useQuery } from '@apollo/client'
+import { styled } from '@linaria/react'
 import { UserProfileModel } from 'frontend-models'
 import React, { useEffect, useReducer, useState } from 'react'
 
+import { tm } from '~/styles/theme'
 import { decodeDateFormatWithHyphen } from '~/utils/DateUtils'
 import StorageUtils from '~/utils/StorageUtils'
 import WealthyValidations from '~/utils/ValidationUtils'
 import appEnv from '~/utils/env'
 
+import Input from '../Base/Input'
+import { DesktopRightSection } from '../CommonStyledComponents'
+import DesktopLeftSection from '../DesktopLeftSection'
+
 import ProposalKyc from './ProposalKyc'
 import PREFILL_QUERY from './graphql/prefill.query'
+import { Title } from './styledComponents'
 
 import useGqlQuery from '~/hooks/useGqlQuery'
-
-interface ProposalKycContainerPropTypes {
-  error: boolean
-  hagrid: Record<string, any>
-  loading: boolean
-}
 
 const ProposalKycContainer = () => {
   const [user, setUser] = useState(UserProfileModel.init({}))
   const { data, isLoading, fetchData } = useGqlQuery({
     query: PREFILL_QUERY,
+    variables: {
+      onBoardProduct: 'MF',
+      declarationType: 'basic',
+    },
+    showErrorToast: true,
   })
 
   const initialState = {
@@ -96,15 +101,15 @@ const ProposalKycContainer = () => {
   }, [])
 
   useEffect(() => {
-    if (data?.hagrid) {
+    if (data?.data?.hagrid) {
       const userData = UserProfileModel.init(
-        data?.hagrid.wealthyUserDetailsPrefill
+        data?.data?.hagrid.wealthyUserDetailsPrefill
       )
       setUser(userData)
 
       if (emptyChecker(userData.kycUrl)) {
         const domain = appEnv.IS_LOCAL
-          ? 'http://localhost:9000'
+          ? 'http://localhost:3000'
           : appEnv.API_URL
         window.location.assign(
           `${
@@ -178,27 +183,85 @@ const ProposalKycContainer = () => {
   const emptyChecker = (value: string) => {
     return value && value !== '-' ? value : ''
   }
+  console.log(state)
+
+  const renderInstructions = () => {
+    switch (state.stage) {
+      case 1:
+        return <Title>Choose phone number for investment</Title>
+      case 2:
+        return <Title>Choose email for investment</Title>
+      case 3:
+        return <Title>Personal Details</Title>
+      default:
+        return <></>
+        break
+    }
+  }
 
   return (
-    <ProposalKyc
-      dispatch={dispatch}
-      error={data?.error}
-      loading={isLoading}
-      state={state}
-      user={user}
-    />
+    <Wrapper>
+      <DesktopLeftSection>{renderInstructions()}</DesktopLeftSection>
+      <DesktopRightSection className="right-section">
+        <ProposalKyc
+          dispatch={dispatch}
+          error={data?.error}
+          loading={isLoading}
+          state={state}
+          user={user}
+        />
+      </DesktopRightSection>
+    </Wrapper>
   )
 }
 
-const WithData = (props) => {
-  const { data } = useQuery(PREFILL_QUERY, {
-    variables: {
-      onBoardProduct: 'MF',
-      declarationType: 'basic',
-    },
-  })
-
-  return props.renderChildren(data)
-}
-
 export default ProposalKycContainer
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  .right-section {
+    padding: 0;
+  }
+  @media screen and (max-width: 1023px) {
+    flex-direction: column;
+    .mf-desktop-left-section-wrapper {
+      max-width: unset;
+      width: 100%;
+      padding: 1.5rem;
+      height: max-content;
+      margin-left: unset !important;
+      margin-right: unset !important;
+    }
+    .right-section {
+      margin: unset;
+      padding: 0 !important;
+      display: flex;
+    }
+  }
+  form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .transition-wrapper {
+    height: 100%;
+    @media screen and (min-width: 1024px) {
+      padding-top: 5rem !important;
+    }
+  }
+
+  .section-title {
+    @media screen and (min-width: 1024px) {
+      font-family: 'Marcellus';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 24px;
+      text-align: left;
+
+      color: ${tm((t) => t.colors.primaryTextColor)};
+    }
+    text-align: left;
+  }
+`

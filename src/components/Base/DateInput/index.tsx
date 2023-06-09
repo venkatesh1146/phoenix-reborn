@@ -4,10 +4,11 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import { styled } from '@linaria/react'
+import { CSSProperties, styled } from '@linaria/react'
 import React from 'react'
 
 interface DateInputPropTypes {
+  containerStyles?: CSSProperties
   /** Placeholder for input */
   childIcon?: JSX.Element | JSX.Element[]
 
@@ -63,15 +64,16 @@ const inputWidth = {
  * One input box to rule them all
  */
 const DateInput = (props: DateInputPropTypes) => {
-  const { width, isInvalid } = props
+  const { width, isInvalid, containerStyles = {} } = props
   return (
-    <InputContainer isInvalid={isInvalid} width={width}>
+    <InputContainer style={containerStyles} isInvalid={isInvalid} width={width}>
       {props.childIcon}
       <StyledInput
         required
         max={props.max}
         min={props.min}
         type="date"
+        className="date-input"
         {...props}
       />
       <span className="err-msg">{props.isInvalid}</span>
@@ -141,6 +143,11 @@ const StyledInput = styled.input<any>`
   &[isDisable] {
     pointer-events: none;
   }
+  outline: none;
+  border: 1px solid #e6e6e6;
+  height: 2rem;
+  padding: 4px 6px;
+  border-radius: 4px;
 `
 
 const InputContainer = styled.div<any>`

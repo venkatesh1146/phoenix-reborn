@@ -1,31 +1,61 @@
-import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
-const defaultStyle = css`
-  outline: none;
-  background: transparent;
-  color: var(--gray);
-  font-family: inherit;
-  border: 0;
-  padding: 0.6em 1.5em 0.5em;
-  letter-spacing: 0.1em;
-  width: 100%;
-  -webkit-appearance: none;
-  border-radius: 0;
+import { tm } from '~/styles/theme'
 
-  &::placeholder {
-    color: var(--lighter-grey);
-    text-transform: none;
-    font-size: 0.9em;
-    letter-spacing: 0;
+import { WealthyImages } from '~/assets'
+
+const StyledInput = styled.input<any>`
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  height: 2rem;
+  padding: 4px 6px;
+
+  &[data-badge='show'] {
+    background: url(${WealthyImages.tickWithBgDesign}) no-repeat 98% 50% !important;
   }
   &:focus {
     outline: none;
   }
-`
+  &[type='currency'] {
+    padding: 0.6em 2em 0.5em;
+  }
+  &[type='registration'] {
+    outline: none;
+    background-color: #fafafa;
+    color: var(--gray);
+    font-family: inherit;
+    border: 0;
+    font-size: 1.12em;
+    padding: 1.2em;
+    margin-top: 1.5em;
+    letter-spacing: 0.1em;
+    width: 100%;
+    -webkit-appearance: none;
+    border-radius: var(--card-radius);
+    font-weight: 900;
+    transition: 0.2s all ease-in;
+    background: white;
+    font-weight: 500;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.1);
+    &::placeholder {
+      color: var(--lighter-gray);
+      text-transform: none;
+    }
 
-const StyledInput = styled.input``
+    &:focus {
+      background: var(--white);
+      outline: none;
+      box-shadow: var(--box-shadow);
+    }
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    background-color: ${tm((t) => t.colors.white)};
+    color: ${tm((t) => t.colors.secondaryTextColor)};
+  }
+`
 
 const InputContainer = styled.div<any>`
   display: flex;
@@ -33,7 +63,7 @@ const InputContainer = styled.div<any>`
   justify-content: center;
   align-items: center;
   position: relative;
-  width: ${(props: any) => inputWidth[props.width]};
+  width: max-content;
   i {
     position: absolute;
     left: 18px;
@@ -52,9 +82,12 @@ const InputContainer = styled.div<any>`
     padding-left: 1em;
     padding-top: 0.4em;
   }
+  background-color: ${tm((t) => t.colors.white)};
 `
 
 interface InputPropTypes {
+  showVerifiedBadge?: boolean
+  containerStyles?: CSSProperties
   /** Placeholder for input */
   childIcon?: JSX.Element
 
@@ -104,11 +137,26 @@ const inputWidth: Record<string, any> = {
  * One input box to rule them all
  */
 const Input = (props: InputPropTypes) => {
-  const { width, isInvalid } = props
+  const {
+    width,
+    isInvalid,
+    containerStyles = {},
+    isDisabled,
+    showVerifiedBadge = false,
+  } = props
   return (
-    <InputContainer isInvalid={isInvalid} width={width}>
+    <InputContainer
+      className="input-container"
+      isInvalid={isInvalid}
+      width={width}
+      style={containerStyles}
+    >
       {props.childIcon}
-      <StyledInput {...props} />
+      <StyledInput
+        disabled={isDisabled}
+        data-badge={showVerifiedBadge ? 'show' : 'hide'}
+        {...props}
+      />
       <span className="err-msg">{props.isInvalid}</span>
     </InputContainer>
   )

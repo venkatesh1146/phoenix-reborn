@@ -8,11 +8,13 @@ import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import { PrimaryButton } from '~/components/Base/Buttons'
+import { FooterButton, PrimaryButton } from '~/components/Base/Buttons'
 import Icon from '~/components/Base/Icon'
 import Image from '~/components/Base/Image'
 import Input from '~/components/Base/Input'
 import Text from '~/components/Base/Text'
+import Footer from '~/components/Footer'
+import { tm } from '~/styles/theme'
 
 import Family from '../Family'
 
@@ -47,38 +49,33 @@ const MobileInput = ({
 
   return (
     <MobileInputWrapper>
-      <Container>
-        <Title>Choose phone number for investment</Title>
-        <InputsContainer>
-          {user.families.length ? (
-            <Family isMobile dispatch={dispatch} user={user} />
-          ) : null}
-          <form onSubmit={onSubmit}>
-            <Label>Mobile Number</Label>
-            <MobileSection isError={false}>
-              <CountryCode>
-                <Input
-                  inputType="registration"
-                  isDisabled={state.isPhoneVerified}
-                  name="mobileCode"
-                  placeholder="eg: +971"
-                  value={state.countryCode}
-                  onChange={handleMobileCode}
-                />
-              </CountryCode>
-              <PhoneNumberInput
+      <InputsContainer>
+        {user.families.length ? (
+          <Family isMobile dispatch={dispatch} user={user} />
+        ) : null}
+        <form onSubmit={onSubmit}>
+          <Label className="section-title">Mobile Number</Label>
+          <MobileSection isError={false}>
+            <div style={{ margin: '0 0.5rem' }}>
+              <Input
                 inputType="registration"
                 isDisabled={state.isPhoneVerified}
-                isError={false}
-                name="phoneNumber"
-                placeholder=""
-                value={state.phoneNumber}
-                width="full"
-                onChange={onChangeHandler}
+                name="mobileCode"
+                placeholder="eg: +971"
+                value={state.countryCode}
+                onChange={handleMobileCode}
+                className="mobile-code"
+                width="small"
+                containerStyles={{ width: '3.5rem' }}
               />
               <SelectedCountry>
                 {isCodeEditing && !selectedCountry[0] && (
-                  <Image alt="ellipses" src={WealthyImages.ellipsis} />
+                  <Image
+                    height={24}
+                    width={24}
+                    alt="ellipses"
+                    src={WealthyImages.ellipsis}
+                  />
                 )}
                 {selectedCountry && (
                   <Text>
@@ -92,61 +89,63 @@ const MobileInput = ({
                   </Text>
                 )}
               </SelectedCountry>
-              <VerificationStatus status={state.isPhoneVerified}>
-                {state.isPhoneVerified && <Icon name="wl-icon-check-circle" />}
-              </VerificationStatus>
-            </MobileSection>
-            <p>{rendered}</p>
-            <PrimaryButton
-              disabled={
-                !state.isPhoneVerified ? state.phoneNumber.length !== 10 : false
-              }
-              style={{ margin: '3em 0' }}
-              onClick={onSubmit}
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                position: 'relative',
+              }}
             >
-              Proceed
-            </PrimaryButton>
-          </form>
-        </InputsContainer>
-      </Container>
+              <PhoneNumberInput
+                inputType="registration"
+                isDisabled={state.isPhoneVerified}
+                isError={false}
+                name="phoneNumber"
+                placeholder=""
+                value={state.phoneNumber}
+                onChange={onChangeHandler}
+                width="small"
+                showVerifiedBadge={state.isPhoneVerified}
+              />
+            </div>
+          </MobileSection>
+          <Text style={{ textAlign: 'left' }}>{rendered}</Text>
+          <PrimaryButton
+            disabled={
+              !state.isPhoneVerified ? state.phoneNumber.length !== 10 : false
+            }
+            style={{ marginTop: 'auto' }}
+            onClick={onSubmit}
+          >
+            Proceed
+          </PrimaryButton>
+        </form>
+      </InputsContainer>
     </MobileInputWrapper>
   )
 }
 
 const MobileInputWrapper = styled.div`
-  height: 100vh;
-  width: 50%;
-  margin: 0 auto;
   position: relative;
   text-align: center;
-  @media (max-width: 768px) {
-    width: 100%;
+  flex-grow: 1;
+  display: flex;
+  .mobile-code {
+    width: 3.5rem;
   }
 `
 
-const Container = styled.div`
-  padding: 2.4rem 0;
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const Title = styled.h1`
-  margin: 0;
-  padding: 0;
-  font-size: 2rem;
-  font-weight: 400;
-  color: #000000;
-  font-family: DmSerif;
-`
-
 const Label = styled.p`
-  font-size: 1.4rem;
+  text-align: left;
+  font-family: 'DM Serif Display';
+  font-style: normal;
   font-weight: 400;
-  color: #7e7e7e;
+  font-size: 1.5rem;
+  line-height: 22px;
+  text-transform: capitalize;
+  margin-top: 0;
+  color: ${tm((t) => t.colors.secondaryTextColor)};
 `
 
 const PhoneNumberInput = styled(Input)`
@@ -155,30 +154,27 @@ const PhoneNumberInput = styled(Input)`
 `
 
 const InputsContainer = styled.div`
-  margin: 3rem 0 0 0;
-  width: 60%;
-  @media (max-width: 768px) {
-    width: 90%;
-  }
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 `
 
 const MobileSection = styled.div<any>`
-  display: grid;
-  position: relative;
-  grid-template-columns: 1.5fr 5fr;
-  grid-gap: 0.5em 1em;
-  width: 100%;
-`
-
-const CountryCode = styled.div`
-  > div {
-    width: auto;
-    input {
-      &::placeholder {
-        font-size: 0.7em;
-      }
-    }
+  .mobile-code {
+    width: 3.5rem;
   }
+  input {
+    &::placeholder {
+      font-size: 0.7em;
+    }
+    height: 2rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 0 6px;
+  }
+  display: flex;
+  align-items: start;
+  padding-bottom: 1rem;
 `
 
 const SelectedCountry = styled.div`
@@ -187,7 +183,7 @@ const SelectedCountry = styled.div`
   width: auto;
   display: flex;
   align-items: center;
-  padding-left: 1em;
+  justify-content: center;
   margin-bottom: -1em;
   img {
     height: 3em;
@@ -199,21 +195,12 @@ const SelectedCountry = styled.div`
 `
 
 const VerificationStatus = styled.div<any>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* float: right; */
-  margin-top: 4em;
   position: absolute;
-  right: 1em;
-  color: ${(props) => (props.status ? '#51a905' : 'red')};
-  text-transform: uppercase;
-  font-size: 0.8em;
-  i {
-    margin-right: 0.5em;
-    margin-bottom: 4px;
-    color: #51a905;
-    font-size: 1.25em;
+  z-index: 10;
+  right: 1rem;
+  top: 0.5rem;
+  @media screen and (min-width: 1024px) {
+    top: 0.8rem;
   }
 `
 

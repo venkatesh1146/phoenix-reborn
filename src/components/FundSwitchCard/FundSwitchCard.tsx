@@ -31,16 +31,22 @@ interface FundSwitchCardProps {
   showStatus?: boolean
 }
 
-const getColorBasedOnStatus = (status: string) => {
-  switch (status) {
-    case 'success':
-      return '#7AFF82'
-    case 'failed':
-      return '#FF7A8E'
-    case 'inprogress':
-    default:
-      return '#ffe47a'
-  }
+const statusColorAndIconMap = {
+  success: {
+    color: 'rgba(20, 177, 149, 0.3)',
+    icon: WealthyImages.greenTickFilled,
+    text: 'Success',
+  },
+  failed: {
+    color: 'rgba(255, 114, 98, 0.3)',
+    icon: WealthyImages.failedIcon,
+    text: 'Failed',
+  },
+  inprogress: {
+    color: 'rgba(255, 170, 92, 0.3)',
+    icon: WealthyImages.exclamationMark,
+    text: 'In Progress',
+  },
 }
 
 function FundSwitchCard({
@@ -52,7 +58,16 @@ function FundSwitchCard({
     <>
       <Wrapper className={WrapperClassName}>
         {showStatus && !!status ? (
-          <Status color={getColorBasedOnStatus(status)}>{status}</Status>
+          <Status color={statusColorAndIconMap[status]?.color}>
+            <Image
+              src={statusColorAndIconMap[status]?.icon}
+              height={10}
+              width={10}
+              alt={status}
+              style={{ marginRight: '4px' }}
+            />
+            {statusColorAndIconMap[status]?.text}
+          </Status>
         ) : null}
         <FundDetails>
           <Image

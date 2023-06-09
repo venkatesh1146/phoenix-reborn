@@ -27,6 +27,10 @@ const WealthyImages = {
     'https://i.wlycdn.com/wealthy-home-page/wealthy-new-purple-logo.svg',
   failureIcon: 'https://i.wlycdn.com/mera-business/failure_icon.svg',
   ellipsis: 'https://i.wlycdn.com/phoenix/v1/ellipsis.svg',
+  greenTickFilled: 'https://i.wlycdn.com/insurance/green-tick-2.svg',
+  exclamationMark:
+    'https://i.wlycdn.com/articles/exclaimation-caution-icon.svg',
+  failedIcon: 'https://i.wlycdn.com/articles/wrong-ban-cross-icon.svg',
 }
 
 export default WealthyImages

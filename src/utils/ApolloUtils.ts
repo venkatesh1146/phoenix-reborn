@@ -23,7 +23,8 @@ const authLink = setContext((_, { headers }) => {
     StorageConstants.RSESSIONID_KEY
   )
   additionalHeaders['Authorization'] =
-    StorageUtils.getProposalAccessToken() || StorageUtils.getAccessToken()
+    'd0901f29-42b3-4d88-ba4e-adedffeddad0:8380DwFnuNn6lcF5cIbJUE4lr'
+  // StorageUtils.getProposalAccessToken() || StorageUtils.getAccessToken()
   additionalHeaders['X-RSESSIONID'] = rsessionid
   additionalHeaders['X-APP-VERSION'] = 'web'
 

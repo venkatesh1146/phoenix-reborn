@@ -48,7 +48,11 @@ const ProposalKyc = ({
   }
 
   const customStyles = {
+    flexGrow: 1,
+    display: 'flex',
     width: '100%',
+    height: '100%',
+    padding: '2rem',
   }
 
   return (
@@ -114,7 +118,7 @@ const ProposalLoader = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  justify-contents: center;
+  justify-content: center;
 `
 
 export default ProposalKyc
