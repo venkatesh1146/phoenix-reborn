@@ -2,9 +2,9 @@ import React from 'react'
 
 import PortfolioAllocation from '~/components/PortfolioAllocation'
 
-import Image from '../../components/Base/Image'
-import FundsSwitchOverview from '../../components/FundsSwitchOverview'
-import Info from '../../components/Info/Info'
+import Image from '../../../../components/Base/Image'
+import FundsSwitchOverview from '../../../../components/FundsSwitchOverview'
+import Info from '../../../../components/Info/Info'
 import {
   Divider,
   FundsWrapper,
@@ -12,8 +12,8 @@ import {
   SubText,
   Text,
   Wrapper,
-} from '../../components/OrderPlaced/styledComponents'
-import FullScreenSpinner from '../../components/common/Spinner/FullScreenSpinner'
+} from '../../../../components/OrderPlaced/styledComponents'
+import FullScreenSpinner from '../../../../components/common/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
 import { useIsDesktop } from '~/hooks/useIsDesktop'

@@ -131,7 +131,6 @@ const OtpContainer = ({
     />
   )
 }
-
 // const withVerify = graphql(VERIFY_USER_PROFILE_UPDATE, {
 //   props: ({ mutate }) => ({
 //     verifyUserProfileUpdate: (payload: any) =>

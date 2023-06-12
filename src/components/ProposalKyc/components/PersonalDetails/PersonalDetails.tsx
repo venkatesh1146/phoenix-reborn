@@ -5,13 +5,16 @@
 */
 
 import { styled } from '@linaria/react'
-import Dialog from 'rc-dialog'
 import React from 'react'
 
 import { PrimaryButton } from '~/components/Base/Buttons'
 import DateInput from '~/components/Base/DateInput'
 import Input from '~/components/Base/Input'
+import PopupModal from '~/components/Base/Popup'
 import Spinner from '~/components/common/Spinner'
+
+import 'rc-dialog/assets/index.css'
+import css from './styles.module.scss'
 
 interface PersonalDetailsPropTypes {
   checkedState: any[]
@@ -52,79 +55,81 @@ const PersonalDetails = ({
   const { panError, panNumber, dob } = state
 
   return (
-    <PersonalDetailsWrapper>
-      <SubHeader className="section-title">
-        Confirm your personal details
-      </SubHeader>
+    <>
+      <PersonalDetailsWrapper>
+        <SubHeader className="section-title">
+          Confirm your personal details
+        </SubHeader>
 
-      <form onSubmit={onProceed}>
-        <InputContainer>
-          <Label>PAN</Label>
-          <Input
-            inputType="registration"
-            isInvalid={panError}
-            name="panNumber"
-            placeholder=""
-            transform="uppercase"
-            value={panNumber}
-            onChange={onChangeHandler}
-            onPaste={onChangeHandler}
-          />
-        </InputContainer>
+        <form onSubmit={onProceed}>
+          <InputContainer>
+            <Label>PAN</Label>
+            <Input
+              inputType="registration"
+              isInvalid={panError}
+              name="panNumber"
+              placeholder=""
+              transform="uppercase"
+              value={panNumber}
+              onChange={onChangeHandler}
+              onPaste={onChangeHandler}
+            />
+          </InputContainer>
 
-        <InputContainer>
-          <Label>Date of birth</Label>
-          <DateInput
-            inputType="registration"
-            max={startDate}
-            name="dob"
-            placeholder="dd/mm/yyyy"
-            value={dob}
-            width="small"
-            onChange={onChangeHandler}
-            containerStyles={{ width: 'max-content' }}
-          />
-        </InputContainer>
+          <InputContainer>
+            <Label>Date of birth</Label>
+            <DateInput
+              inputType="registration"
+              max={startDate}
+              name="dob"
+              placeholder="dd/mm/yyyy"
+              value={dob}
+              width="small"
+              onChange={onChangeHandler}
+              containerStyles={{ width: 'max-content' }}
+            />
+          </InputContainer>
 
-        {checkField.map(({ name }, index) => {
-          return (
-            <CheckBoxContainer
-              key={name}
-              onClick={() => handleOnCheckboxChange(index)}
-            >
-              <CheckBox
-                readOnly
-                checked={checkedState[index]}
-                name={name}
-                type="checkbox"
-                value={name}
-              />
-              <CheckboxText>{name}</CheckboxText>
-            </CheckBoxContainer>
-          )
-        })}
+          {checkField.map(({ name }, index) => {
+            return (
+              <CheckBoxContainer
+                key={name}
+                onClick={() => handleOnCheckboxChange(index)}
+              >
+                <CheckBox
+                  readOnly
+                  checked={checkedState[index]}
+                  name={name}
+                  type="checkbox"
+                  value={name}
+                />
+                <CheckboxText>{name}</CheckboxText>
+              </CheckBoxContainer>
+            )
+          })}
 
-        <PrimaryButton
-          disabled={
-            panNumber.length !== 10 ||
-            panError ||
-            !dob ||
-            loading ||
-            checkingPan
-          }
-          onClick={onProceed}
-          className="proceed-btn"
-        >
-          {checkingPan ? <Spinner color={'#fff'} /> : 'Proceed'}
-        </PrimaryButton>
-      </form>
-
-      <Dialog
-        animation="zoom"
-        className="wl-payment-dialog custom-fullscreen"
-        maskAnimation="fade"
-        visible={true}
-        onClose={() => setShowModal(false)}
+          <PrimaryButton
+            disabled={
+              panNumber.length !== 10 ||
+              panError ||
+              !dob ||
+              loading ||
+              checkingPan
+            }
+            onClick={onProceed}
+            className="proceed-btn"
+          >
+            {checkingPan ? <Spinner color={'#fff'} /> : 'Proceed'}
+          </PrimaryButton>
+        </form>
+      </PersonalDetailsWrapper>
+      <PopupModal
+        classNames={{
+          modal_dialog: css.modal_dialog,
+          modal_content: css.modal_content,
+        }}
+        close={() => setShowModal(false)}
+        shouldShow={showModal}
       >
         <ConfirmationWrapper>
           <Title>Kindly confirm your details</Title>
@@ -145,13 +150,17 @@ const PersonalDetails = ({
             </ErrorWrapper>
           )}
           <form onSubmit={onSubmit}>
-            <PrimaryButton disabled={loading} onClick={onSubmit}>
+            <PrimaryButton
+              style={{ padding: '0 3rem', marginTop: '1rem', height: '2.5rem' }}
+              disabled={loading}
+              onClick={onSubmit}
+            >
               {loading ? <Spinner /> : 'Proceed'}
             </PrimaryButton>
           </form>
         </ConfirmationWrapper>
-      </Dialog>
-    </PersonalDetailsWrapper>
+      </PopupModal>
+    </>
   )
 }
 
@@ -187,17 +196,9 @@ const ConfirmationWrapper = styled.div`
   text-align: center;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
   width: 100%;
-  > h1 {
-    margin-top: 3rem;
-  }
   p {
-    font-size: 1.3em;
-  }
-  @media (max-width: 768px) {
-    width: 90%;
-    margin-top: 2em;
+    font-size: 1.3rem;
   }
 `
 
@@ -215,20 +216,18 @@ const PersonalDetailsWrapper = styled.div`
 `
 
 const Title = styled.h1`
-  margin: 0;
-  padding: 0;
-  font-size: 2rem;
+  font-family: 'Marcellus';
+  font-style: normal;
   font-weight: 400;
-  color: #000000;
-  font-family: DmSerif;
+  font-size: 1.2rem;
+  line-height: 24px;
 `
 
 const SubHeader = styled.p`
-  margin: 0;
+  margin: 6px 0;
   padding: 0;
   color: #7e7e7e;
-  font-size: 1.4rem;
-  font-weight: 400;
+  font-size: 1rem !important;
   font-family: MavenPro;
 `
 

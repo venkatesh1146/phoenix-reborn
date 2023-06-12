@@ -9,7 +9,7 @@ import UserNameHeader from '~/components/UserNameHeader'
 import FullScreenSpinner from '~/components/common/Spinner/FullScreenSpinner'
 import { tm } from '~/styles/theme'
 
-import Image from '../../components/Base/Image'
+import Image from '../../../../components/Base/Image'
 
 import { WealthyImages } from '~/assets'
 import { useIsDesktop } from '~/hooks/useIsDesktop'

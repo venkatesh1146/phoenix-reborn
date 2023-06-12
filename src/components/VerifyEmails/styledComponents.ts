@@ -14,11 +14,10 @@ export const Emails = styled.div`
   margin-bottom: 6rem;
 
   @media screen and (min-width: 1024px) {
-    width: max-content;
-
     .email-wrapper {
       margin: 0.5rem !important;
-      min-width: 28.125rem;
+      min-width: 18rem;
+      flex-grow: 1;
     }
   }
   .email-wrapper {
@@ -54,7 +53,6 @@ export const EmailsSection = styled.div`
   flex-grow: 1;
   @media screen and (min-width: 1024px) {
     padding: 0;
-    width: max-content;
     margin: auto;
   }
 `

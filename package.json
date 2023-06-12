@@ -44,6 +44,7 @@
     "axios": "^1.4.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
+    "framer-motion": "^10.12.16",
     "frontend-models": "github:wealthy/frontend-models",
     "graphql": "^16.6.0",
     "graphql-tag": "2.11.0",

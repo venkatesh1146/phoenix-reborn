@@ -183,7 +183,6 @@ const ProposalKycContainer = () => {
   const emptyChecker = (value: string) => {
     return value && value !== '-' ? value : ''
   }
-  console.log(state)
 
   const renderInstructions = () => {
     switch (state.stage) {

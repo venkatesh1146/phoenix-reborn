@@ -22,14 +22,14 @@ const TransitionContainer = (props: TransitionContainerPropTypes) => {
 
   const transitionForward = {
     entering: { opacity: 0, transform: 'translateX(2%)' },
-    entered: { opacity: 1, transform: 'translateX(0%)', pointerEvents: 'all' },
+    entered: { opacity: 1, transform: 'unset', pointerEvents: 'all' },
     exiting: { opacity: 0, transform: 'translateX(-2%)' },
     exited: { opacity: 0 },
   }
 
   const transitionBackward = {
     entering: { opacity: 0, transform: 'translateX(-2%)' },
-    entered: { opacity: 1, transform: 'translateX(0%)', pointerEvents: 'all' },
+    entered: { opacity: 1, transform: 'unset', pointerEvents: 'all' },
     exiting: { opacity: 0, transform: 'translateX(2%)' },
     exited: { opacity: 0 },
   }

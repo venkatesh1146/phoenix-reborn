@@ -7,7 +7,6 @@
 import { useApolloClient } from '@apollo/client'
 import { PanUsageSubtype, WealthyDate } from 'frontend-models'
 import React, { useState } from 'react'
-// import { graphql, withApollo } from 'react-apollo'
 
 import { getErrorMessage, handleApiError } from '~/utils/ErrorUtils'
 import WealthyStorage from '~/utils/StorageUtils'

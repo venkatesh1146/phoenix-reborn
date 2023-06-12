@@ -4,46 +4,41 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-// import { graphql } from 'react-apollo'
 
 import ConnectWithWealthPartner from './ConnectWithWealthPartner'
 import PARTNER_QUERY from './graphql/partner.query'
 
-const propTypes = {
-  error: PropTypes.bool.isRequired,
-  hydra: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
+import useGqlQuery from '~/hooks/useGqlQuery'
+
+interface ConnectWithWealthPartnerContainerPropTypes {
+  user: Record<string, any>
 }
 
-const ConnectWithWealthPartnerContainer = ({ hydra, loading, error }: any) => {
+const ConnectWithWealthPartnerContainer = (
+  props: ConnectWithWealthPartnerContainerPropTypes
+) => {
   const [agent, setAgent] = useState({})
+  const { data, fetchData, isLoading, error } = useGqlQuery({
+    query: PARTNER_QUERY,
+    variables: {
+      userId: props.user.userId,
+    },
+  })
 
   useEffect(() => {
-    if (hydra && hydra.customerPartner) {
-      setAgent(hydra.customerPartner)
+    if (data?.hydra && data?.hydra.customerPartner) {
+      setAgent(data?.hydra.customerPartner)
     }
-  }, [hydra, loading, error])
+  }, [data?.hydra, isLoading, error])
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
-    <ConnectWithWealthPartner agent={agent} error={error} loading={loading} />
+    <ConnectWithWealthPartner agent={agent} error={error} loading={isLoading} />
   )
 }
-
-// const withData = graphql(PARTNER_QUERY, {
-//   props: ({ data: { hydra, loading, error } }: any) => ({
-//     hydra,
-//     loading,
-//     error,
-//   }),
-//   options: (props: any) => ({
-//     variables: {
-//       userId: props?.user.userId,
-//     },
-//   }),
-// })
-
-ConnectWithWealthPartnerContainer.propTypes = propTypes
 
 export default ConnectWithWealthPartnerContainer

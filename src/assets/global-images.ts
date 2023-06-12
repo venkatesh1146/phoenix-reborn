@@ -31,6 +31,8 @@ const WealthyImages = {
   exclamationMark:
     'https://i.wlycdn.com/articles/exclaimation-caution-icon.svg',
   failedIcon: 'https://i.wlycdn.com/articles/wrong-ban-cross-icon.svg',
+  closeImage:
+    'https://i.wlycdn.com/articles/cross-cancel-black-filled-icon.svg',
 }
 
 export default WealthyImages

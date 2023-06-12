@@ -4,9 +4,9 @@ import { DesktopRightSection } from '~/components/CommonStyledComponents'
 import DesktopLeftSection from '~/components/DesktopLeftSection'
 import ProgressCircle from '~/components/ProgressCircle'
 
-import Image from '../../components/Base/Image'
-import Footer from '../../components/Footer'
-import Info from '../../components/Info/Info'
+import Image from '../../../../components/Base/Image'
+import Footer from '../../../../components/Footer'
+import Info from '../../../../components/Info/Info'
 import {
   Details,
   Divider,
@@ -21,8 +21,8 @@ import {
   SubTxt,
   Text,
   Wrapper,
-} from '../../components/KycVerification/styledComponents'
-import FullScreenSpinner from '../../components/common/Spinner/FullScreenSpinner'
+} from '../../../../components/KycVerification/styledComponents'
+import FullScreenSpinner from '../../../../components/common/Spinner/FullScreenSpinner'
 
 import { WealthyImages } from '~/assets'
 import { useIsDesktop } from '~/hooks/useIsDesktop'
