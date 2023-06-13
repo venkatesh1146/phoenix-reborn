@@ -21,6 +21,10 @@ export default function useGqlMutation(props: MutationOptions) {
   const client = useApolloClient()
 
   const mutate = ({ onFailure, onSuccess, ...params }: Params) => {
+    setState({
+      ...state,
+      isLoading: true,
+    })
     client
       .mutate({
         ...props,

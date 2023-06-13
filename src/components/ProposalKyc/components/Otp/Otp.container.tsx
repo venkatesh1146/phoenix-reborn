@@ -16,30 +16,29 @@ import {
   REQUEST_USER_PROFILE_UPDATE,
   VERIFY_USER_PROFILE_UPDATE,
 } from '~/graphql'
+import useGqlMutation from '~/hooks/useGqlMutation'
 
 interface OtpContainerPropTypes {
   dispatch: Function
-  isMobile: boolean
-  requestUserProfileUpdate: Function
+  isMobile?: boolean
   state: Record<string, any>
   user: Record<string, any>
-  verifyUserProfileUpdate: Function
-}
-
-const defaultProps = {
-  isMobile: false,
 }
 
 const OtpContainer = ({
   dispatch,
-  isMobile,
+  isMobile = false,
   state,
   user,
-  requestUserProfileUpdate,
-  verifyUserProfileUpdate,
 }: OtpContainerPropTypes) => {
   const [otp, setOtp] = useState<any[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+
+  const { mutate: verifyUserProfileUpdate, isLoading } = useGqlMutation({
+    mutation: VERIFY_USER_PROFILE_UPDATE,
+  })
+  const { mutate: requestUserProfileUpdate } = useGqlMutation({
+    mutation: REQUEST_USER_PROFILE_UPDATE,
+  })
 
   const onKeyUpHandler = (
     keyCode: number,
@@ -76,37 +75,46 @@ const OtpContainer = ({
   }
 
   const handlePaste = (event: any) => {
-    const otpInputs = Array.from(document.querySelectorAll('.otp-input'))
+    const otpInputs: any = Array.from(document.querySelectorAll('.otp-input'))
     const clip = event.clipboardData.getData('text')
     const pin = clip.replace(/\s/g, '')
     const ch = [...pin]
     otpInputs.forEach((el, i) => (el.value = ch[i] ? ch[i] : ''))
-    otpInputs[pin.length - 1].focus()
+    otpInputs[pin.length - 1]?.focus()
     setOtp(ch)
   }
 
   const onSubmit = (event: any) => {
+    toast.loading('loading', { id: 'submit-otp' })
     event?.preventDefault()
-    setIsLoading(true)
-    verifyUserProfileUpdate({ token: state.token, otp: otp.join('') })
-      .then(({ data }: any) => {
-        toast.success(data.verifyUserProfileUpdate.message)
+    verifyUserProfileUpdate({
+      variables: { input: { token: state.token, otp: otp.join('') } },
+      onSuccess: ({ data }: any) => {
+        toast.success(data.verifyUserProfileUpdate.message, {
+          id: 'submit-otp',
+        })
         if (isMobile) {
           dispatch({ type: 'update', name: 'stage', value: 2 })
           return
         }
         dispatch({ type: 'update', name: 'stage', value: 3 })
-      })
-      .catch(handleApiError)
-      .finally(() => setIsLoading(false))
+      },
+      onFailure: (e) => handleApiError(e, 'submit-otp'),
+    })
   }
 
   const onResend = () => {
-    requestUserProfileUpdate(
-      isMobile
-        ? { phoneNumber: `(${state.countryCode})${state.phoneNumber}` }
-        : { email: state.email }
-    ).catch(handleApiError)
+    toast.loading('loading', { id: 'resend-otp' })
+    requestUserProfileUpdate({
+      variables: {
+        input: isMobile
+          ? { phoneNumber: `(${state.countryCode})${state.phoneNumber}` }
+          : { email: state.email },
+      },
+      onFailure: handleApiError,
+      onSuccess: () =>
+        toast.success('OTP sent successfully', { id: 'resend-otp' }),
+    })
   }
 
   const onEdit = () => {
@@ -121,7 +129,6 @@ const OtpContainer = ({
       isLoading={isLoading}
       isMobile={isMobile}
       otp={otp.join('')}
-      // setOtp={setOtp}
       state={state}
       onEdit={onEdit}
       onKeyUpHandler={onKeyUpHandler}
@@ -131,34 +138,5 @@ const OtpContainer = ({
     />
   )
 }
-// const withVerify = graphql(VERIFY_USER_PROFILE_UPDATE, {
-//   props: ({ mutate }) => ({
-//     verifyUserProfileUpdate: (payload: any) =>
-//       mutate
-//         ? mutate({
-//             variables: {
-//               input: payload,
-//             },
-//           })
-//         : {},
-//   }),
-// })
-
-// const withResend = graphql(REQUEST_USER_PROFILE_UPDATE, {
-//   props: ({ mutate }) => ({
-//     requestUserProfileUpdate: (payload: any) =>
-//       mutate
-//         ? mutate({
-//             variables: {
-//               input: payload,
-//             },
-//           })
-//         : {},
-//   }),
-// })
-
-// const withMutation = compose(withVerify, withResend)
-
-OtpContainer.defaultProps = defaultProps
 
 export default OtpContainer

@@ -125,14 +125,6 @@ const defaultProps = {
   inputType: 'default',
 }
 
-const inputWidth: Record<string, any> = {
-  small: '12em',
-  normal: '15em',
-  medium: '20em',
-  large: '27em',
-  full: '100%',
-}
-
 /**
  * One input box to rule them all
  */

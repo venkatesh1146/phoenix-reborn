@@ -14,7 +14,6 @@ import StorageUtils from '~/utils/StorageUtils'
 import WealthyValidations from '~/utils/ValidationUtils'
 import appEnv from '~/utils/env'
 
-import Input from '../Base/Input'
 import { DesktopRightSection } from '../CommonStyledComponents'
 import DesktopLeftSection from '../DesktopLeftSection'
 
@@ -101,9 +100,9 @@ const ProposalKycContainer = () => {
   }, [])
 
   useEffect(() => {
-    if (data?.data?.hagrid) {
+    if (data?.data?.hagrid?.wealthyUserDetailsPrefill) {
       const userData = UserProfileModel.init(
-        data?.data?.hagrid.wealthyUserDetailsPrefill
+        data?.data?.hagrid?.wealthyUserDetailsPrefill
       )
       setUser(userData)
 
@@ -192,9 +191,11 @@ const ProposalKycContainer = () => {
         return <Title>Choose email for investment</Title>
       case 3:
         return <Title>Personal Details</Title>
+      case 8:
+      case 9:
+        return <Title>OTP Verification</Title>
       default:
         return <></>
-        break
     }
   }
 
@@ -255,7 +256,7 @@ const Wrapper = styled.div`
       font-family: 'Marcellus';
       font-style: normal;
       font-weight: 400;
-      font-size: 24px;
+      font-size: 1.25rem !important;
       line-height: 24px;
       text-align: left;
 

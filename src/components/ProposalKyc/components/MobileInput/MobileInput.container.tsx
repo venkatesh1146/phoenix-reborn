@@ -36,7 +36,7 @@ const MobileInputContainer = ({
   })
 
   useEffect(() => {
-    if (user.exists) {
+    if (user?.exists) {
       getSelectedCountry(state.countryCode)
     }
   }, [user])

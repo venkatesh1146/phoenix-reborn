@@ -31,9 +31,7 @@ const checkField = [
 ]
 
 interface PersonalDetailsContainerPropTypes {
-  client: Record<string, any>
-  createUserProfile: (param: any) => Promise<any>
-  dispatch: (param: any) => void
+  dispatch: Function
   state: Record<string, any>
   user: Record<string, any>
 }
@@ -95,10 +93,7 @@ const PersonalDetailsContainer = ({
         setName(panInfo.maskedName)
         setShowModal(true)
       })
-      .catch((error: any) => {
-        handleApiError(error)
-        // setErrorMsg(error.message);
-      })
+      .catch(handleApiError)
       .finally(() => {
         setCheckingPan(false)
       })
@@ -137,7 +132,7 @@ const PersonalDetailsContainer = ({
     let goNextPage = false
 
     createUserProfile({
-      variables: { input: { payload } },
+      variables: { input: payload },
       onSuccess: ({ data }: any) => {
         if (!isChecked) {
           // if (isNotCheckedIndex !== 0) {
@@ -168,6 +163,7 @@ const PersonalDetailsContainer = ({
 
         setShowModal(false)
         goNextPage && dispatch({ type: 'update', name: 'stage', value: 4 })
+        if (!goNextPage) handleApiError(error)
       },
     })
   }

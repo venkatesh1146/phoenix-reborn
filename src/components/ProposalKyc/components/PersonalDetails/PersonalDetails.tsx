@@ -73,6 +73,7 @@ const PersonalDetails = ({
               value={panNumber}
               onChange={onChangeHandler}
               onPaste={onChangeHandler}
+              className={'pan-input'}
             />
           </InputContainer>
 
@@ -179,6 +180,11 @@ const ErrorWrapper = styled.div`
 
 const Detail = styled.span`
   float: right;
+  float: right;
+  text-wrap: wrap;
+  text-align: right;
+  word-break: break-word;
+  margin-left: 1rem;
 `
 
 const DetailWrapper = styled.div`
@@ -219,7 +225,7 @@ const Title = styled.h1`
   font-family: 'Marcellus';
   font-style: normal;
   font-weight: 400;
-  font-size: 1.2rem;
+  font-size: 1.3rem !important;
   line-height: 24px;
 `
 
@@ -227,8 +233,9 @@ const SubHeader = styled.p`
   margin: 6px 0;
   padding: 0;
   color: #7e7e7e;
-  font-size: 1rem !important;
-  font-family: MavenPro;
+  font-size: 0.92rem !important;
+  display: flex;
+  justify-content: space-between;
 `
 
 const InputContainer = styled.div`
@@ -236,10 +243,13 @@ const InputContainer = styled.div`
   .date-input {
     min-width: 12rem;
   }
+  .pan-input {
+    text-transform: uppercase;
+  }
 `
 
 const Label = styled.p`
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: #7e7e7e;
   margin-bottom: 0.5rem;
@@ -257,7 +267,7 @@ const CheckBox = styled.input`
 
 const CheckboxText = styled.p`
   color: #7e7e7e;
-  font-size: 1rem;
+  font-size: 0.9rem;
 `
 
 export default PersonalDetails

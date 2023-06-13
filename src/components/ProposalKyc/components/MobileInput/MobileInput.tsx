@@ -4,16 +4,13 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 import React from 'react'
 
-import { FooterButton, PrimaryButton } from '~/components/Base/Buttons'
-import Icon from '~/components/Base/Icon'
+import { PrimaryButton } from '~/components/Base/Buttons'
 import Image from '~/components/Base/Image'
 import Input from '~/components/Base/Input'
 import Text from '~/components/Base/Text'
-import Footer from '~/components/Footer'
 import { tm } from '~/styles/theme'
 
 import Family from '../Family'
@@ -127,13 +124,8 @@ const MobileInput = ({
 }
 
 const MobileInputWrapper = styled.div`
-  position: relative;
-  text-align: center;
-  flex-grow: 1;
   display: flex;
-  .mobile-code {
-    width: 3.5rem;
-  }
+  flex-grow: 1;
 `
 
 const Label = styled.p`
@@ -141,7 +133,6 @@ const Label = styled.p`
   font-family: 'DM Serif Display';
   font-style: normal;
   font-weight: 400;
-  font-size: 1.5rem;
   line-height: 22px;
   text-transform: capitalize;
   margin-top: 0;

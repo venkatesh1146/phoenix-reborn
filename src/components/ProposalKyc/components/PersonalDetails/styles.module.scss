@@ -1,5 +1,7 @@
 .modal_dialog {
-  max-width: 500px;
+  @media screen and (min-width: 1024px) {
+    max-width: 500px;
+  }
 }
 
 .modal_content {

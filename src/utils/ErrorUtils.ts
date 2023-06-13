@@ -19,8 +19,12 @@ export const getErrorMessage = (error: any) => {
     return error?.response?.data?.errorMessage
   }
 
-  // graphql errors
-  if (error?.data?.errors[0]?.message) return error?.data?.errors[0]?.message
+  //apollo error
+  if (error?.message) return error.message
+
+  if (error?.data?.errors[0]?.message)
+    // graphql errors
+    return error?.data?.errors[0]?.message
 
   if (!error.response || !error.response.data || !error.response.data.errors) {
     return defaultMessage
@@ -55,7 +59,9 @@ export const getErrorMessage = (error: any) => {
   return errors[0].error_message || defaultMessage
 }
 
-export const handleApiError = (error: Error) => {
+export const handleApiError = (error: Error, toastId?: string) => {
   const msg = getErrorMessage(error)
-  toast.error(msg)
+  toast.error(msg, {
+    id: toastId,
+  })
 }
