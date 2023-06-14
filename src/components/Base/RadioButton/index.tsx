@@ -29,7 +29,7 @@ const RadioButton = (props: RadioButtonPropTypes) => {
   )
 }
 
-const Radio = styled.div<{ isActive?: boolean }>`
+const Radio = styled.div`
   margin-right: 1em;
   width: 1.25em;
   height: 1.25em;
@@ -37,15 +37,12 @@ const Radio = styled.div<{ isActive?: boolean }>`
   align-items: center;
   justify-content: center;
   border-radius: 2em;
-  ${(props) =>
-    !props.isActive
-      ? css`
-          background-color: #eaeaea;
-          i {
-            opacity: 0;
-          }
-        `
-      : ''}
+  &[isActive] {
+    background-color: #eaeaea;
+    i {
+      opacity: 0;
+    }
+  }
 `
 
 export default RadioButton

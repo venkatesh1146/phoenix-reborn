@@ -10,7 +10,7 @@ interface useGqlQueryPropTypes extends QueryOptions {
 }
 
 interface StateType {
-  data: null | Record<string, any>
+  data: null | Record<string, any> | any
   isLoading: boolean
   error: null | any
 }

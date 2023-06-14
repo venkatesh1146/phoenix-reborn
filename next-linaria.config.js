@@ -17,6 +17,10 @@ const webpackConfig = withLinaria({
       },
     ],
   },
+  module: {
+    test: /\.less$/,
+    use: ['style-loader', 'css-loader', 'less-loader'],
+  },
   //base path
 })
 module.exports = webpackConfig
