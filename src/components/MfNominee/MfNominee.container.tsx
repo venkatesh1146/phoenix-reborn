@@ -6,7 +6,6 @@
 
 import { styled } from '@linaria/react'
 import { useRouter } from 'next/router'
-import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -23,16 +22,6 @@ import { CREATE_USER_NOMINEE } from './graphql/UserNominee'
 
 import useGqlMutation from '~/hooks/useGqlMutation'
 import useGqlQuery from '~/hooks/useGqlQuery'
-
-const propTypes = {
-  createMfNominee: PropTypes.func.isRequired,
-  createUserNominee: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-  mfNominees: PropTypes.array.isRequired,
-  userNominees: PropTypes.array.isRequired,
-}
 
 const MfNomineeContainer = ({ history }) => {
   const [mfNomineeList, setMfNomineeList] = useState<any[]>([])
@@ -184,12 +173,11 @@ const MfNomineeContainer = ({ history }) => {
   )
 }
 
-MfNomineeContainer.propTypes = propTypes
-
 export default MfNomineeContainer
 const Wrapper = styled.div`
   display: flex;
   height: 100%;
+  width: 100%;
   display: flex;
   .right-section {
     padding: 0;

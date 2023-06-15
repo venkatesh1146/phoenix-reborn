@@ -1,0 +1,215 @@
+{
+  "theme": {
+    "type": "mui",
+    "mui": {
+      "variant": "outlined"
+    },
+    "className": "basic-form"
+  },
+  "fields": [
+    {
+      "name": "name",
+      "meta": {
+        "displayName": "First Name",
+        "displayType": "text",
+        "displayProps": {
+          "sm": 12
+        },
+        "validation": {
+          "required": true,
+          "pattern": "^[a-zA-Z]+$",
+          "pattern_detail": {
+            "errorMsg": "Special characters and numbers are not allowed"
+          }
+        }
+      }
+    },
+    {
+      "name": "dob",
+      "meta": {
+        "displayName": "Date of Birth",
+        "displayType": "date",
+        "displayProps": {
+          "sm": 12
+        },
+        "validation": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "relationship",
+      "meta": {
+        "displayName": "Relationship",
+        "displayType": "select",
+        "displayProps": {
+          "sm": 12
+        },
+        "options": [
+          {
+            "value": "brtr",
+            "label": "Brother"
+          },
+          {
+            "value": "dghlaw",
+            "label": "Daughter in Law"
+          },
+          {
+            "value": "dgtr",
+            "label": "Daughter"
+          },
+          {
+            "value": "fath",
+            "label": "Father"
+          },
+          {
+            "value": "fthlaw",
+            "label": "Father in Law"
+          },
+          {
+            "value": "gdgtr",
+            "label": "Grand Daughter"
+          },
+          {
+            "value": "grfth",
+            "label": "Grand Father"
+          },
+          {
+            "value": "grmth",
+            "label": "Grand Mother"
+          },
+          {
+            "value": "gson",
+            "label": "Grand Son"
+          },
+          {
+            "value": "husb",
+            "label": "Husband"
+          },
+          {
+            "value": "lggrd",
+            "label": "Legal Guardian"
+          },
+          {
+            "value": "moth",
+            "label": "Mother"
+          },
+          {
+            "value": "mthlaw",
+            "label": "Mother in Law"
+          },
+          {
+            "value": "neph",
+            "label": "Nephew"
+          },
+          {
+            "value": "niece",
+            "label": "Niece"
+          },
+          {
+            "value": "o",
+            "label": "Others"
+          },
+          {
+            "value": "self",
+            "label": "Self"
+          },
+          {
+            "value": "sis",
+            "label": "Sister"
+          },
+          {
+            "value": "sonlaw",
+            "label": "Son in Law"
+          },
+          {
+            "value": "son",
+            "label": "Son"
+          },
+          {
+            "value": "spou",
+            "label": "Spouse"
+          },
+          {
+            "value": "wife",
+            "label": "Wife"
+          }
+        ],
+        "validation": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "guardian_name",
+      "meta": {
+        "displayName": "Guardian Name",
+        "displayType": "text",
+        "displayProps": {
+          "sm": 12
+        },
+        "validation": {
+          "required": true,
+          "pattern": "^[a-zA-Z]+$",
+          "pattern_detail": {
+            "errorMsg": "Special characters and numbers are not allowed"
+          }
+        },
+        "dependencies": {
+          "exists": {
+            "ref": "dob",
+            "value": "$valueFn",
+            "valueFn": "isMinor"
+          }
+        }
+      }
+    },
+    {
+      "name": "guardian_dob",
+      "meta": {
+        "displayName": "Guardian DOB",
+        "displayType": "date",
+        "displayProps": {
+          "sm": 12
+        },
+        "validation": {
+          "required": true,
+          "max": "2005-06-01"
+        },
+        "dependencies": {
+          "exists": {
+            "ref": "dob",
+            "value": "$valueFn",
+            "valueFn": "isMinor"
+          }
+        }
+      }
+    },
+    {
+      "name": "add_guardian_custom",
+      "prop": null,
+      "meta": {
+        "displayType": "custom_is_minor_block",
+        "displayName": "Add Guardian",
+        "value": false,
+        "dependencies": {
+          "exists": {
+            "ref": "dob",
+            "value": "$valueFn",
+            "valueFn": "isMinor"
+          }
+        }
+      }
+    }
+  ],
+  "buttons": [
+    {
+      "name": "Done",
+      "meta": {
+        "type": "submit",
+        "displayName": "Next",
+        "className": "col"
+      }
+    }
+  ]
+}

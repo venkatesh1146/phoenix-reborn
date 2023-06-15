@@ -75,3 +75,36 @@ html {
 .mf-desktop-left-section-wrapper {
   max-width: 45%;
 }
+
+.basic-form {
+  padding: 0;
+  button.MuiButton-root {
+    padding: 16px;
+  }
+  .meta-form-control-tobacco_consumption {
+    margin-top: 24px !important;
+    button.MuiButtonBase-root {
+      border: 0;
+      color: lightgrey;
+      background-color: #f9f9f9;
+      text-transform: capitalize;
+    }
+    button.selected {
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      background-color: unset;
+    }
+    > label {
+      font-size: 16px !important;
+      color: #000;
+      margin-bottom: 16px;
+    }
+  }
+  .footer {
+    margin: 12px 0 0 0 !important;
+  }
+}
+
+.my-2 {
+  margin: 1rem 0;
+}

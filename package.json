@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
+    "@mui/material": "^5.11.7",
+    "@manojadams/metaforms": "^5.0.27",
     "@callstack/react-theme-provider": "^3.0.8",
     "@linaria/babel-preset": "^4.4.4",
     "@linaria/core": "^4.2.9",

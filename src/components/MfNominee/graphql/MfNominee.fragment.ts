@@ -4,8 +4,6 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-'use strict'
-
 import gql from 'graphql-tag'
 
 const MfNomineeFragment = gql`

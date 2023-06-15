@@ -4,15 +4,13 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-"use strict";
+import gql from 'graphql-tag'
 
-import gql from "graphql-tag";
-
-import MfNomineeFragment from "./MfNominee.fragment";
-import UserNomineeFragment from "./UserNominee.fragment";
+import MfNomineeFragment from './MfNominee.fragment'
+import UserNomineeFragment from './UserNominee.fragment'
 
 const CREATE_MF_NOMINEE = gql`
-  mutation addMfNominee ($input: [MFNomineeInput]!) {
+  mutation addMfNominee($input: [MFNomineeInput]!) {
     createMfNominees(input: $input) {
       mfNominees {
         ...MfNominee
@@ -24,10 +22,10 @@ const CREATE_MF_NOMINEE = gql`
   }
   ${MfNomineeFragment}
   ${UserNomineeFragment}
-`;
+`
 
 const UPDATE_MF_NOMINEE = gql`
-  mutation updateMfNominee ($input: UpdateMfNomineeInput!) {
+  mutation updateMfNominee($input: UpdateMfNomineeInput!) {
     updateMfNominee(input: $input) {
       mfNominee {
         ...MfNominee
@@ -39,9 +37,6 @@ const UPDATE_MF_NOMINEE = gql`
   }
   ${MfNomineeFragment}
   ${UserNomineeFragment}
-`;
+`
 
-export {
-  CREATE_MF_NOMINEE,
-  UPDATE_MF_NOMINEE
-};
+export { CREATE_MF_NOMINEE, UPDATE_MF_NOMINEE }

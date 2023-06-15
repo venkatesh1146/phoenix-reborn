@@ -68,7 +68,7 @@ const Subtitle = styled.p`
 `
 
 const Button = styled.a`
-  background-color: #f21976;
+  background-color: #6725f4;
   width: 50%;
   margin: 3rem auto 2rem;
   border-radius: 25px;

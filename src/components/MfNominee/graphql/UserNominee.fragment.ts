@@ -4,9 +4,7 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-"use strict";
-
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 const UserNomineeFragment = gql`
   fragment UserNominee on UserNomineeNode {
@@ -19,6 +17,6 @@ const UserNomineeFragment = gql`
     dob
     guardianDob
   }
-`;
+`
 
-export default UserNomineeFragment;
+export default UserNomineeFragment

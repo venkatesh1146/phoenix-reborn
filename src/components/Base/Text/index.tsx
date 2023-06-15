@@ -6,7 +6,6 @@
  * @Last modified time: 2018-03-03T17:47:31+05:30
  */
 
-import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 import PropTypes from 'prop-types'
 

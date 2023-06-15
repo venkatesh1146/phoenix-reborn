@@ -59,7 +59,7 @@ export const getErrorMessage = (error: any) => {
   return errors[0].error_message || defaultMessage
 }
 
-export const handleApiError = (error: Error, toastId?: string) => {
+export const handleApiError = (error: Error | any, toastId?: string) => {
   const msg = getErrorMessage(error)
   toast.error(msg, {
     id: toastId,

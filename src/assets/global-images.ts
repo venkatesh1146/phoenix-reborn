@@ -33,6 +33,8 @@ const WealthyImages = {
   failedIcon: 'https://i.wlycdn.com/articles/wrong-ban-cross-icon.svg',
   closeImage:
     'https://i.wlycdn.com/articles/cross-cancel-black-filled-icon.svg',
+  trashIcon: 'https://i.wlycdn.com/mera-business/delete_icon.svg.svg',
+  addIcon: 'https://i.wlycdn.com/mera-business/add_icon.svg',
 }
 
 export default WealthyImages

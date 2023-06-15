@@ -4,10 +4,7 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-'use strict'
-
 import { NomineeRelationshipType, WealthyDate } from 'frontend-models'
-import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
 import { handleApiError } from '~/utils/ErrorUtils'
@@ -16,11 +13,11 @@ import WealthyValidations from '~/utils/ValidationUtils'
 
 import NomineeDetailsForm from './AddUserNominee'
 
-const propTypes = {
-  createUserNominee: PropTypes.func.isRequired,
-  mfNomineeList: PropTypes.array.isRequired,
-  setMfNomineeList: PropTypes.func.isRequired,
-  setShowForm: PropTypes.func.isRequired,
+interface NomineeDetailsFormContainerPropTypes {
+  createUserNominee: (param: any) => Promise<any>
+  mfNomineeList: any[]
+  setMfNomineeList: (param: any) => void
+  setShowForm: (param: any) => void
 }
 
 const NomineeDetailsFormContainer = ({
@@ -28,7 +25,7 @@ const NomineeDetailsFormContainer = ({
   mfNomineeList,
   setMfNomineeList,
   setShowForm,
-}) => {
+}: NomineeDetailsFormContainerPropTypes) => {
   const [nomineeName, setNomineeName] = useState('')
   const [nomineeRelationship, setNomineeRelationship] = useState('')
   const [nomineeDob, setNomineeDob] = useState('')
@@ -87,21 +84,29 @@ const NomineeDetailsFormContainer = ({
         payload.guardianDob = guardianDob.slice(0, 10)
       }
 
-      await createUserNominee({ input: payload }).then(({ data }) => {
-        const nomResult = data.createUserNominee.nominee
-        const mfNomineeListCopy = [...mfNomineeList]
-        nomResult.percentage =
-          100 -
-          mfNomineeListCopy.reduce(
-            (total, nom) =>
-              (total += !isNaN(nom.percentage) ? nom.percentage : 0),
-            0
-          )
-        mfNomineeListCopy.splice(mfNomineeList.length - 1, 1, nomResult)
-        setMfNomineeList(mfNomineeListCopy)
+      await createUserNominee({
+        variables: { input: payload },
+        onSuccess: ({ data }) => {
+          const nomResult = data.createUserNominee.nominee
+          const mfNomineeListCopy = [...mfNomineeList]
+          nomResult.percentage =
+            100 -
+            mfNomineeListCopy.reduce(
+              (total, nom) =>
+                (total += !isNaN(nom.percentage) ? nom.percentage : 0),
+              0
+            )
+          mfNomineeListCopy.splice(mfNomineeList.length - 1, 1, nomResult)
+          setMfNomineeList(mfNomineeListCopy)
+          showSuccessToast('Nominee details updated')
+          setShowForm(false)
+          setIsLoading(false)
+        },
+        onFailure: (err) => {
+          handleApiError(err)
+          setIsLoading(false)
+        },
       })
-      showSuccessToast('Nominee details updated')
-      setShowForm(false)
     } catch (error: any) {
       handleApiError(error)
     } finally {
@@ -133,7 +138,5 @@ const NomineeDetailsFormContainer = ({
     />
   )
 }
-
-NomineeDetailsFormContainer.propTypes = propTypes
 
 export default NomineeDetailsFormContainer

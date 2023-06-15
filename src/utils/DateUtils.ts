@@ -26,3 +26,22 @@ export const decodeDateFormatWithHyphen = (d: any) => {
     date.getMonth() + 1
   )}-${appendZero(date.getDate())}`
 }
+
+export const getAgeFromDOB = (dob: string) => {
+  const birthDate = new Date(dob)
+  const currentDate = new Date()
+  let age = currentDate.getFullYear() - birthDate.getFullYear()
+  const monthGap = currentDate.getMonth() - birthDate.getMonth()
+  if (
+    monthGap < 0 ||
+    (monthGap === 0 && currentDate.getDate() < birthDate.getDate())
+  ) {
+    age--
+  }
+  return age
+}
+
+export const isMinor = (dob: string) => {
+  const age = getAgeFromDOB(dob)
+  return age < 18
+}

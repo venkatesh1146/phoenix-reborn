@@ -5,36 +5,37 @@
 */
 
 import { styled } from '@linaria/react'
-import PropTypes from 'prop-types'
 import Select, { Option } from 'rc-select'
 import React from 'react'
 
 import { tm } from '~/styles/theme'
+import { handleApiError } from '~/utils/ErrorUtils'
 
 import ErrorPage from '../../components/ErrorPage'
 import { PrimaryButton } from '../Base/Buttons'
-import Icon from '../Base/Icon'
+import Image from '../Base/Image'
 import Input from '../Base/Input'
 import Spinner from '../common/Spinner'
 
 import AddUserNominee from './components/AddUserNominee'
 
 import 'rc-select/assets/index.css'
+import { WealthyImages } from '~/assets'
 
-const propTypes = {
-  createUserNominee: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-  mfNomineeList: PropTypes.array.isRequired,
-  onAdd: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onSelectNominee: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  setMfNomineeList: PropTypes.func.isRequired,
-  setShowForm: PropTypes.func.isRequired,
-  showForm: PropTypes.bool.isRequired,
-  userNomineeList: PropTypes.array.isRequired,
+interface MfNomineePropTypes {
+  createUserNominee: (params: any) => Promise<any>
+  error: boolean
+  isLoading: boolean
+  loading: boolean
+  mfNomineeList: any[]
+  onAdd: (params: any) => void
+  onDelete: (params: any) => void
+  onSelectNominee: (value, option, index) => void
+  onSubmit: (params: any) => void
+  setMfNomineeList: (params: any) => void
+  setShowForm: (params: any) => void
+  showForm: boolean
+  userNomineeList: any[]
 }
 
 const MfNominee = ({
@@ -51,7 +52,7 @@ const MfNominee = ({
   setShowForm,
   onSubmit,
   onSelectNominee,
-}) => {
+}: MfNomineePropTypes) => {
   if (loading) {
     return (
       <NomineeLoader>
@@ -61,6 +62,7 @@ const MfNominee = ({
   }
 
   if (error) {
+    handleApiError(error)
     return <ErrorPage />
   }
 
@@ -124,11 +126,14 @@ const MfNominee = ({
           setMfNomineeList(mfNomineeListCopy)
         }}
       />
-      {index <= 1 && index === mfNomineeList.length - 1 ? (
-        <AddButton onClick={() => onAdd(nominee, index)}>+</AddButton>
-      ) : null}
+
       <DeleteButton onClick={() => onDelete(index)}>
-        <Icon name="fa fa-trash" size="1em" />
+        <Image
+          alt="delete"
+          src={WealthyImages.trashIcon}
+          height={32}
+          width={32}
+        />
       </DeleteButton>
     </FormContainer>
   )
@@ -143,6 +148,9 @@ const MfNominee = ({
       <Heading>
         <p>Nominee Name</p>
         <p>Percentage</p>
+        <AddButton onClick={onAdd}>
+          <Image alt="add" src={WealthyImages.addIcon} height={32} width={32} />
+        </AddButton>
       </Heading>
       <InputsContainer>
         <form
@@ -169,21 +177,19 @@ const MfNominee = ({
 }
 
 const DeleteButton = styled.div`
-  font-size: 2rem;
   cursor: pointer;
-  padding-top: 2.7rem;
-  margin-right: 1rem;
-  position: absolute;
-  left: -1.5em;
+  margin-right: 2rem;
+  margin-left: 1rem;
 `
 
 const AddButton = styled.div`
-  font-size: 3rem;
   cursor: pointer;
-  padding-top: 2rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 1rem;
-  position: absolute;
-  right: -1em;
+  margin-right: 2rem;
 `
 
 const MfNomineeWrapper = styled.div`
@@ -204,11 +210,12 @@ const FormContainer = styled.div`
     border: none;
     font-size: 1rem;
     color: ${tm((t) => t.colors.secondaryTextColor)};
+    max-width: 100%;
   }
   .input-container {
     background: transparent;
     align-items: start;
-    min-width: 200px;
+    min-width: 120px;
     flex: 1;
   }
 `
@@ -287,7 +294,5 @@ const Heading = styled.div`
     max-width: 60%;
   }
 `
-
-MfNominee.propTypes = propTypes
 
 export default MfNominee

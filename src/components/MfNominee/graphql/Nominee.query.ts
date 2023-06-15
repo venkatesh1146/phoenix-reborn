@@ -4,10 +4,10 @@
   Bitbucket: https://bitbucket.org/OmAthalye/
 */
 
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
-import UserNomineeFragment from "./UserNominee.fragment";
-import MfNomineeFragment from "./MfNominee.fragment";
+import MfNomineeFragment from './MfNominee.fragment'
+import UserNomineeFragment from './UserNominee.fragment'
 
 const USER_NOMINEE_QUERY = gql`
   query UserNomineeQuery {
@@ -18,7 +18,7 @@ const USER_NOMINEE_QUERY = gql`
     }
   }
   ${UserNomineeFragment}
-`;
+`
 
 const MF_NOMINEE_QUERY = gql`
   query MfNomineeQuery {
@@ -33,9 +33,6 @@ const MF_NOMINEE_QUERY = gql`
   }
   ${UserNomineeFragment}
   ${MfNomineeFragment}
-`;
+`
 
-export {
-  USER_NOMINEE_QUERY,
-  MF_NOMINEE_QUERY
-};
+export { USER_NOMINEE_QUERY, MF_NOMINEE_QUERY }

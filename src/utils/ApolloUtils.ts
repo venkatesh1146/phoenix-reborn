@@ -1,10 +1,4 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  createHttpLink,
-  gql,
-} from '@apollo/client'
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 
 import StorageUtils from './StorageUtils'
@@ -24,7 +18,7 @@ const authLink = setContext((_, { headers }) => {
   )
   additionalHeaders['Authorization'] =
     '1e41eff5-6ce0-49d1-92c5-8e6adef5614a:ZbVTFULvGLov9ovH56BomDOhd'
-  // StorageUtils.getProposalAccessToken() || StorageUtils.getAccessToken()
+  StorageUtils.getProposalAccessToken() || StorageUtils.getAccessToken()
   additionalHeaders['X-RSESSIONID'] = rsessionid
   additionalHeaders['X-APP-VERSION'] = 'web'
 

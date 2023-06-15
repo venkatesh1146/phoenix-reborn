@@ -8,32 +8,36 @@ import { styled } from '@linaria/react'
 import { NomineeRelationshipType } from 'frontend-models'
 import PropTypes from 'prop-types'
 import Select, { Option } from 'rc-select'
-import React from 'react'
+import React, { useState } from 'react'
 import 'rc-select/assets/index.css'
 
 import { PrimaryButton } from '~/components/Base/Buttons'
 import DateInput from '~/components/Base/DateInput'
 import Input from '~/components/Base/Input'
+import MetaForm from '~/components/common/MetaForm'
 import OnboardingBack from '~/components/common/OnboardingBack'
 import Spinner from '~/components/common/Spinner'
 import { tm } from '~/styles/theme'
+import { isMinor } from '~/utils/DateUtils'
 
-const propTypes = {
-  guardianDob: PropTypes.string.isRequired,
-  guardianName: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isNomineeAdult: PropTypes.bool.isRequired,
-  nomineeDob: PropTypes.string.isRequired,
-  nomineeDobErr: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  nomineeName: PropTypes.string.isRequired,
-  nomineeRelationship: PropTypes.string.isRequired,
-  onProceed: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  setGuardianDob: PropTypes.func.isRequired,
-  setGuardianName: PropTypes.func.isRequired,
-  setNomineeDob: PropTypes.func.isRequired,
-  setNomineeName: PropTypes.func.isRequired,
-  setShowForm: PropTypes.func.isRequired,
+import Schema from './schema.json'
+
+interface NomineeDetailsFormPropTypes {
+  guardianDob: string
+  guardianName: string
+  isLoading: boolean
+  isNomineeAdult: boolean
+  nomineeDob: string
+  nomineeDobErr: string | boolean
+  nomineeName: string
+  nomineeRelationship: string
+  onProceed: (param: any) => void
+  onSelect: (param1: any, param2: any) => void
+  setGuardianDob: (param: any) => void
+  setGuardianName: (param: any) => void
+  setNomineeDob: (param: any) => void
+  setNomineeName: (param: any) => void
+  setShowForm: (param: any) => void
 }
 
 const NomineeDetailsForm = ({
@@ -52,7 +56,9 @@ const NomineeDetailsForm = ({
   setNomineeDob,
   setNomineeName,
   setShowForm,
-}) => {
+}: NomineeDetailsFormPropTypes) => {
+  const [schemaDetail, setSchemaDetail] = useState(Schema)
+
   const today = new Date().toISOString().substring(0, 10)
   const startDate = `${Number(today.split('-')[0]) - 18}-${
     today.split('-')[1]
@@ -66,6 +72,10 @@ const NomineeDetailsForm = ({
       </Option>
     )
   }
+  const fetchSchema = async () => {
+    return { data: schemaDetail }
+  }
+
   return (
     <>
       <BackContainer>
@@ -156,6 +166,24 @@ const NomineeDetailsForm = ({
           </PrimaryButton>
         </>
       </NomineeDetails>
+
+      <MetaForm
+        fetchSchema={fetchSchema}
+        handleSubmit={console.log}
+        buttons={{
+          submit: <PrimaryButton>Submit</PrimaryButton>,
+        }}
+        cacheId={'Nominee'}
+        className={'mf-new-nominee'}
+        title={''}
+        sub_title={''}
+        updateSchema={(result) => {
+          return result
+        }}
+        fns={{
+          isMinor: isMinor,
+        }}
+      />
     </>
   )
 }
@@ -219,7 +247,5 @@ const SelectWrapper = styled.div`
 const Text = styled.p`
   text-align: left;
 `
-
-NomineeDetailsForm.propTypes = propTypes
 
 export default NomineeDetailsForm
