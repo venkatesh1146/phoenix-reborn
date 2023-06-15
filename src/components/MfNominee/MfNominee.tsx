@@ -209,6 +209,7 @@ const FormContainer = styled.div`
     background: transparent;
     align-items: start;
     min-width: 200px;
+    flex: 1;
   }
 `
 
@@ -244,10 +245,9 @@ const NomineeLoader = styled.div`
 `
 
 const SelectWrapper = styled.div`
-  width: 50%;
-  flex-grow: 1;
-  margin-right: 2rem;
+  padding-right: 2rem;
   min-width: 100px;
+  flex: 1;
   .rc-select {
     width: 100%;
     .rc-select-arrow {
@@ -279,10 +279,12 @@ const Heading = styled.div`
   display: flex;
   justify-content: space-between;
   p {
+    flex-grow: 1;
     flex: 1;
   }
-  p::first-child {
-    margin-right: 2rem;
+  p:first-child {
+    padding-right: 2rem;
+    max-width: 60%;
   }
 `
 
