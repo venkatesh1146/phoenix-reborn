@@ -12,7 +12,7 @@ import { EmailAndButton, EmailTxt, EmailWrapper } from '../styledComponents'
 
 import { WealthyImages } from '~/assets'
 import useRestApi from '~/hooks/useRestApi'
-import { resendOTP, sendOTP, verifyOTP } from '~/rest/MFSwitch'
+import { resendOTP, sendOTP, verifyOTP } from '~/rest/MFSwitch/MFSwitch'
 
 interface EmailPropTypes {
   emailData: {

@@ -126,6 +126,13 @@ const tokenCheck = () => {
   return true
 }
 
+const setProposalAccessToken = (token, expiry) => {
+  const expiryTime = Date.now() + expiry * 1000
+  const encryptedToken = WealthyEncrypt.encryptToken(token)
+  setCookie('proposal_access_token', encryptedToken, { expires: expiryTime })
+  setCookie('proposal_access_token_expiry', expiryTime)
+}
+
 const getProposalAccessToken = () => {
   const token = getCookie('proposal_access_token')
   const decrypedToken = token ? WealthyEncrypt.decryptToken(token) : null
@@ -206,6 +213,7 @@ const WealthyStorage = {
   getAccessToken,
   getProposalAccessToken,
   getGlobalCookie,
+  setProposalAccessToken,
 }
 
 export default WealthyStorage

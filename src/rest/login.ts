@@ -6,6 +6,7 @@
 
 import { AxiosHeaders } from 'axios'
 
+import { resolveWithTimeout } from '~/utils/APIUtils'
 import WealthyEnv from '~/utils/env'
 
 import { transformedAxios as axios } from './axios'
@@ -46,4 +47,14 @@ const submitTwoFa = (
   })
 }
 
-export { getAuthFromToken, checkToken, submitTwoFa }
+const getAccessTokenUsingAuthToken = (authToken: string) => {
+  console.log('TCL: getAccessTokenUsingAuthToken -> authToken', authToken)
+  return resolveWithTimeout('token') //TODO: update with actual api
+}
+
+export {
+  getAuthFromToken,
+  checkToken,
+  submitTwoFa,
+  getAccessTokenUsingAuthToken,
+}

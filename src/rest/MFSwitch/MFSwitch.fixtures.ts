@@ -1,17 +1,15 @@
 import humps from 'humps'
 
+import { resolveWithTimeout } from '~/utils/APIUtils'
 import env from '~/utils/env'
 
-import data from '../hooks/MockResponse.json'
-
-import { transformedAxios } from './axios'
+import MFStatusFixture from '../../hooks/MockResponse.json'
+import { transformedAxios } from '../axios'
 import {
   ResendOTPRequestType,
   SendOTPRequestType,
   VerifyOTPRequestType,
-} from './interfaces'
-
-import queryClient from '~/providers/queryClient'
+} from '../interfaces'
 
 const BASE_URL = env.QUIENJET_URL
 
@@ -31,19 +29,5 @@ export const resendOTP = (req: ResendOTPRequestType) => {
 }
 
 export const getProposalStatus = (proposalId: string) => {
-  const url = `${BASE_URL}/proposals/api/v0/mf/status?proposal_id=${proposalId}`
-
-  return new Promise((r, rej) => {
-    setTimeout(() => {
-      r({
-        data: humps.camelizeKeys(data),
-      })
-    }, 1000)
-  })
-
-  return queryClient.fetchQuery({
-    queryFn: () => transformedAxios.get(url),
-    queryKey: ['mf-switch-proposal-status'],
-    staleTime: 15 * 1000,
-  })
+  return resolveWithTimeout(humps.camelizeKeys(MFStatusFixture))
 }

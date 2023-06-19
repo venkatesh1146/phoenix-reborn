@@ -1,17 +1,15 @@
-import humps from 'humps'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { handleApiError } from '~/utils/ErrorUtils'
 import { getMFSwitchUrlWithProposalId } from '~/utils/UrlUtils'
 
-import ProposalData from './MockResponse.json'
+import useMFSwitchAuthToken from './useMFSwitchAuthToken'
 import useRestApi from './useRestApi'
 
 import { MF_SWITCH_PROPOSAL_STAGES } from '~/constants'
-import { MFSwitchStatusResponseType } from '~/constants/interfaces'
 import { MF_SWITCH_ROUTES } from '~/constants/routes'
-import { getProposalStatus } from '~/rest/MFSwitch'
+import apis from '~/rest'
 
 export default function useMFSwitchProposal() {
   const {
@@ -22,9 +20,9 @@ export default function useMFSwitchProposal() {
     isSuccess,
     ...rest
   } = useRestApi<any, any, string, any>({
-    apiFunction: getProposalStatus,
+    apiFunction: apis.getProposalStatus,
   })
-
+  useMFSwitchAuthToken()
   const router = useRouter()
   const proposalId = router.query.proposalId || router.query.proposal_id
   const getAMCLogos = () => {
