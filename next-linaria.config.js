@@ -6,6 +6,8 @@ const withLinaria = require('next-linaria')
 const webpackConfig = withLinaria({
   // settings from next.config.js
   reactStrictMode: true,
+  assetPrefix: '/', //TODO: need to update this
+  basePath: '/',
   swcMinify: true,
   images: {
     remotePatterns: [
