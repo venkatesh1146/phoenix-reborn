@@ -22,7 +22,6 @@ export default function useMFSwitchProposal() {
   } = useRestApi<any, any, string, any>({
     apiFunction: apis.getProposalStatus,
   })
-  useMFSwitchAuthToken()
   const router = useRouter()
   const proposalId = router.query.proposalId || router.query.proposal_id
   const getAMCLogos = () => {

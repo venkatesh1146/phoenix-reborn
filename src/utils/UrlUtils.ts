@@ -12,11 +12,13 @@ export const removeQueryParam = (router: NextRouter, paramName: string) => {
 
   const searchParams = new URLSearchParams(query as any)
   searchParams.delete(paramName)
-
   const queryString = searchParams.toString()
 
-  router.replace({
-    pathname: pathname,
-    search: `?${queryString}`,
-  })
+  const { [paramName]: removedQuery, ...rest } = query
+
+  return {
+    pathname,
+    search: queryString,
+    query: rest,
+  }
 }

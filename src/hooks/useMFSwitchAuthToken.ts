@@ -9,7 +9,6 @@ import { getAccessTokenUsingAuthToken } from '~/rest/login'
 
 export default function useMFSwitchAuthToken() {
   const router = useRouter()
-  const authToken = router.query.auth_token
 
   const getAccessTokenWithAuthToken = (token: string) => {
     getAccessTokenUsingAuthToken(token)
@@ -19,14 +18,20 @@ export default function useMFSwitchAuthToken() {
           tokenData.accessToken,
           tokenData.accessTokenExpiry
         )
-        removeQueryParam(router, 'auth_token')
+        const url = removeQueryParam(router, 'auth_token')
+        //FIXME: the below settimeout is used because the url is to fix the url not updating with the search params
+        const id = setTimeout(() => {
+          router.replace(url)
+          clearTimeout(id)
+        }, 0)
       })
       .catch(handleApiError)
   }
 
   useEffect(() => {
-    if (authToken) {
-      getAccessTokenWithAuthToken(authToken as string)
+    if (router.isReady) {
+      const authToken = router.query?.auth_token
+      if (authToken) getAccessTokenWithAuthToken(authToken as string)
     }
-  }, [authToken])
+  }, [router.isReady, router.query.auth_token])
 }

@@ -15,12 +15,15 @@ import WealthyApolloClient from '~/utils/ApolloUtils'
 
 import { ToastConfig, ToastDesktopConfig } from '~/constants/toast.config'
 import { useIsDesktop } from '~/hooks/useIsDesktop'
+import useMFSwitchAuthToken from '~/hooks/useMFSwitchAuthToken'
 import queryClient from '~/providers/queryClient'
 
 const client = WealthyApolloClient
 
 export default function App({ Component, pageProps }: AppProps) {
   const isDesktop = useIsDesktop()
+  useMFSwitchAuthToken()
+
   return (
     <ApolloProvider client={client}>
       <QueryClientProvider client={queryClient}>
